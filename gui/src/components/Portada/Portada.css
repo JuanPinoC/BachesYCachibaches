@@ -1,0 +1,16 @@
+.Derecha {
+	width: 60%;
+	display: inline-block;
+	background-color: #231;
+	min-height: 200px;
+	max-height: 400px;
+	overflow-y: scroll;
+}
+.Izquierda {
+	width: 40%;
+	display: inline-block;
+	background-color: #F43;
+	min-height: 200px;
+	max-height: 400px;
+	overflow-y: scroll;
+}

@@ -1,14 +1,6 @@
 # BachesYCachibaches
 
 Proyecto TECSUP
-111
-wireframing incluido
 
-
-xxxx
-
-
-qqq
-
-
-wwww
+limpio
+y nuevo
