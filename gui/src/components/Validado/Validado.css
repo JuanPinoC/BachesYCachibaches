@@ -1,0 +1,30 @@
+.Horizontal div{
+	padding: 5px;
+	display: inline-table;
+}
+
+.Buscar{
+	margin: 20px;
+}
+
+.Publicaciones{
+	margin: 20px;
+}
+
+.VerMas{
+	border-radius: 15px;
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+	margin: 30px;
+	padding: 15px;
+	transition-duration: 0.8s;
+}
+
+.VerMas:hover{
+	background-color: #FFBF00;
+	border-color: #FFBF00;
+	color:white;
+}
+
+

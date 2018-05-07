@@ -1,0 +1,46 @@
+.Horizontal div{
+	padding: 5px;
+	display: inline-table;
+}
+.Horizontal input {
+    width: 700px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border-left: 6px solid black
+
+
+
+
+
+
+}
+
+.Horizontal input:hover {
+    background-color: #F3E077  ;
+}
+.agregar{
+	border-radius: 15px;
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+	margin: 30px;
+	padding: 15px;
+	transition-duration: 0.8s;
+}
+
+.agregar:hover{
+	background-color: #FFBF00;
+	border-color: #FFBF00;
+	color:white;
+}
+.cuadrado{
+	width: 700px;
+	height: 570px;
+	background-color: #F3E077;
+	float: right;
+
+}
