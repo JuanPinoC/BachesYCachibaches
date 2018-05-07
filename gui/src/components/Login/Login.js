@@ -3,7 +3,7 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 
 import Estilos from './Login.css';
-
+ 
 const login = () => (<div className={Estilos.Login}>
 	<h1>INICIO DE SESIÓN</h1>
 	<form className={Estilos.Formulario}>
