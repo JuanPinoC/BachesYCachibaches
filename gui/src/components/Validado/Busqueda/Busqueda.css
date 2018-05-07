@@ -1,0 +1,32 @@
+.busquedas{
+	margin: 10px;
+	list-style-type: none;
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 10px;
+   
+}
+
+.busqueda {
+    float: right;
+}
+
+.busquedas input {
+    width: 800px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+
+
+
+
+
+}
+
+.busquedas input:hover {
+    background-color: #F3E077  ;
+}
