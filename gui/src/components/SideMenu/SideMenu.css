@@ -1,0 +1,12 @@
+.SideMenu {
+	font-size: 20px;
+	position: absolute;
+	top:10%;
+	margin: 20px;
+	padding: 20 20px;
+	height: auto;
+	width: auto;
+	background-color: #e69138;
+	border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+}

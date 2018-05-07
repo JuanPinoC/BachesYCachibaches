@@ -1,0 +1,13 @@
+.Icon {
+	text-align: center;
+	margin: 20px;
+	padding: 0px;
+}
+.Icon img{
+	border-radius: 50%;
+	width: 50px;
+	margin-bottom: 0px;
+}
+.Icon h4{
+	margin-top: 0px;
+}

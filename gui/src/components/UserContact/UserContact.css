@@ -1,0 +1,32 @@
+.UserContact {
+	text-align: center;
+}
+.UserContact h3{
+	font-size: 20px;
+}
+.UserContact img {
+	display: inline-block;
+	border-radius: 50%;
+	width: 50px;
+}
+.UserContact span {
+	width: 100%;
+	vertical-align: top;
+	padding: 30 30px;
+}
+.UserContact input {
+	width: 100%;
+	padding:10 10px;
+}
+.UserContact button {
+    background-color: green;
+    border-radius: 5%;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+}
