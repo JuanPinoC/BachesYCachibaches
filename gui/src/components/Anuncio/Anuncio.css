@@ -1,0 +1,49 @@
+.Publicacion{
+	background-color: transparent;
+	color: black;
+	border:1%;
+	border-style:solid;
+	border-color: #FFBF00;
+	transition-duration: 0.4s;
+}
+
+.Publicacion:hover{
+	background-color: #FFBF00;
+	color: white;
+}
+
+.Publicacion td{
+	float: left;
+}
+
+.Imagen img{
+	margin:20px;
+	width: 300px;
+    height: auto;
+    transition-duration: 0.4s;
+}
+.Imagen img:hover{
+	margin:20px;
+	width: 300px;
+    height: auto;
+    border-radius: 15px;
+}
+
+.Info{
+	padding: 20px;
+	width: 400px;
+}
+
+.Destacado{
+	width: 35px;
+    height: auto;
+	float: right;
+}
+
+.Precio{
+	float: right;
+}
+
+.TituloPublicacion{}
+
+.Descripcion{}

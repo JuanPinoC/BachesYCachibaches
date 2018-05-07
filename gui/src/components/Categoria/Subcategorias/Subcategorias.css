@@ -1,0 +1,25 @@
+.Subcategorias{
+	margin: 10px;
+	list-style-type: none;
+    padding: 0px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #333333;
+}
+
+.Subcategoria {
+    float: left;
+}
+
+.Subcategoria a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    transition-duration: 0.4s;
+}
+
+.Subcategoria a:hover {
+    background-color: black;
+}

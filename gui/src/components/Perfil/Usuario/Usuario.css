@@ -1,0 +1,47 @@
+.Usuario{
+	/*background-color: #FFBF00;*/
+}
+
+.Usuario td{
+	float: left;
+}
+
+.Imagen{
+	width: 400px;
+}
+
+.Imagen img{
+	margin: 50px;
+	width: 300px;
+    height: auto;
+    align-content: center;
+    border-radius: 50%;
+    transition-duration: 0.4s;
+}
+
+.Imagen img:hover{
+    border-radius: 15%;
+}
+
+.Info{
+	padding: 30px;
+	width: 300px;
+}
+
+.Opciones{
+	margin: 50px;
+	width: 300px;
+	text-align: center;
+	border-left: 6px solid black;
+}
+
+.Opciones div{
+	padding: 10px;
+	transition-duration: 0.4s;
+}
+
+.Opciones div:hover{
+	padding: 10px;
+	background-color: black;
+	color: #FFBF00;
+}

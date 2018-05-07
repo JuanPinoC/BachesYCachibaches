@@ -1,0 +1,16 @@
+.Elemento{
+	width: 250px;
+	transition-duration: 0.4s;
+	border-left: 6px solid black;
+}
+
+.Elemento:hover{
+	background-color: #FFBF00;
+	color: white;
+}
+
+.Elemento img{
+	margin:20px;
+	width: 35px;
+    height: auto;
+}
