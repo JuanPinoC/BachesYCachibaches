@@ -1,0 +1,62 @@
+.Ad {
+	font-size: 20px;
+	position: absolute;
+	top:10%;
+	margin: 20px;
+	padding: 20 20px;
+	height: auto;
+	width: auto;
+	background-color: #fff;
+	border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+}
+.Ad h3 {
+	margin:20px;
+	width:60%;
+}
+
+.Ad h3,span,p {
+	display:block;
+	float:left;
+	text-align:center;
+}
+.Ad span{
+	background-color: black;
+	color: white;
+	border-radius: 20px;
+	margin-top: 10px;
+	padding:40px;
+}
+
+.Ad p {
+	margin: 20px;
+	width: 60%;
+}
+
+.Ad img {
+	display: block;
+	width: 80%;
+	margin: 20px auto;
+}
+
+.Ad button {
+    background-color: #b45f06;
+    border-radius: 5%;
+    border: none;
+    width: 25%;
+    color: white;
+    margin: 10px;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    float: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+@media (min-width: 600px) {
+    .Ad {
+        width: 500px;
+        left: calc(50% - 250px);
+    }
+}

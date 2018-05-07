@@ -1,0 +1,29 @@
+.Comments {
+	font-size: 20px;
+	position: absolute;
+	top:10%;
+	margin: 20px;
+	padding: 20 20px;
+	height: auto;
+	width: auto;
+	background-color: #fff;
+	border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+}
+
+.Comments h2,p {
+	display: block;
+	margin: 0px;
+	padding: 5px;
+}
+.Comments textarea{
+	margin: 20px;
+	resize: none;
+}
+
+@media (min-width: 600px) {
+    .Comments {
+        width: 500px;
+        left: calc(50% - 250px);
+    }
+}

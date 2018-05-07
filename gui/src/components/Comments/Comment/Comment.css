@@ -1,0 +1,11 @@
+.Comment img {
+	margin: 0 20px;
+	display: inline-block;
+	border-radius: 50%;
+	width: 50px;
+}
+.Comment text{
+	padding: 20px 0px;
+	margin: 0 20px;
+	display: inline-block;
+}
