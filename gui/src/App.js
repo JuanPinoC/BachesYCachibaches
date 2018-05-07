@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <Layout>
         {/*<Portada />*/}
-        <Perfil />
+        <Categoria />
       </Layout>
     );
   }

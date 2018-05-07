@@ -8,14 +8,30 @@
     height: 100%;
 }
 
-.NavigationItems a {
-    color: #FFF;
-    margin-right: 10px;
-    text-decoration: none;
-}
-
 @media (min-width: 500px) {
     .NavigationItems {
         flex-flow: row;
     }
+}
+
+.NavigationItems li {
+    padding:17px;
+    background-color: transparent;
+    color: white;
+    border:1%;
+    border-style:none none solid none;
+    transition-duration: 0.4s;
+    border-color: #FFBF00;
+}
+
+.NavigationItems li:hover{
+    background-color: #FFBF00;
+    color: white;
+    border-color: #FFBF00;
+}
+
+.NavigationItems li:active{
+    background-color: #ffffff;
+    color: white;
+    border-color: transparent;
 }
