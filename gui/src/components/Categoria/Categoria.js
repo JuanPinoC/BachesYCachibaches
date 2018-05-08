@@ -5,7 +5,7 @@ import Classes from './Categoria.css';
 import BarraCategorias from '../BarraCategorias/BarraCategorias.js';
 import Subcategorias from './Subcategorias/Subcategorias.js';
 import Anuncio from '../Anuncio/Anuncio.js';
-
+ 
 const categoria = () => (
 	<div className={Classes.Horizontal}>
 		<div>
