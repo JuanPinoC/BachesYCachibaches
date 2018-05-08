@@ -1,32 +1,176 @@
-.Login {
-	text-align: center;
+.login {
+  text-align: center;
+  background-color: black;
 }
 
-.Formulario {
-	margin: 10px;
-	padding: 5px;
-	width: 450px;
-	text-align: center;
-	vertical-align: middle;
-	display: block;
+.loginImginicio {
+  background-color: #434343;
+  text-align: right;
 }
 
-.Label {
-	font-size: 24px;
-	color: blue;
-	display: block;
+.loginImgbody {
+  background-color: #434343;
+  width: 70px;
+  height: 70px;
+  margin-top: 20px;
+  margin-left: 20px;
+
 }
 
-.Input {
-	font-size: 26px;
-	color: red;
-	display: block;
-	width: 90%;
+.loginTable {
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  margin-top: 20px; 
+  padding-left: 20px;
+  border-color: red;
 }
 
-.Button {
-	font-size: 32px;
-	color: #FFF;
-	background-color: #000;
-	width: 100%;
+.loginTd {
+  border: 3px solid #ddd;
+  color: white;
+  text-align: left;
+  padding-left: 30px;
+  font-size: 1.2em;
+  border-color: black;
+
+}
+
+.loginBody {
+  border: 1px;
+  padding: 1px;
+  margin: 1px;
+  background-image: url("./img/inicio.jpg");
+  background-color: #cccccc;
+  height: 440px;
+  width: 100%;
+}
+
+.loginTitle {
+  margin-top: 70px; 
+  font-size: 2em;
+  color: #FFA13D;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  color: black;
+ 
+}
+
+.loginSubtitle {
+  color: #FFA13D;
+  border: 1px;
+  padding-top: 2px;
+  padding-bottom: 20px;
+  margin: 1px;
+  width:1200px;
+  height:20px;
+  text-align:top;
+  color:#000000;
+  font-size: 1em;
+}
+
+.loginSubtitle2 {
+  color: #FFA13D;
+  border: 1px;
+  padding-top: 22px;
+  padding-bottom: 12px;
+  margin: 1px;
+  width:1148px;
+  height:20px;
+  text-align:top;
+  color:#000000;
+  font-size: 1em;
+}
+
+.loginSubtitle3 {
+  color: #FFA13D;
+  border: 1px;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  margin: 1px;
+  width:1248px;
+  height:20px;
+  text-align:top;
+  color:#000000;
+  font-size: 1em;
+}
+
+.loginOlvidaste {
+  color: #FFA13D;
+  border: 1px;
+  padding-top: 60px;
+  padding-bottom: 20px;
+  margin: 1px;
+  width:1700px;
+  height:10px;
+  text-align:top;
+  color:#000000;
+  font-size: 1em;
+}
+
+.loginSubinput {
+  color: #FFA13D;
+  border: 1px;
+  padding: 1px;
+  margin: 1px;  
+  width:1470px;
+  height:04px;
+  text-align:center;
+  color:#000000;
+  font-size: 1em;
+}
+
+.loginSubinputd {
+  color: #FFA13D;
+  border: 1px;
+  padding: 1px;
+  margin: 1px;  
+  width:500px;
+  height:04px;
+  text-align:center;
+  color:#000000;
+  font-size: 1em;
+}
+
+.loginCheckinput {
+  color: #FFA13D;
+  border: 1px;
+  padding-top: 3px;
+  margin: 1px;  
+  width:1180px;
+  height:04px;
+  text-align:center;
+  color:#000000;
+  font-size: 1em;
+}
+
+.loginInput {
+  color: #FFA13D;
+  border: 2px solid black;
+  padding: 1px;
+  margin: 1px; 
+  width:400px;
+  height:20px;
+  color:#000000;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+.loginSubcheckinput {
+  color: #FFA13D;
+  border: 0px solid black;
+  padding: 0px;
+  margin: 0px; 
+  width:20px;
+  height:13px;
+  color:#000000;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+.loginIntro {
+  font-size: large;
+  text-align: left;
+  padding: 2%;
+  background: black;
 }

@@ -1,0 +1,59 @@
+.portada {
+  text-align: center;
+}
+
+.portadaImginicio {
+  background-color: #434343;
+  text-align: right;
+}
+
+.portadaImgbody {
+  background-color: #434343;
+  width: 400px;
+  height: 270px;
+  margin-top: 20px;
+
+}
+
+.portadaTable {
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  margin-top: 20px; 
+}
+
+.portadaTd {
+  border: 3px solid #ddd;
+}
+
+.portadaBody {
+  background-color: #434343;
+  height: 414px;
+  width: 100%;
+}
+
+.portadaTitle {
+  font-size: 4em;
+  color: #FFA13D;
+  line-height:100%;
+  height: 50px;
+  width: 685px;
+  padding: 20px;
+  text-align: left;
+ 
+}
+
+.portadaSubtitle {
+  font-size: 1.3em;
+  color: #FFFFFF;
+  padding: 20px;
+  text-align: left;
+}
+
+.portadaIntro {
+  font-size: large;
+  text-align: left;
+  padding: 2%;
+}
+
+
