@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './login.css';
+import classes from './Login.css';
 import inicio from './img/inicio.jpg';
 import facebook from './img/facebook.png';
 import google from './img/google.png';

@@ -21,6 +21,10 @@
     height: 80%;
 }
 
+.SearchBar {
+    width: 500px;
+}
+
 @media (max-width: 499px) {
     .DesktopOnly {
         display: none;
