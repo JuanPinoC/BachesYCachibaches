@@ -3,9 +3,9 @@ import classes from './Agregar.css';
 
 
 const agregar = (props) => (
-
 		<div className={classes.Horizontal}>
-			
+		
+			<div className={classes.cuadrado}>
 			<div>
 			<h3>Agregar nueva Publicacion</h3>
 			<p>Nombre</p>
@@ -21,10 +21,7 @@ const agregar = (props) => (
 			
 			<center><h3 className={classes.agregar}> Subir Publicacion </h3></center>
 			</div>
-			
-			<div className={classes.cuadrado}>
 			</div>
-			
 		</div>
 	);
 
