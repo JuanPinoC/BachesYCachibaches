@@ -4,9 +4,9 @@ import classes from './DrawerToggle.css';
 
 const drawerToggle = (props) => (
     <div className={classes.DrawerToggle} onClick={props.clicked}>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div>Categoria 1</div>
+        <div>Categoria 2</div>
+        <div>Categoria 3</div>
     </div>
 );
 

@@ -35,3 +35,7 @@
     color: white;
     border-color: transparent;
 }
+
+.NavigationItems a{
+    text-decoration: none;
+}
