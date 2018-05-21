@@ -6,13 +6,13 @@ import BarraCategorias from '../BarraCategorias/BarraCategorias.js';
 import Subcategorias from './Subcategorias/Subcategorias.js';
 import Anuncio from '../Anuncio/Anuncio.js';
  
-const categoria = () => (
+const categoria = (props) => (
 	<div className={Classes.Horizontal}>
 		<div>
 			<BarraCategorias className={Classes.Categorias}/>
 		</div>
 		<div>
-			<h1 className={Classes.TituloCategoria}>Categoria</h1>
+			<h1 className={Classes.TituloCategoria}>{props.match.params.nombre||'Categoria'}</h1>
 			<Subcategorias />
 			<hr/>
 			<div className={Classes.Publicaciones}>
