@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+const defaultPicture = '/profilePictures/default.jpeg';
 
 const userSchema = mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
@@ -17,6 +19,7 @@ const userSchema = mongoose.Schema({
 	puntuacion: {type:Number, default:100},
 	latitud: {type:Number, default: null},
 	longitud: {type:Number, default: null},
+	foto: {type:String, default: defaultPicture},
 	contrasenia: {type: String, required: true}
 });
 User = mongoose.model('User', userSchema,'usuarios');
@@ -24,7 +27,7 @@ User = mongoose.model('User', userSchema,'usuarios');
 module.exports = {
 	show: (req,res,next)=>{
 		User.find()
-			.select('nombres apellidos email puntuacion _id')
+			.select('nombres apellidos email puntuacion foto _id')
 			.exec()
 			.then(docs =>{
 				const response = {
@@ -35,7 +38,8 @@ module.exports = {
 							apellidos: doc.apellidos,
 							email: doc.email,
 							puntuacion: doc.puntuacion,
-							_id: doc._id,
+							foto: doc.foto,
+							_id: doc._id
 						}
 					})
 				};
@@ -63,11 +67,19 @@ module.exports = {
 							error:err
 						});
 					}else{
+						const foto = req.file === undefined ? defaultPicture : req.file.path;
 						const user = new User({
 							_id: new mongoose.Types.ObjectId(),
 							nombres: req.body.nombres,
 							apellidos: req.body.apellidos,
+							telefono: req.body.telefono,
+							celular: req.body.celular,
+							direccion: req.body.direccion,
 							email: req.body.email,
+							puntuacion: req.body.puntuacion,
+							latitud: req.body.latitud,
+							longitud: req.body.longitud,
+							foto: foto,
 							contrasenia: hash
 						});
 						user 
@@ -80,6 +92,7 @@ module.exports = {
 										nombres: result.name,
 										apellidos: result.name,
 										email: result.email,
+										foto: result.foto,
 										_id: result._id
 									}
 								});
@@ -98,7 +111,7 @@ module.exports = {
 	find: (req,res,next)=>{
 		const id = req.params.userId
 		User.findById(id)
-			.select('nombres apellidos email puntuacion _id')
+			.select('nombres apellidos email puntuacion foto _id')
 			.exec()
 			.then(doc => {
 				if (doc) {
@@ -138,12 +151,35 @@ module.exports = {
 	},
 	delete: (req,res,next)=>{
 		const id = req.params.userId;
-		User.remove({_id: id})
+		User.findById(id)
+			.select('foto')
 			.exec()
-			.then(result => {
-				res.status(200).json({
-					message: 'Product deleted',
-				});
+			.then(doc =>{
+				if (!doc) {
+					return res.status(404).json({
+						message: "User not found"
+					});
+				}else{
+					if (doc.foto !== defaultPicture) {
+						fs.unlink(doc.foto , (err) => {
+						  if (err) throw err;
+						  console.log(doc.foto+' was deleted');
+						});
+					}
+					User.remove({_id: id})
+						.exec()
+						.then(result => {
+							res.status(200).json({
+								message: 'User deleted',
+							});
+						})
+						.catch(err => {
+							console.log(err);
+							res.status(500).json({
+								error: err
+							});
+						});			
+				}
 			})
 			.catch(err => {
 				console.log(err);

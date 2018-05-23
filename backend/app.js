@@ -14,6 +14,7 @@ mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
 app.use('/uploads',express.static('uploads'));
+app.use('/profilePictures',express.static('profilePictures'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -29,7 +30,7 @@ app.use((req,res,next)=>{
 	next();
 });
 
-app.use('/users',userRoutes);
+app.use('/usuarios',userRoutes);
 app.use('/planes',planRoutes);
 app.use('/categorias',categoriaRoutes);
 app.use('/anuncios', anuncioRoutes);

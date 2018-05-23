@@ -31,5 +31,8 @@ const upload = multer({
 
 router.get('/', Anuncio.show);
 router.post('/:userId', upload.single('imagen'),Anuncio.create);
+router.get('/:anuncioId', Anuncio.find);
+router.post('/Update/:anuncioId',Anuncio.update);
+router.post('/Delete/:anuncioId',Anuncio.delete);
 
 module.exports = router;

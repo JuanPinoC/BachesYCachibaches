@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Usuario = require('../models/user');
+const fs = require('fs');
 
 const destacado = mongoose.Schema({
 	plan: {type: mongoose.Schema.Types.ObjectId, default: null},
@@ -38,7 +39,9 @@ module.exports = {
 							titulo: doc.titulo,
 							fec_pub: doc.fec_pub,
 							categoria: doc.categoria,
-							subcategoria: doc.subcategoria
+							subcategoria: doc.subcategoria,
+							precio: doc.precio,
+							imagen: doc.imagen
 						}
 					})
 				});
@@ -77,6 +80,7 @@ module.exports = {
 						fec_pub: result.fec_pub,
 						categoria: result.categoria,
 						subcategoria: result.subcategoria,
+						imagen: result.imagen
 					}
 				});
 			})
@@ -87,4 +91,84 @@ module.exports = {
 				});
 			});
 	},
+	find: (req,res,next)=>{
+		const id = req.params.anuncioId;
+		Anuncio.findById(id)
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.populate('usuario','nombres')
+			.populate('categoria','nombre')
+			.exec()
+			.then(doc => {
+				if (doc) {
+					res.status(200).json({
+						anuncio: doc
+					});
+				}else{
+					res.status(404).json({message: 'No valid entry found for provided ID'});
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				});
+			});
+	},
+	update: (req,res,next)=>{
+		const id = req.params.anuncioId;
+		const updateOps = {};
+		for(const ops of req.body){
+			updateOps[ops.propName] = ops.value;
+		}
+		Anuncio.update({_id:id},{$set: updateOps})
+			.exec()
+			.then(result => {
+				res.status(200).json({
+					message: 'Ad updated'
+				});
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				});
+			});
+	},
+	delete: (req,res,next)=>{
+		const id = req.params.anuncioId;
+		Anuncio.findById(id)
+			.select('imagen')
+			.exec()
+			.then(doc=>{
+				if (!doc) {
+					return res.status(404).json({
+						message: "Ad not found"
+					});
+				}else{
+					fs.unlink(doc.imagen , (err) => {
+					  if (err) throw err;
+					  console.log(doc.imagen+' was deleted');
+					});
+					Anuncio.remove({_id: id})
+					.exec()
+					.then(result=> {
+						res.status(200).json({
+							message: 'Ad deleted'
+						});
+					})
+					.catch(err => {
+						console.log(err);
+						res.status(500).json({
+							error: err
+						});
+					});
+				}
+			})
+			.catch(err => {
+						console.log(err);
+						res.status(500).json({
+							error: err
+						});
+					});
+	}
 }
