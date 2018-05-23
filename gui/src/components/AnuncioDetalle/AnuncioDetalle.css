@@ -1,0 +1,70 @@
+.PublicacionDetalle{
+	background-color: #FFBF00;
+	color: black;
+	border:1%;
+	border-style:solid;
+	border-color: #FFBF00;
+	transition-duration: 0.4s;
+}
+
+.PublicacionDetalle a{
+    text-decoration: none;
+    color: black;
+}
+
+.PublicacionDetalle td{
+	float: left;
+}
+
+.Imagen img{
+	margin:20px;
+	width: 600px;
+    height: auto;
+    transition-duration: 0.4s;
+}
+
+.Imagen img:hover{
+    border-radius: 25px;
+}
+
+.Info{
+	padding: 20px 60px 20px 20px;
+	width: 400px;
+}
+
+.Destacado{
+	width: 35px;
+    height: auto;
+	float: right;
+}
+
+.Precio{
+	float: right;
+	font-size: 30px;
+}
+
+.TituloPublicacionDetalle{
+	text-align: left;
+	margin-top: 70px;
+	font-size: 35px;
+}
+
+.TextoPublicacionDetalle{
+	text-align: left;
+}
+
+.UsuarioPublicacionDetalle{
+	margin: 20px;
+}
+
+.UsuarioImagenDetalle img{
+	width: 70px;
+	height: 70px;
+	margin: 10px;
+	border-radius: 35px;
+}
+
+.UsuarioPuntuacionDetalle img{
+	width: 25px;
+	height: 25px;
+}

@@ -16,9 +16,9 @@ const categoria = (props) => (
 			<Subcategorias />
 			<hr/>
 			<div className={Classes.Publicaciones}>
-				<Anuncio />
-				<Anuncio />
-				<Anuncio />
+				<Anuncio nombre={"sunt aut facere repellat provident occaecati excepturi optio reprehenderit"} />
+				<Anuncio nombre={"Publicacion 2"} />
+				<Anuncio nombre={"Publicacion 3"} />
 			</div>
 			<center><h3 className={Classes.VerMas}> Ver más anuncios </h3></center>
 		</div>

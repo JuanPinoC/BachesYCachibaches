@@ -12,6 +12,11 @@
 	color: white;
 }
 
+.Publicacion a{
+    text-decoration: none;
+    color: black;
+}
+
 .Publicacion td{
 	float: left;
 }
