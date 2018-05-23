@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const userRoutes = require('./api/routes/users');
+const planRoutes = require('./api/routes/planes');
+const categoriaRoutes = require('./api/routes/categorias');
+const anuncioRoutes = require('./api/routes/anuncios');
 
 mongoose.connect('mongodb://localhost/baches');
 mongoose.Promise = global.Promise;
@@ -27,9 +30,12 @@ app.use((req,res,next)=>{
 });
 
 app.use('/users',userRoutes);
+app.use('/planes',planRoutes);
+app.use('/categorias',categoriaRoutes);
+app.use('/anuncios', anuncioRoutes);
 
 app.use((req,res,next)=>{
-	const error = new Error('Not found');
+	const error = new Error('Page Not found');
 	error.status = 404;
 	next(error);
 });
