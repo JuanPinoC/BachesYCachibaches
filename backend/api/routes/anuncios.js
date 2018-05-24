@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const Anuncio = require('../models/anuncio');
+const Anuncio = require('../controllers/anuncioController');
 
 const storage = multer.diskStorage({
 	destination: function(req, file, cb){
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req,file,cb) => {
 	//reject a file
-	if (file.mimeType === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+	if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
 		cb(null, true);	
 	}else{
 		cb(null,false);

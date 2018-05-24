@@ -8,6 +8,8 @@ const userRoutes = require('./api/routes/users');
 const planRoutes = require('./api/routes/planes');
 const categoriaRoutes = require('./api/routes/categorias');
 const anuncioRoutes = require('./api/routes/anuncios');
+const compraRoutes = require('./api/routes/compras');
+const comentarioRoutes = require('./api/routes/comentarios');
 
 mongoose.connect('mongodb://localhost/baches');
 mongoose.Promise = global.Promise;
@@ -34,6 +36,8 @@ app.use('/usuarios',userRoutes);
 app.use('/planes',planRoutes);
 app.use('/categorias',categoriaRoutes);
 app.use('/anuncios', anuncioRoutes);
+app.use('/compras', compraRoutes);
+app.use('/comentarios', comentarioRoutes);
 
 app.use((req,res,next)=>{
 	const error = new Error('Page Not found');

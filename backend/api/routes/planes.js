@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Plan = require('../models/plan');
+const Plan = require('../controllers/planController');
 
 router.get('/', Plan.show);
 router.post('/', Plan.create);
