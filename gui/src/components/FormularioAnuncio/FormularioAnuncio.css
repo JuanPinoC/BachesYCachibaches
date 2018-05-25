@@ -1,0 +1,69 @@
+.FormularioAnuncio h1{
+	align-content: center;
+	padding: 10px;
+	margin-bottom: 10px;
+	text-transform: capitalize;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.FormularioAnuncio hr{
+	width: 60%;
+	margin-bottom: 30px;
+}
+
+.FormularioAnuncio form{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin-left: 18%;
+}
+
+.FormularioAnuncio .Parte{
+	display: inline-block;
+	margin-top: 10px;
+	margin-left: 50px;
+}
+
+.FormularioAnuncio .Atributo{
+	display: block;
+	margin-top: 20px;
+}
+
+.FormularioAnuncio .Atributo label{
+	font-size: 15px;
+}
+
+.FormularioAnuncio .Atributo input{
+	border-radius: 5px;
+	padding: 5px;
+	margin-left: 40px; 
+	float: right;
+}
+
+.FormularioAnuncio .Atributo input:focus{
+	outline:0;
+}
+
+.FormularioAnuncio .Botones{
+	margin-top: 30px;
+	margin-left: 18%;
+}
+
+.FormularioAnuncio button{
+	background-color: white;
+	border-style: none;
+	transition-duration: 0.3s;
+	width: 200px;
+	margin-top: 20px;
+}
+
+.FormularioAnuncio button:hover{
+	color: white;
+	border-style: none;
+}
+
+.FormularioAnuncio .BtnCrear:hover{
+	background-color: #61E232;
+}
+
+.FormularioAnuncio .BtnCancelar:hover{
+	background-color: #F62626;
+}
