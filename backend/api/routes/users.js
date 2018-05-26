@@ -29,10 +29,10 @@ const upload = multer({
 	fileFilter: fileFilter
 });
 
+router.get('/find',User.find);
+router.post('/update',upload.single('foto'), User.update);
+router.post('/delete',User.delete);
 router.get('/', User.show);
 router.post('/', upload.single('foto'), User.create);
-router.get('/:userId',User.find);
-router.post('/Update/:userId',upload.single('foto'), User.update);
-router.post('/Delete/:userId',User.delete);
 
 module.exports = router;

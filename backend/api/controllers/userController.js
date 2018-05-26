@@ -89,7 +89,7 @@ module.exports = {
 		})
 	},
 	find: (req,res,next)=>{
-		const id = req.params.userId
+		const id = req.body.userId
 		User.findById(id)
 			.select('nombres apellidos email puntuacion foto _id')
 			.exec()
@@ -108,17 +108,48 @@ module.exports = {
 			})
 	},
 	update: (req,res,next)=>{
-		const id = req.params.userId;
-		const updateOps = {};
-		for(const ops of req.body){
-			updateOps[ops.propName] = ops.value;
+		const id = req.body.userId;
+		const obj = req.body;
+		const pass = req.body.contrasenia;
+		delete obj.userId;
+		delete obj.contrasenia;
+		if (req.file !== undefined) {
+			User.findById(id)
+			.select('foto')
+			.exec()
+			.then(doc=>{
+				if (doc.foto !== '/profilePictures/default.jpeg') {
+					fs.unlink(doc.foto , (err) => {
+						  if (err) throw err;
+						  console.log(doc.foto+' was deleted');
+						}
+					);
+				}
+			});
+			obj.foto = req.file.path;
 		}
-		console.log(req.body);
-		console.log(updateOps);
-		User.update({_id: id},{$set: updateOps})
+		if (req.body.newpass !== '' && req.body.contrasenia !== '') {
+			User.findById(id)
+			.select('contrasenia')
+			.exec()
+			.then(doc=>{
+				bcrypt.compare(pass, doc.contrasenia, (err,res)=>{
+					if (res) {
+						bcrypt.hash(req.body.newpass, 10, (err,hash)=>{
+							if(err) throw err;
+							User.update({_id: id},{$set: {contrasenia: hash}})
+							.exec();
+							console.log('Contraseña actualizada');
+						});
+					}else{
+						return console.log('Contraseña antigua incorrecta');
+					}
+				});
+			});
+		}
+		User.update({_id: id},{$set: obj})
 			.exec()
 			.then(result => {
-				console.log(result);
 				res.status(200).json({
 					message: 'User updated'
 				});
@@ -131,7 +162,7 @@ module.exports = {
 			});
 	},
 	delete: (req,res,next)=>{
-		const id = req.params.userId;
+		const id = req.body.userId;
 		User.findById(id)
 			.select('foto')
 			.exec()
@@ -168,5 +199,17 @@ module.exports = {
 					error: err
 				});
 			});
+	},
+	//Funccion por desarrollar
+	password: (req,res,next)=>{
+		const id = req.body.userId;
+		console.log(id);
+		console.log(req.body);
+		bcrypt.hash(req.body.contrasenia, 10, (err,hash)=>{
+			if (err) throw err;
+			User.update({_id: id},{$set: {contrasenia: hash}})
+				.exec();
+				console.log('Contraseña actualizada');
+		});
 	}
 }

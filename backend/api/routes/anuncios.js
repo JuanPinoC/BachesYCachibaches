@@ -29,10 +29,11 @@ const upload = multer({
 	fileFilter: fileFilter
 });
 
+router.get('/find/', Anuncio.find);
+router.post('/update/', upload.single('imagen'), Anuncio.update);
+router.post('/delete/',Anuncio.delete);
 router.get('/', Anuncio.show);
-router.post('/:userId', upload.single('imagen'),Anuncio.create);
-router.get('/:anuncioId', Anuncio.find);
-router.post('/Update/:anuncioId',Anuncio.update);
-router.post('/Delete/:anuncioId',Anuncio.delete);
+router.post('/', upload.single('imagen'),Anuncio.create);
+
 
 module.exports = router;

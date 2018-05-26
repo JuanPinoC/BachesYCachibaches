@@ -58,7 +58,7 @@ module.exports = {
 			});
 	},
 	find: (req,res,next)=>{
-		const id = req.params.categoryId;
+		const id = req.body.categoryId;
 		Categoria.findById(id)
 			.select('name _id subcategorias')
 			.exec()
@@ -79,7 +79,7 @@ module.exports = {
 			});
 	},
 	update: (req,res,next)=>{
-		const id = req.params.categoryId;
+		const id = req.body.categoryId;
 		const updateOps = {};
 		for(const ops of req.body){
 			updateOps[ops.propName] = ops.value;
@@ -99,7 +99,7 @@ module.exports = {
 			});
 	},
 	delete: (req,res,next)=>{
-		const id = req.params.categoryId;
+		const id = req.body.categoryId;
 		Categoria.remove({_id: id})
 			.exec()
 			.then(result => {

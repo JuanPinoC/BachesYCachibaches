@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Anuncio = require('../models/anuncio');
+const Comentario = require('../models/comentario');
 const fs = require('fs');
 
 module.exports = {
@@ -36,7 +37,7 @@ module.exports = {
 	create: (req,res,next)=>{
 		const anuncio = new Anuncio({
 			_id: new mongoose.Types.ObjectId(),
-			usuario: req.params.userId,
+			usuario: req.body.userId,
 			titulo: req.body.titulo,
 			descripcion: req.body.descripcion,
 			fec_pub: req.body.fec_pub,
@@ -72,7 +73,7 @@ module.exports = {
 			});
 	},
 	find: (req,res,next)=>{
-		const id = req.params.anuncioId;
+		const id = req.body.anuncioId;
 		Anuncio.findById(id)
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
 			.populate('usuario','nombres')
@@ -95,12 +96,23 @@ module.exports = {
 			});
 	},
 	update: (req,res,next)=>{
-		const id = req.params.anuncioId;
-		const updateOps = {};
-		for(const ops of req.body){
-			updateOps[ops.propName] = ops.value;
+		const id = req.body.anuncioId;
+		const obj = req.body;
+		delete obj._id;
+		if (req.file !== undefined) {
+			Anuncio.findById(id)
+			.select('imagen')
+			.exec()
+			.then(doc=>{
+				fs.unlink(doc.imagen , (err) => {
+					  if (err) throw err;
+					  console.log(doc.imagen+' was deleted');
+					}
+				);
+			});
+			obj.imagen = req.file.path;
 		}
-		Anuncio.update({_id:id},{$set: updateOps})
+		Anuncio.update({_id:id},{$set: obj })
 			.exec()
 			.then(result => {
 				res.status(200).json({
@@ -115,7 +127,7 @@ module.exports = {
 			});
 	},
 	delete: (req,res,next)=>{
-		const id = req.params.anuncioId;
+		const id = req.body.anuncioId;
 		Anuncio.findById(id)
 			.select('imagen')
 			.exec()
@@ -135,6 +147,10 @@ module.exports = {
 						res.status(200).json({
 							message: 'Ad deleted'
 						});
+						Comentario.deleteMany({anuncio: id},(err)=>{
+							if (err) throw err;
+							console.log('Comenatarios eliminados');
+						})
 					})
 					.catch(err => {
 						console.log(err);
