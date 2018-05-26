@@ -1,0 +1,22 @@
+.Atributo{
+	display: block;
+	margin-top: 20px;
+}
+
+.Atributo label{
+	font-size: 15px;
+}
+
+.Atributo input{
+	border-radius: 5px;
+	padding: 5px;
+	margin-left: 40px; 
+	float: right;
+	border: 1px solid #FFBF00;
+	width: 200px;
+}
+
+.Atributo input:focus{
+	outline:0;
+	box-shadow: inset 0px 0px 5px 0px #FFBF00;
+}

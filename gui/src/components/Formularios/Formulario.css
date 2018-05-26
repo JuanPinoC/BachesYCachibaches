@@ -1,0 +1,54 @@
+.Formulario h1{
+	align-content: center;
+	padding: 10px;
+	margin-bottom: 10px;
+	text-transform: capitalize;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.Formulario hr{
+	width: 60%;
+	margin-bottom: 30px;
+}
+
+.Formulario form{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin-left: 16%;
+	font-weight: bold;
+}
+
+.Formulario .Parte{
+	display: inline-block;
+	margin-top: 10px;
+	margin-left: 50px;
+}
+
+.Formulario .Botones{
+	margin-top: 30px;
+	margin-bottom: 50px;
+	margin-right: 25%;
+	margin-left: 22%;
+}
+
+.Formulario button{
+	background-color: white;
+	border-style: none;
+	transition-duration: 0.3s;
+	width: 200px;
+	margin-top: 20px;
+	margin-left: 10px;
+	border-radius: 10px;
+}
+
+.Formulario button:hover{
+	border-style: none;
+	color: white;
+}
+
+.Formulario .BtnCrear:hover{
+	background-color: #61E232;
+}
+
+.Formulario .BtnCancelar:hover{
+	background-color: #F62626;
+}

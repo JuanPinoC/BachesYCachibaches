@@ -13,7 +13,8 @@ import Registrar from '../../components/Registrar/Registrar';
 import Portada from '../../components/Portada/portada';
 import Usuario from '../../components/Perfil/Usuario/Usuario';
 import AnuncioDetalle from '../../components/AnuncioDetalle/AnuncioDetalle';
-import FormularioAnuncio from '../../components/FormularioAnuncio/FormularioAnuncio';
+import FormularioAnuncio from '../../components/Formularios/FormularioAnuncio';
+import FormularioUsuario from '../../components/Formularios/FormularioUsuario';
 
 class Layout extends Component {
     state = {
@@ -44,6 +45,7 @@ class Layout extends Component {
                         <Route path="/categoria/:nombre" component={Categoria}/>
                         <Route path="/anuncio/:nombre" component={AnuncioDetalle}/>
                         <Route path="/formularioAnuncio" component={FormularioAnuncio}/>
+                        <Route path="/formularioUsuario" component={FormularioUsuario}/>
                         <Route path="/ingresar" component={Login}/>
                         <Route path="/registrarse" component={Registrar}/>
                         <Route path="/nosotros" component={Portada}/>

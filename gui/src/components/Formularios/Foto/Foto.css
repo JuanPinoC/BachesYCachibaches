@@ -1,0 +1,46 @@
+.FotoFormulario{
+	display: block;
+	margin-top: 10px;
+	margin-left: 50px;
+	width: 60%;
+}
+
+.FotoFormulario .AtributoImagen{
+	display: block;
+	margin-top: 40px;
+}
+
+.FotoFormulario .AtributoImagen label{
+	font-size: 15px;
+}
+
+.FotoFormulario .AtributoImagen input:focus{
+	outline:0;
+}
+
+.FotoFormulario .Imagen img{
+	margin: 30px;
+	height: 100px;
+	width: auto;
+	border: 1px solid black;
+	border-radius: 10px;
+	display: inline-block;
+}
+
+.FotoFormulario .ImagenLabel{
+	padding: 10px;
+	background-color: transparent;
+	border: 1px solid #61E232;
+	border-radius: 10px;
+	transition-duration: 0.3s;
+}
+
+.FotoFormulario .ImagenLabel:hover{
+	background-color: #61E232;
+	color: white;
+}
+
+.FotoFormulario .ImagenInput{
+	width: 0.1px;
+	height: 0.1px
+}
