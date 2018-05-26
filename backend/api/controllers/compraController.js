@@ -67,7 +67,7 @@ module.exports = {
 			});
 	},
 	find: (req,res,next)=>{
-		const id = req.params.compraId;
+		const id = req.body.compraId;
 		Compra.findById(id)
 			.select('_id anuncio usuario fecha')
 			.populate('anuncio','titulo')
@@ -90,7 +90,7 @@ module.exports = {
 			});
 	},
 	update:(req,res,next)=>{
-		const id = req.params.compraId;
+		const id = req.body.compraId;
 		const updateOps = {};
 		for(const ops of req.body){
 			updateOps[ops.propName] = ops.value;
@@ -111,7 +111,7 @@ module.exports = {
 			});
 	},
 	delete:(req,res,next)=>{
-		const id = req.params.compraId;
+		const id = req.body.compraId;
 		Compra.remove({_id: id})
 			.exec()
 			.then(result => {

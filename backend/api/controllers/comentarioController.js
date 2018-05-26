@@ -60,7 +60,7 @@ module.exports = {
 			});
 	},
 	find:(req,res,next)=>{
-		const id = req.params.comentarioId;
+		const id = req.body.comentarioId;
 		Comentario.findById(id)
 			.select('_id anuncio usuario fecha comentario')
 			.populate('anuncio','titulo')
@@ -81,7 +81,7 @@ module.exports = {
 			});
 	},
 	update:(req,res,next)=>{
-		const id = req.params.comentarioId;
+		const id = req.body.comentarioId;
 		const updateOps = {};
 		for(const ops of req.body){
 			updateOps[ops.propName] = ops.value;
@@ -101,7 +101,7 @@ module.exports = {
 			});
 	},
 	delete:(req,res,next)=>{
-		const id = req.params.comentarioId;
+		const id = req.body.comentarioId;
 		Comentario.remove({_id: id})
 			.exec()
 			.then(result => {
