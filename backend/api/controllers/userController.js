@@ -118,15 +118,22 @@ module.exports = {
 			.select('foto')
 			.exec()
 			.then(doc=>{
-				if (doc.foto !== '/profilePictures/default.jpeg') {
+				if (doc.foto !== profilePictures) {
 					fs.unlink(doc.foto , (err) => {
-						  if (err) throw err;
-						  console.log(doc.foto+' was deleted');
-						}
-					);
+						  if (err) {
+								if (err.code === 'ENOENT'){
+									User.update({_id:id},{$set: {foto:profilePictures}})
+									.exec();
+								}
+							}else{
+								console.log(doc.foto+' was deleted');
+							}  
+						});
 				}
-			});
-			obj.foto = req.file.path;
+				User.update({_id: id},{$set:{foto:req.file.path}})
+				.exec();
+			})
+			.catch(err=>{throw err});
 		}
 		if (req.body.newpass !== '' && req.body.contrasenia !== '') {
 			User.findById(id)
@@ -147,6 +154,7 @@ module.exports = {
 				});
 			});
 		}
+		delete obj.foto;
 		User.update({_id: id},{$set: obj})
 			.exec()
 			.then(result => {

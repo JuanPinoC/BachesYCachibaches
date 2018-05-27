@@ -34,6 +34,7 @@ class imagenes extends Component {
       }
       reader.readAsDataURL(file)
     }
+    console.log(this.state.imgs);
   }
 
   ImageDeleteHandler = (e) =>{

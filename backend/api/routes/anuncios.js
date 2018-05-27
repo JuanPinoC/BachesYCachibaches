@@ -30,10 +30,10 @@ const upload = multer({
 });
 
 router.get('/find/', Anuncio.find);
-router.post('/update/', upload.single('imagen'), Anuncio.update);
+router.post('/update/', upload.array('imagen',10), Anuncio.update);
 router.post('/delete/',Anuncio.delete);
 router.get('/', Anuncio.show);
-router.post('/', upload.single('imagen'),Anuncio.create);
+router.post('/', upload.array('imagen',10),Anuncio.create);
 
 
 module.exports = router;

@@ -35,6 +35,10 @@ module.exports = {
 			});
 	},
 	create: (req,res,next)=>{
+		const imagenes = [];
+		for(let i = 0; i < req.files.length;i++){
+			imagenes[i]=req.files[i].path;
+		}
 		const anuncio = new Anuncio({
 			_id: new mongoose.Types.ObjectId(),
 			usuario: req.body.userId,
@@ -46,7 +50,7 @@ module.exports = {
 			subcategoria: req.body.subcategoria,
 			precio: req.body.precio,
 			destacado: req.body.destacado,
-			imagen: req.file.path
+			imagen: imagenes
 		});
 		anuncio
 			.save()		
@@ -96,22 +100,38 @@ module.exports = {
 			});
 	},
 	update: (req,res,next)=>{
-		const id = req.body.anuncioId;
+		const id = req.body._id;
 		const obj = req.body;
 		delete obj._id;
-		if (req.file !== undefined) {
+		if (req.files.length > 0) {
 			Anuncio.findById(id)
 			.select('imagen')
 			.exec()
 			.then(doc=>{
-				fs.unlink(doc.imagen , (err) => {
-					  if (err) throw err;
-					  console.log(doc.imagen+' was deleted');
+				if (doc.imagen.length > 0) {
+					for(let i = 0; i < doc.imagen.length; i++){
+						fs.unlink(doc.imagen[i] , (err) => {
+							if (err) {
+								if (err.code === 'ENOENT'){
+									Anuncio.update({_id:id},{$set: {imagen:[]}})
+									.exec();
+								}
+							}else{
+								console.log(doc.imagen[i]+' was deleted');
+							}  
+						});
 					}
-				);
-			});
-			obj.imagen = req.file.path;
+				}
+				const imagenes = [];
+				for(let i = 0; i < req.files.length;i++){
+					imagenes[i]=req.files[i].path;
+				}
+				Anuncio.update({_id: id},{$set:{imagen:imagenes}})
+				.exec();
+			})
+			.catch(err=>{throw err});
 		}
+		delete obj.imagen;
 		Anuncio.update({_id:id},{$set: obj })
 			.exec()
 			.then(result => {

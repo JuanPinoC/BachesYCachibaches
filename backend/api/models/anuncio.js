@@ -16,7 +16,7 @@ const anuncioSchema = mongoose.Schema({
 	subcategoria: {type:String, required: true},
 	precio: {type: Number, required: true},
 	destacado: {type:[destacado], required: false},
-	imagen: {type: String, required: true}
+	imagen: {type:Array, required: true}
 });
 module.exports = mongoose.model('Anuncio', anuncioSchema,'anuncios');
 
