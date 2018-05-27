@@ -13,8 +13,13 @@ import Registrar from '../../components/Registrar/Registrar';
 import Portada from '../../components/Portada/portada';
 import Usuario from '../../components/Perfil/Usuario/Usuario';
 import AnuncioDetalle from '../../components/AnuncioDetalle/AnuncioDetalle';
+
 import FormularioAnuncio from '../../components/Formularios/FormularioAnuncio';
 import FormularioUsuario from '../../components/Formularios/FormularioUsuario';
+import FormularioCategoria from '../../components/Formularios/FormularioCategoria';
+import FormularioSubcategoria from '../../components/Formularios/FormularioSubcategoria';
+import FormularioPlan from '../../components/Formularios/FormularioPlan';
+import FormularioComentario from '../../components/Formularios/FormularioComentario';
 
 class Layout extends Component {
     state = {
@@ -46,6 +51,10 @@ class Layout extends Component {
                         <Route path="/anuncio/:nombre" component={AnuncioDetalle}/>
                         <Route path="/formularioAnuncio" component={FormularioAnuncio}/>
                         <Route path="/formularioUsuario" component={FormularioUsuario}/>
+                        <Route path="/formularioCategoria" component={FormularioCategoria}/>
+                        <Route path="/formularioSubcategoria" component={FormularioSubcategoria}/>
+                        <Route path="/formularioPlan" component={FormularioPlan}/>
+                        <Route path="/formularioComentario" component={FormularioComentario}/>
                         <Route path="/ingresar" component={Login}/>
                         <Route path="/registrarse" component={Registrar}/>
                         <Route path="/nosotros" component={Portada}/>
