@@ -23,7 +23,8 @@ import FormularioComentario from '../../components/Formularios/FormularioComenta
 
 class Layout extends Component {
     state = {
-        showSideDrawer: false
+        showSideDrawer: false,
+        userLogged: true
     }
 
     sideDrawerClosedHandler = () => {
@@ -40,7 +41,7 @@ class Layout extends Component {
         return (
             <Aux>
                 <Toolbar
-                drawerToggleClicked={this.sideDrawerToggleHandler} />
+                drawerToggleClicked={this.sideDrawerToggleHandler} userLogged={this.state.userLogged} />
                 <SideDrawer
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler} />

@@ -3,6 +3,7 @@ import React from 'react';
 import classes from './Toolbar.css';
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
+import NavigationItemsUser from '../NavigationItems/NavigationItemsLoggedUser';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import Searchbar from '../SearchBar/SearchBar';
 
@@ -17,7 +18,10 @@ const toolbar = ( props ) => (
         	<Searchbar />
         </div>
         <nav className={classes.DesktopOnly}>
-            <NavigationItems />
+            {
+                (props.userLogged)?<NavigationItemsUser/>:<NavigationItems/>    
+            }
+            
         </nav>
     </header>
     </div>

@@ -2,12 +2,17 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 import Classes from './AnuncioDetalle.css';
+
 import Valoracion from '../Perfil/Valoracion/Valoracion';
+import Comentarios from '../Comentarios/Comentarios';
+
 import img from './img.jpg';
 import imgUsuario from '../Perfil/Usuario/userExample.png';
 import imgDestacado from '../Anuncio/star.png';
 
+
 const anuncioDetalle = (props) => (
+	<div>
 	<center>
 		<tr className={Classes.PublicacionDetalle}>
 			<td className={Classes.Imagen}>
@@ -36,6 +41,8 @@ const anuncioDetalle = (props) => (
 			</div>
 		</tr>
 	</center>
+		<Comentarios comentarios={props.comentarios} />
+	</div>
 )
 
 export default anuncioDetalle;

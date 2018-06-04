@@ -1,0 +1,60 @@
+.FormularioComentario{
+	margin-left: 1%;
+	margin-right: 1%;
+	padding: 20px;
+	border-radius: 25px;
+	background-color: white;
+	border:1px solid #f2f2f2;
+	border-right:2px solid #f2f2f2;
+	border-bottom: 2px solid #f2f2f2;
+}
+
+.FormularioComentario img{
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+	border: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.FormularioComentario textarea{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin-left: 20px;
+	border: 2px solid grey;
+	border-radius: 25px 25px 25px 5px;
+	width: 70%;
+	max-width: 600px;
+	min-width: 100px;
+	height: 100px;
+	padding: 15px;
+	padding-left: 20px;
+	resize: none;
+	margin-bottom: 10px;
+}
+
+.FormularioComentario textarea:focus{
+	border:2px solid black;
+	outline: none;
+}
+
+.FormularioComentario button{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-weight: bold;
+	background-color: white;
+	border: 2px solid #61E232;
+	border-radius: 10px;
+	width: 200px;
+	height: 50px;
+	transition-duration: 0.3s;
+	margin-left: 10px;
+}
+
+.FormularioComentario button:hover{
+	background-color: #61E232;
+	color: white;
+	border-color: transparent;
+}
+
+.FormularioComentario button:focus{
+	outline: none;
+}

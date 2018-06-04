@@ -22,14 +22,10 @@ class formularioUsuario extends Component {
 				</div>
         		<div className={Classes.Parte}>
         			<Atributo titulo={"Dirección"} nombre={"direccion"} tipo={"text"} />
-					<Atributo titulo={"Puntuación"} nombre={"puntuacion"} tipo={"number"} />
 					<Atributo titulo={"Celular"} nombre={"celular"} tipo={"number"} />
 					<Atributo titulo={"Teléfono"} nombre={"telefono"} tipo={"number"} />
 				</div>
-				<div className={Classes.Parte}>
-					<Atributo titulo={"Latitud"} nombre={"latitud"} tipo={"text"}/>
-					<Atributo titulo={"Longitud"} nombre={"longitud"} tipo={"text"}/>
-				</div>
+				
 				<Foto />
 				<div className={Classes.Botones}>
 					<button className={Classes.BtnCrear}>
