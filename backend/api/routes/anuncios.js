@@ -29,9 +29,11 @@ const upload = multer({
 	fileFilter: fileFilter
 });
 
-router.get('/find/', Anuncio.find);
-router.post('/update/', upload.array('imagen',10), Anuncio.update);
-router.post('/delete/',Anuncio.delete);
+router.get('/find', Anuncio.find);
+router.post('/edit', Anuncio.edit);
+router.post('/update', upload.array('imagen',10), Anuncio.update);
+router.post('/delete',Anuncio.delete);
+router.post('/highlight', Anuncio.highlight);
 router.get('/', Anuncio.show);
 router.post('/', upload.array('imagen',10),Anuncio.create);
 

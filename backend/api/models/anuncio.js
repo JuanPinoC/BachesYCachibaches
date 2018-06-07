@@ -15,7 +15,7 @@ const anuncioSchema = mongoose.Schema({
 	categoria: {type: mongoose.Schema.Types.ObjectId, ref:'Categoria', required: true},
 	subcategoria: {type:String, required: true},
 	precio: {type: Number, required: true},
-	destacado: {type:[destacado], required: false},
+	destacado: {type: destacado, default: destacado},
 	imagen: {type:Array, required: true}
 });
 module.exports = mongoose.model('Anuncio', anuncioSchema,'anuncios');

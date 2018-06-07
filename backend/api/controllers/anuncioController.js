@@ -49,7 +49,6 @@ module.exports = {
 			categoria: req.body.categoria,
 			subcategoria: req.body.subcategoria,
 			precio: req.body.precio,
-			destacado: req.body.destacado,
 			imagen: imagenes
 		});
 		anuncio
@@ -152,15 +151,20 @@ module.exports = {
 			.select('imagen')
 			.exec()
 			.then(doc=>{
+				console.log(doc.imagen.length);
 				if (!doc) {
 					return res.status(404).json({
 						message: "Ad not found"
 					});
 				}else{
-					fs.unlink(doc.imagen , (err) => {
-					  if (err) throw err;
-					  console.log(doc.imagen+' was deleted');
-					});
+					if (doc.imagen.length > 0) {
+						for(let i = 0; i< doc.imagen.length; i++){
+							fs.unlink(doc.imagen[i] , (err) => {
+							  if (err) throw err;
+							  console.log(doc.imagen+' was deleted');
+							});
+						}
+					}
 					Anuncio.remove({_id: id})
 					.exec()
 					.then(result=> {
@@ -169,7 +173,7 @@ module.exports = {
 						});
 						Comentario.deleteMany({anuncio: id},(err)=>{
 							if (err) throw err;
-							console.log('Comenatarios eliminados');
+							console.log('Comentarios eliminados');
 						})
 					})
 					.catch(err => {
@@ -186,5 +190,44 @@ module.exports = {
 							error: err
 						});
 					});
+	},
+	highlight: (req,res,next)=>{
+		Anuncio.update({_id: req.body.anuncioId},{$set:{
+			destacado:{
+				plan:req.body.plan,
+				fecha:req.body.fecha
+			}
+		}})
+		.exec()
+		.then(result => {
+			res.status(200).json({
+				message: 'Ad updated'
+			});
+		})
+		.catch(err =>{
+			console.log(err);
+			res.status(500).json({
+				error: err
+			});
+		});
+	},
+	edit:(req,res,next)=>{
+		Anuncio.findById(req.body.anuncioId)
+			.select('_id titulo descripcion categoria subcategoria precio imagen activo')
+			.populate('categoria')
+			.exec()
+			.then(doc => {
+				if (doc) {
+					res.status(200).json({
+						anuncio: doc
+					});
+				}else{
+					res.status(404).json({message: 'No valid entry found for provided ID'});
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({error: err});
+			});
 	}
 }

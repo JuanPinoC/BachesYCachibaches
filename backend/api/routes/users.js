@@ -29,6 +29,8 @@ const upload = multer({
 	fileFilter: fileFilter
 });
 
+router.post('/password',User.password);
+router.post('/login',User.login);
 router.get('/find',User.find);
 router.post('/update',upload.single('foto'), User.update);
 router.post('/delete',User.delete);
