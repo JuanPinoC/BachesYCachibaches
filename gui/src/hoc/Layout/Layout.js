@@ -25,34 +25,17 @@ class Layout extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showSideDrawer: false,
-            userLogged: false
+            userLogged: false,
+            token: sessionStorage.getItem('jwtToken')
         }
         this.UserLogged = this.UserLogged.bind(this);
     }
 
-    UserLogged = (value) => {
-        this.setState({ userLogged: value });
-    }
-
-    data = {
-        tipo: "",
-        titulo: "titulo",
-        descripcion: "descripcion",
-        precio: 100,
-        categoria: "categoria",
-        subcategoria: "subcategoria",
-        destacado: "destacado"
-    }
-
-    sideDrawerClosedHandler = () => {
-        this.setState( { showSideDrawer: false } );
-    }
-
-    sideDrawerToggleHandler = () => {
-        this.setState( ( prevState ) => {
-            return { showSideDrawer: !prevState.showSideDrawer };
-        } );
+    UserLogged = (value, token) => {
+        this.setState({
+            userLogged: value,
+            token: (typeof token != 'undefined')?token:''
+        });
     }
 
     render () {
@@ -60,12 +43,16 @@ class Layout extends Component {
             <Aux>
                 <Toolbar
                     drawerToggleClicked={this.sideDrawerToggleHandler} 
-                    userLogged={this.state.userLogged} action={this.UserLogged}/>
-                <SideDrawer
-                    open={this.state.showSideDrawer}
-                    closed={this.sideDrawerClosedHandler} />
+                    userLogged={this.state.userLogged}
+                    action={this.UserLogged}
+                />
                 <main className={classes.Content}>
-                    <Switch>
+                    
+                        {(this.state.token!=null)?(
+                        <Switch>
+                            <Route path="/ingresar" render={() => (
+                            <Login action={this.UserLogged}/>)}/>
+                            <Route path="/registrarse" component={FormularioUsuario}/>
                         <Route path="/buscar" component={Categoria}/>
                         <Route path="/categoria/:nombre" component={Categoria}/>
                         <Route path="/anuncio/:nombre" component={AnuncioDetalle}/>
@@ -75,13 +62,19 @@ class Layout extends Component {
                         <Route path="/formularioCategoria" component={FormularioCategoria}/>
                         <Route path="/formularioPlan" component={FormularioPlan}/>
                         <Route path="/formularioComentario" component={FormularioComentario}/>
-                        <Route path="/ingresar"
-                                render={() => (<Login action={this.UserLogged}/>)}/>
-                        <Route path="/registrarse" component={FormularioUsuario}/>
                         <Route path="/nosotros" component={Portada}/>
                         <Route path="/info" component={Usuario}/>
                         <Route path="/" component={Portada}/>
-                    </Switch>
+                        </Switch>
+                        ):(
+                        <Switch>
+                        <Route path="/ingresar" render={() => (
+                            <Login action={this.UserLogged}/>)}/>
+                            <Route path="/registrarse" component={FormularioUsuario}/>
+                            <Route path="/" component={Portada}/>
+                        </Switch>
+                        )}
+                                
                 </main>
                 <Footer />
             </Aux>

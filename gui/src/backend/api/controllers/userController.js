@@ -4,7 +4,7 @@ const fs = require('fs');
 const defaultPicture = '/profilePictures/default.jpeg';
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-
+	
 module.exports = {
 	show: (req,res,next)=>{
 		User.find()

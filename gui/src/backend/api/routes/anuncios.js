@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const Anuncio = require('../controllers/anuncioController');
+const checkAuth = require('../middlewares/check-auth')
 
 const storage = multer.diskStorage({
 	destination: function(req, file, cb){
@@ -34,7 +35,7 @@ router.post('/edit', Anuncio.edit);
 router.post('/update', upload.array('imagen',10), Anuncio.update);
 router.post('/delete',Anuncio.delete);
 router.post('/highlight', Anuncio.highlight);
-router.get('/', Anuncio.show);
+router.get('/', checkAuth, Anuncio.show);
 router.post('/', upload.array('imagen',10),Anuncio.create);
 
 

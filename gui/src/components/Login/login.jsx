@@ -33,16 +33,17 @@ class login extends Component {
       method: 'post',
       url: 'usuarios/login',
       data: data,
-      config: { headers: {'Content-Type': 'multipart/form-data' }}
+      config: { headers: {'Content-Type': 'multipart/form-data',  }}
     })
     .then((response) => {
       //handle success
-      this.props.action(true);
+      this.props.action(true,response.data.token);
       console.log(response);
+      sessionStorage.setItem('jwtToken', response.data.token);
     })
     .catch((response) => {
       //handle error
-      this.props.action(true);
+      this.props.action(false);
       console.log(response);
     });
   }
