@@ -2,7 +2,8 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import classes from './NavigationItems.css';
 
-const navigationItemsLoggedUser = () => (
+
+const navigationItemsLoggedUser = (props) => (
     <ul className={classes.NavigationItems}>  
         <NavLink to="/perfil" exact >
             <li className={classes.BarSuperiorBtn}>Perfil</li>
@@ -14,7 +15,7 @@ const navigationItemsLoggedUser = () => (
             <li className={classes.BarSuperiorBtn}>Cuenta</li>
         </NavLink>
         <NavLink to="/salir" exact >
-            <li className={classes.BarSuperiorBtn}>Salir</li>
+            <li className={classes.BarSuperiorBtn} onClick={()=>{props.action(false)}}>Salir</li>
         </NavLink>
     </ul>
 );

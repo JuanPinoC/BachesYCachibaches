@@ -1,56 +1,91 @@
 import React, { Component } from 'react';
-import classes from './Login.css';
-import inicio from './img/inicio.jpg';
-import facebook from './img/facebook.png';
-import google from './img/google.png';
-import face from './img/facebookWhite.png';
-import goog from './img/googleWhite.png';
+import Classes from './Login.css';
+
+import fb from './img/facebookWhite.png';
+import goo from './img/googleWhite.png';
 import git from './img/gitWhite.png';
 import inst from './img/instWhite.png';
 
-class Login extends Component {
+import Atributo from '../Formularios/Atributo/Atributo';
+import axios from '../../AxiosFiles/axios.js';
+
+class login extends Component {
+
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      email: '',
+      contrasenia: ''
+    };
+
+    this.AtributoHandler = this.AtributoHandler.bind(this);
+  }
+
+  AtributoHandler = (campo, valor) => {
+    this.setState({ [campo]: valor });
+  }
+
+  SubmitHandler = (e) => {
+    e.preventDefault();
+    const data = this.state;
+    axios({
+      method: 'post',
+      url: 'usuarios/login',
+      data: data,
+      config: { headers: {'Content-Type': 'multipart/form-data' }}
+    })
+    .then((response) => {
+      //handle success
+      this.props.action(true);
+      console.log(response);
+    })
+    .catch((response) => {
+      //handle error
+      this.props.action(true);
+      console.log(response);
+    });
+  }
+
   render() {
     return (
-      <div className={classes.login}>
-        <body className={classes.loginBody}>
-          <form>
-            <h1 className={classes.loginTitle}>INICIO DE SESION</h1>
-                <p className={classes.loginSubtitle}>Correo Electronico 
-                  <p className={classes.loginSubinput}><input className={classes.loginInput} type="text" placeholder="Ingrese su correo electronico" autoFocus/></p>
-                </p>
-                <p className={classes.loginSubtitle2}>Contraseña
-                  <p className={classes.loginSubinput}><input className={classes.loginInput} type="password" placeholder="Ingrese su contraseña" autoFocus/></p>
-                </p>
-                <p className={classes.loginSubtitle3}>
-                <p className={classes.loginCheckinput}><input className={classes.loginSubcheckinput} type="checkbox"/>Recuerdame</p><p className={classes.loginOlvidaste}>¿Olvidaste tu contraseña?</p>
-                </p>
-                <img src={facebook} alt={"facebook"} className={classes.loginImgbody}/><img src={google} alt={"google"} className={classes.loginImgbody}/> 
-          </form>
-        </body>
-        <p className={classes.loginIntro}>
-          Quizas te pueda interesar
-
-          <table className={classes.loginTable}>
-	        <tr>
-	        	<td rowSpan="2" className={classes.loginTd}> 
-	          		<h4> ByC tiene como objetivo servir de <br></br>
-                medio para que las personas que <br></br>
-                desean adquirir productos y/o <br></br>
-                deshacerse de los que no utilizan, <br></br>
-                obteniendo un beneficio monetario </h4>
-	          	</td>
-	          	<td className={classes.loginTd}>
-	          		<p className={classes.loginSubinputd}><input className={classes.loginInput} type="search" placeholder="buscar..." autoFocus/></p>
-	          	</td>
-	        </tr>
-          <tr>
-            <td className={classes.loginTd}><img src={face} alt={"face"} className={classes.loginImgbody}/><img src={goog} alt={"goog"} className={classes.loginImgbody}/><img src={git} alt={"git"} className={classes.loginImgbody}/><img src={inst} alt={"inst"} className={classes.loginImgbody}/></td>
-         </tr>
-	       </table>
-        </p>
+      <div className={Classes.Login}>
+        <div className={Classes.Form}>
+          <h1>Ingresar</h1>
+          <div className={Classes.Parte}>
+          <Atributo titulo={"E-mail"} nombre={"email"}
+            tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
+          <Atributo titulo={"Contraseña"} nombre={"contrasenia"}
+            tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
+          </div>
+          <div className={Classes.Botones}>
+            <button onClick={this.SubmitHandler} className={Classes.BtnIngresar}>
+              <h3>Ingresar</h3>
+            </button>
+            <button className={Classes.BtnForgotPassword}>
+              Olvide mi contraseña :c
+            </button>
+          </div>
+        </div>
+        <div className={Classes.Info}>
+          <div className={Classes.Texto}>
+            <h2>Tal vez te interese...</h2>
+            <h3>
+              ByC tiene como objetivo servir de medio para que las personas que 
+              desean adquirir productos y/o deshacerse de los que no utilizan,
+              obteniendo un beneficio monetario.
+            </h3>
+          </div>
+          <div className={Classes.Imagenes}>
+            <img src={fb}/>
+            <img src={goo}/>
+            <img src={git}/>
+            <img src={inst}/>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default Login;
+export default login;

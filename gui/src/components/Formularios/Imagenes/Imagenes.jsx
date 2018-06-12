@@ -10,7 +10,7 @@ class imagenes extends Component {
       views: []
     };
 
-    ImageChangeHandler = (e) => {
+  ImageChangeHandler = (e) => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
@@ -35,6 +35,7 @@ class imagenes extends Component {
       reader.readAsDataURL(file)
     }
     console.log(this.state.imgs);
+    if(this.props.action)this.props.action("imagen",this.state.imgs);
   }
 
   ImageDeleteHandler = (e) =>{
@@ -55,6 +56,8 @@ class imagenes extends Component {
       imgs: imgs,
       views: views
     });
+
+    if(this.props.action)this.props.action("imagen",this.state.imgs);
   }
 
   render(){

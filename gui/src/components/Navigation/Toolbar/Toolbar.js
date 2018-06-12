@@ -19,9 +19,8 @@ const toolbar = ( props ) => (
         </div>
         <nav className={classes.DesktopOnly}>
             {
-                (props.userLogged)?<NavigationItemsUser/>:<NavigationItems/>    
-            }
-            
+                (props.userLogged)?<NavigationItemsUser action={props.action}/>:<NavigationItems/>    
+            }       
         </nav>
     </header>
     </div>

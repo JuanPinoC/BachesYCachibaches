@@ -23,6 +23,9 @@ class foto extends Component {
       }
       reader.readAsDataURL(file)
     }
+
+    //if(this.props.action)this.props.action("foto",String(file));
+    if(this.props.action)this.props.action("foto",file);
   }
 
   ImageDeleteHandler = (e) =>{
