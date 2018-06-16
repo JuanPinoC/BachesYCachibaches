@@ -46,10 +46,14 @@ class formularioCategoria extends Component {
 
 		let indice = nombres.indexOf(
 				nombres.find((element) => {
+					console.log(element);
+					console.log(e.target.id);
 					return element == e.target.id; 
 				})
 			);
 		
+		console.log(indice);
+
 		nombres.splice(indice,1);
     	vistas.splice(indice,1);
 
