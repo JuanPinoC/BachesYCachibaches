@@ -21,34 +21,42 @@ class formularioAnuncio extends Component {
 				categoria: props.data.categoria,
 				subcategoria: props.data.subcategoria,
 				destacado: props.data.destacado,
-				usuario: "5b09a556220ed019884c25cc"
+				userId: "5b09a556220ed019884c25cc"
 			}:{
-				usuario: "5b09a556220ed019884c25cc"
+				userId: "5b09a556220ed019884c25cc"
 			};
 
 		this.AtributoHandler = this.AtributoHandler.bind(this);
 	}
 
 	AtributoHandler = (campo, valor) => {
-    	this.setState({ [campo]: valor });
+		if(campo == "precio")
+    		this.setState({ precio: parseFloat(valor)});
+    	else
+    		this.setState({ [campo]: valor});
   	}
 
   	SubmitHandler = (e) => {
-  		e.preventDefault();
   		const data = this.state;
+  		
   		axios({
   			method: 'post',
   			url: 'anuncios/',
   			data: data,
-  			config: { headers: {'Content-Type': 'multipart/form-data' }}
+			config: { 
+  				headers: { 
+  					'Content-Type': 'multipart/form-data',
+  					'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')}}
   		})
-  		.then(function (response) {
+  		.then((response) => {
   			//handle success
   			console.log(response);
   		})
-  		.catch(function (response) {
+  		.catch((response) => {
   			//handle error
   			console.log(response);
+  			console.log(sessionStorage.getItem('jwtToken'));
+  			console.log(data);
   		});
   	}
 
@@ -71,9 +79,9 @@ class formularioAnuncio extends Component {
         			<Atributo titulo={"Categoría"} nombre={"categoria"}
         				tipo={"select"} contenido={this.state.categoria} action={this.AtributoHandler}/>
 				</div>
-				<Imagenes />
+				<Imagenes action={this.AtributoHandler} />
 				<div className={Classes.Botones}>
-					<button type='submit' className={Classes.BtnCrear}>
+					<button type='submit' className={Classes.BtnCrear} onClick={this.SubmitHandler}>
 						<h2>Crear</h2>
 					</button>
 					<button className={Classes.BtnCancelar}>

@@ -5,6 +5,8 @@
 
 .TituloCategoria{
 	margin: 20px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-weight: bold;
 }
 
 .Publicaciones{

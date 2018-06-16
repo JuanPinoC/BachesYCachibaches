@@ -15,8 +15,7 @@ const perfil = () => (
 		<hr/>
 		<center>
 			<div className={Classes.Publicaciones}>
-				<Anuncio />
-				<Anuncio />
+				
 			</div>
 		</center>
 	</div>

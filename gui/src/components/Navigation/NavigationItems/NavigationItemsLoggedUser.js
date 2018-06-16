@@ -1,10 +1,11 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+
 import classes from './NavigationItems.css';
 
-
 const navigationItemsLoggedUser = (props) => (
-    <ul className={classes.NavigationItems}>  
+    <ul className={classes.NavigationItems}>
         <NavLink to="/perfil" exact >
             <li className={classes.BarSuperiorBtn}>Perfil</li>
         </NavLink>
@@ -14,8 +15,14 @@ const navigationItemsLoggedUser = (props) => (
         <NavLink to="/cuenta" exact >
             <li className={classes.BarSuperiorBtn}>Cuenta</li>
         </NavLink>
-        <NavLink to="/salir" exact >
-            <li className={classes.BarSuperiorBtn} onClick={()=>{props.action(false)}}>Salir</li>
+        <NavLink to="/" exact >
+            <li className={classes.BarSuperiorBtn}
+                onClick={
+                        () => {
+                                sessionStorage.setItem('jwtToken', null );
+                                props.action();
+                            }
+            }>Salir</li>
         </NavLink>
     </ul>
 );

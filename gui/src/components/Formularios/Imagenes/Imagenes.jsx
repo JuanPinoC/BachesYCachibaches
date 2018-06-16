@@ -31,11 +31,11 @@ class imagenes extends Component {
               onClick={this.ImageDeleteHandler}/>
             )
         });
+        console.log(this.state.imgs);
+        if(this.props.action)this.props.action("imagen",this.state.imgs);
       }
       reader.readAsDataURL(file)
     }
-    console.log(this.state.imgs);
-    if(this.props.action)this.props.action("imagen",this.state.imgs);
   }
 
   ImageDeleteHandler = (e) =>{

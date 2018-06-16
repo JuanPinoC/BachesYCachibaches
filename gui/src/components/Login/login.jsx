@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import Classes from './Login.css';
 
 import fb from './img/facebookWhite.png';
@@ -37,20 +39,22 @@ class login extends Component {
     })
     .then((response) => {
       //handle success
-      this.props.action(true,response.data.token);
-      console.log(response);
       sessionStorage.setItem('jwtToken', response.data.token);
+      this.props.action();
+      console.log(response);
     })
     .catch((response) => {
       //handle error
-      this.props.action(false);
+      this.props.action();
       console.log(response);
     });
   }
 
   render() {
+    let redirect = (sessionStorage.getItem('jwtToken')!="null")?<Redirect to="/" />:null;
     return (
       <div className={Classes.Login}>
+        {redirect}
         <div className={Classes.Form}>
           <h1>Ingresar</h1>
           <div className={Classes.Parte}>

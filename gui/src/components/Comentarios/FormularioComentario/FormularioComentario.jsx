@@ -8,14 +8,11 @@ import imgUsuario from '../../Perfil/Usuario/userExample.png';
 
 class formularioComentario extends Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			anuncio:"5b062af57af17f2478603ddb",
-			usuario: "5b059f41cf0a481d145eb72c",
-			comentario:""
-		};
-	}
+  state = {
+		anuncio:"5b062af57af17f2478603ddb",
+		usuario: "5b059f41cf0a481d145eb72c",
+		comentario:""
+  }
 
 	onChangeHandler = (e) => {
 		this.setState({
@@ -38,6 +35,7 @@ class formularioComentario extends Component {
   				comentario: ""
   			});
   			alert("Se añadio tu comentario!");
+        this.props.action();
   		})
   		.catch((response) => {
   			//handle error

@@ -76,7 +76,7 @@ module.exports = {
 			});
 	},
 	find: (req,res,next)=>{
-		const id = req.body.anuncioId;
+		const id = req.query.anuncioId; //req.body.anuncioId;
 		Anuncio.findById(id)
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
 			.populate('usuario','nombres')

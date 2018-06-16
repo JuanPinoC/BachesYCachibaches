@@ -12,19 +12,30 @@ class formularioUsuario extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state =(props.data)?
+		this.state =(props.userId)?
 			{
-				tipo: props.data.tipo,
-				nombres: props.data.nombres,
-				apellidos: props.data.apellidos,
-				email: props.data.email,
-				contrasenia: props.data.contrasenia,
-				direccion: props.data.direccion,
-				celular: props.data.celular,
-				telefono: props.data.telefono
-			}:{};
+				tipo: "Editar",
+				userId: props.userId
+			}:{
+				tipo: "Crear"
+			};
 			
 		this.AtributoHandler = this.AtributoHandler.bind(this);
+	}
+
+	componentWillMount = () => {
+		if(this.state.tipo=="Editar"){
+			axios.get('users/find?userId=' + this.state.userId,
+  			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
+				.then(response => {
+					this.setState({
+						data: response
+					});
+				}).catch(response => {
+					console.log(response);
+					}
+				);
+		}
 	}
 
 	AtributoHandler = (campo, valor) => {
@@ -32,7 +43,6 @@ class formularioUsuario extends Component {
   	}
 
   	SubmitHandler = (e) => {
-  		e.preventDefault();
   		const data = this.state;
   		axios({
   			method: 'post',
@@ -53,7 +63,7 @@ class formularioUsuario extends Component {
   	render(){
   		return (
 			<div className={Classes.Formulario}>
-			<center><h1>Crear Usuario</h1></center>
+			<center><h1>{this.state.tipo} Usuario</h1></center>
 			<hr/>
 			<div className={Classes.Form}>
 				<div className={Classes.Parte}>

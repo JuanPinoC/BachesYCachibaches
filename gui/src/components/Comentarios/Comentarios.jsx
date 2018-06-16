@@ -9,12 +9,23 @@ import Comentario from './Comentario/Comentario';
 
 export default class comentarios extends Component {
 
-	state = {
-		data: null,
-		vistas: []
+	constructor (props) {
+		super(props);
+		
+		this.state = {
+			data: null,
+			vistas: []
+		};
+
+		this.getComentarios = this.getComentarios.bind(this);
+	}
+	
+
+	componentWillMount = () => {
+		this.getComentarios();
 	}
 
-	componentWillMount(){
+	getComentarios = () => {
 		axios.get('comentarios/')
 		.then(response => {
 			this.setState({
@@ -24,7 +35,7 @@ export default class comentarios extends Component {
 		});
 	}
 
-	agregarComentarios = () =>{
+	agregarComentarios = () => {
 		const data = this.state.data;
 		let vistas = [];
 		for(let i=0,l=data.length;i < l; i++){
@@ -45,7 +56,7 @@ export default class comentarios extends Component {
 		return (this.state.vistas == null)?
 		(
 			<div className={classes.Comentarios}>
-			<FormularioComentario />
+			<FormularioComentario action={this.getComentarios} />
 				<br/>
 				<Comentario 
 						comentario={"quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"} 

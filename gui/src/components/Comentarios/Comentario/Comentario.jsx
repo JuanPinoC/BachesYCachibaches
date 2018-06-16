@@ -2,16 +2,14 @@ import React from 'react';
 import classes from './Comentario.css';
 
 import imgUsuario from '../../Perfil/Usuario/userExample.png';
+import imgDefault from '../../../backend/profilePictures/default.jpeg';
 
 const comentario = (props) => {
-	let img = (true)?
-				('../../../../../backend/profilePictures/default.jpeg')
-				:imgUsuario;
 
 	return (
 		<tr className={classes.Comentario}>
 			<td className={classes.ComentarioUsuario}>
-				<img src={ img }/>
+				<img src={ imgDefault }/>
 				<a src='/usuario'>{props.usuario}</a>
 			</td>
 			<td className={classes.ComentarioTexto}>

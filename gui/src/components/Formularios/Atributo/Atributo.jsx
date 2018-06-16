@@ -39,7 +39,7 @@ class atributo extends Component {
   					value={this.state.contenido}
   					onChange={this.onChangeHandler} />)}
   			</div>
-		);
+		  );
   	}
 }
 
