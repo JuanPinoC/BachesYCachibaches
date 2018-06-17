@@ -32,7 +32,7 @@
 	margin: 50px;
 	width: 300px;
 	text-align: center;
-	border-left: 6px solid pink;
+	border-left: 6px solid #FFBF00;
 }
 
 .Opciones div{
@@ -43,5 +43,5 @@
 .Opciones div:hover{
 	padding: 10px;
 	background-color: black;
-	color: #FFBF88;
+	color: #FFBF00;
 }

@@ -19,9 +19,9 @@ const toolbar = ( props ) => (
         </div>
         <nav className={classes.DesktopOnly}>
             {
-                (props.userLogged)?<NavigationItemsUser/>:<NavigationItems/>    
-            }
-            
+                (sessionStorage.getItem('jwtToken')!="null")?
+                <NavigationItemsUser action={props.action}/>:<NavigationItems/>    
+            }    
         </nav>
     </header>
     </div>

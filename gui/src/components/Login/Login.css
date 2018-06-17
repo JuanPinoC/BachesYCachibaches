@@ -1,176 +1,93 @@
-.login {
-  text-align: center;
-  background-color: black;
-}
-
-.loginImginicio {
-  background-color: #434343;
-  text-align: right;
-}
-
-.loginImgbody {
-  background-color: #434343;
-  width: 70px;
-  height: 70px;
-  margin-top: 20px;
-  margin-left: 20px;
-
-}
-
-.loginTable {
-  width: 100%;
-  height: 300px;
-  text-align: center;
-  margin-top: 20px; 
-  padding-left: 20px;
-  border-color: red;
-}
-
-.loginTd {
-  border: 3px solid #ddd;
-  color: white;
-  text-align: left;
-  padding-left: 30px;
-  font-size: 1.2em;
-  border-color: black;
-
-}
-
-.loginBody {
-  border: 1px;
-  padding: 1px;
-  margin: 1px;
+.Login{
   background-image: url("./img/inicio.jpg");
-  background-color: #cccccc;
-  height: 440px;
-  width: 100%;
-}
-
-.loginTitle {
-  margin-top: 70px; 
-  font-size: 2em;
-  color: #FFA13D;
-  text-align: center;
-  font-family: "Times New Roman", Times, serif;
-  color: black;
- 
-}
-
-.loginSubtitle {
-  color: #FFA13D;
-  border: 1px;
-  padding-top: 2px;
-  padding-bottom: 20px;
-  margin: 1px;
-  width:1200px;
-  height:20px;
-  text-align:top;
-  color:#000000;
-  font-size: 1em;
-}
-
-.loginSubtitle2 {
-  color: #FFA13D;
-  border: 1px;
-  padding-top: 22px;
-  padding-bottom: 12px;
-  margin: 1px;
-  width:1148px;
-  height:20px;
-  text-align:top;
-  color:#000000;
-  font-size: 1em;
-}
-
-.loginSubtitle3 {
-  color: #FFA13D;
-  border: 1px;
-  padding-top: 30px;
-  padding-bottom: 60px;
-  margin: 1px;
-  width:1248px;
-  height:20px;
-  text-align:top;
-  color:#000000;
-  font-size: 1em;
-}
-
-.loginOlvidaste {
-  color: #FFA13D;
-  border: 1px;
   padding-top: 60px;
-  padding-bottom: 20px;
-  margin: 1px;
-  width:1700px;
-  height:10px;
-  text-align:top;
-  color:#000000;
-  font-size: 1em;
 }
 
-.loginSubinput {
-  color: #FFA13D;
-  border: 1px;
-  padding: 1px;
-  margin: 1px;  
-  width:1470px;
-  height:04px;
-  text-align:center;
-  color:#000000;
-  font-size: 1em;
+.Login .Form{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 60px;
+  border-radius: 30px;
+  border:1px solid black;
+  font-weight: bold;
+  align-content: center;
 }
 
-.loginSubinputd {
-  color: #FFA13D;
-  border: 1px;
-  padding: 1px;
-  margin: 1px;  
-  width:500px;
-  height:04px;
-  text-align:center;
-  color:#000000;
-  font-size: 1em;
+.Login h1{
+  align-content: center;
+  text-transform: capitalize;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-.loginCheckinput {
-  color: #FFA13D;
-  border: 1px;
-  padding-top: 3px;
-  margin: 1px;  
-  width:1180px;
-  height:04px;
-  text-align:center;
-  color:#000000;
-  font-size: 1em;
+.Login .Parte{
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 15%;
 }
 
-.loginInput {
-  color: #FFA13D;
-  border: 2px solid black;
-  padding: 1px;
-  margin: 1px; 
-  width:400px;
-  height:20px;
-  color:#000000;
-  font-size: 1em;
-  border-radius: 4px;
+.Login .Botones{
+  margin-top: 30px;
+  margin-bottom: 50px;
+  margin-right: 30%;
+  margin-left: 30%;
 }
 
-.loginSubcheckinput {
-  color: #FFA13D;
-  border: 0px solid black;
-  padding: 0px;
-  margin: 0px; 
-  width:20px;
-  height:13px;
-  color:#000000;
-  font-size: 1em;
-  border-radius: 4px;
+.Login button{
+  background-color: transparent;
+  transition-duration: 0.3s;
+  width: 200px;
+  height: 60px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
-.loginIntro {
-  font-size: large;
-  text-align: left;
-  padding: 2%;
-  background: black;
+.Login .BtnIngresar{
+  border: 2px solid #61E232;
+}
+
+.Login .BtnForgotPassword{
+  border: 2px solid #F62626;
+}
+
+.Login button:focus{
+  outline: none;
+}
+
+.Login .BtnIngresar:hover{
+  color:white;
+  background-color: #61E232;
+}
+
+.Login .BtnForgotPassword:hover{
+  color:white;
+  background-color: #F62626;
+}
+
+.Login .Info{
+  background-color: black;
+  color: white;
+  padding-top: 30px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 30px;
+}
+
+.Login .Info .Texto{
+  width: 50%;
+  height: 200px;
+  display: inline-block;
+}
+
+.Login .Imagenes{
+  background-color: black;
+  display: inline-block;
+  margin: 30px;
+}
+
+.Login .Imagenes img{
+  height: 80px;
+  width: auto;
+  margin: 10px;
 }

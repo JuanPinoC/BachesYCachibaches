@@ -10,11 +10,8 @@ const navigationItems = () => (
     	<NavLink to="/registrarse" exact >
             <li className={classes.BarSuperiorBtn}>Registrarse</li>
         </NavLink>
-        <NavLink to="/nosotros" exact >
-            <li className={classes.BarSuperiorBtn}>Nosotros</li>
-        </NavLink>
         <NavLink to="/info" exact >
-            <li className={classes.BarSuperiorBtn}>Info</li>
+            <li className={classes.BarSuperiorBtn}>Información</li>
         </NavLink>
     </ul>
 );

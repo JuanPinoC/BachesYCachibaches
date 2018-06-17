@@ -1,9 +1,16 @@
+.Anuncio{
+	border-radius: 10px;
+}
+
 .Publicacion{
-	background-color: transparent;
+	/*background-color: transparent;
 	color: black;
 	border:1%;
 	border-style:solid;
-	border-color: #FFBF00;
+	border-color: #FFBF00;*/
+	border: 1px solid #f2f2f2;
+	background: #f2f2f2;
+	margin: 10px;
 	transition-duration: 0.4s;
 }
 
@@ -12,7 +19,7 @@
 	color: white;
 }
 
-.Publicacion a{
+a{
     text-decoration: none;
     color: black;
 }
@@ -26,6 +33,7 @@
 	width: 300px;
     height: auto;
     transition-duration: 0.4s;
+    background: white;
 }
 .Imagen img:hover{
 	margin:20px;

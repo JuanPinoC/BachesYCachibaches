@@ -2,13 +2,19 @@ import React from 'react';
 
 import Classes from './Subcategorias.css';
 
-const subcategorias = () => (
+const subcategorias = (props) => {
+	let elementos = [];
+	if(props.data!=null){
+		for(let i=0,l=props.data.length;i < l;i++){
+			elementos.push(<li className={Classes.Subcategoria}><a>{props.data[i].nombre}</a></li>);
+		}
+	}
+
+	return(
 		<ul className={Classes.Subcategorias}>
-			<li className={Classes.Subcategoria}><a>Subcategoria 1</a></li>
-			<li className={Classes.Subcategoria}><a>Subcategoria 2</a></li>
-			<li className={Classes.Subcategoria}><a>Subcategoria 3</a></li>
-			<li className={Classes.Subcategoria}><a>Subcategoria 4</a></li>
+			{elementos}
 		</ul>
-)
+	);
+}
 
 export default subcategorias;

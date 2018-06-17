@@ -11,9 +11,13 @@
 	margin-bottom: 30px;
 }
 
-.Formulario form{
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.Formulario .Form{
 	margin-left: 16%;
+	margin-right: 16%;
+	margin-bottom: 50px;
+	border:1px solid #f2f2f2;
+	border-radius: 10px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
 }
 
@@ -27,12 +31,12 @@
 	margin-top: 30px;
 	margin-bottom: 50px;
 	margin-right: 25%;
-	margin-left: 22%;
+	margin-left: 25%;
 }
 
 .Formulario button{
-	background-color: white;
-	border-style: none;
+	border:2px solid white;
+	background: white;
 	transition-duration: 0.3s;
 	width: 200px;
 	margin-top: 20px;
@@ -40,9 +44,21 @@
 	border-radius: 10px;
 }
 
+.Formulario button:focus{
+	outline: none;
+}
+
 .Formulario button:hover{
-	border-style: none;
+	border:2px solid white;
 	color: white;
+}
+
+.Formulario .BtnCrear{
+	border-color: #61E232;
+}
+
+.Formulario .BtnCancelar{
+	border-color: #F62626;	
 }
 
 .Formulario .BtnCrear:hover{

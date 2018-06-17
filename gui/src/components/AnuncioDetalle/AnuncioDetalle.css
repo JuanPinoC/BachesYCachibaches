@@ -1,6 +1,9 @@
+.AnuncioDetalle{
+	margin-top: 100px;
+}
+
 .PublicacionDetalle{
 	background-color: #FFBF00;
-	color: black;
 	border:1%;
 	border-style:solid;
 	border-color: #FFBF00;
@@ -9,62 +12,76 @@
 
 .PublicacionDetalle a{
     text-decoration: none;
-    color: black;
+
 }
 
 .PublicacionDetalle td{
 	float: left;
 }
 
-.Imagen img{
+.PublicacionDetalle .Imagen img{
 	margin:20px;
 	width: 600px;
     height: auto;
     transition-duration: 0.4s;
 }
 
-.Imagen img:hover{
+.PublicacionDetalle .Imagen img:hover{
     border-radius: 25px;
 }
 
-.Info{
+.PublicacionDetalle .Info{
 	padding: 20px 60px 20px 20px;
 	width: 400px;
 }
 
-.Destacado{
+.PublicacionDetalle .Destacado{
 	width: 35px;
     height: auto;
 	float: right;
 }
 
-.Precio{
+.PublicacionDetalle .Precio{
 	float: right;
 	font-size: 30px;
 }
 
-.TituloPublicacionDetalle{
+.PublicacionDetalle .TituloPublicacionDetalle{
 	text-align: left;
 	margin-top: 70px;
 	font-size: 35px;
 }
 
-.TextoPublicacionDetalle{
+.PublicacionDetalle .TextoPublicacionDetalle{
 	text-align: left;
 }
 
-.UsuarioPublicacionDetalle{
+.PublicacionDetalle .UsuarioPublicacionDetalle{
 	margin: 20px;
 }
 
-.UsuarioImagenDetalle img{
+.PublicacionDetalle .UsuarioImagenDetalle img{
 	width: 70px;
 	height: 70px;
 	margin: 10px;
 	border-radius: 35px;
 }
 
-.UsuarioPuntuacionDetalle img{
+.PublicacionDetalle .UsuarioPuntuacionDetalle img{
 	width: 25px;
 	height: 25px;
+}
+
+.PublicacionDetalle .Contactar{
+	text-align: center;
+	margin-top: 200px;
+	padding: 30px;
+	border: 2px solid black;
+	background: transparent;
+	transition-duration: 0.3s;
+}
+
+.PublicacionDetalle .Contactar:hover{
+	background: black;
+	color: #FFBF00;
 }
