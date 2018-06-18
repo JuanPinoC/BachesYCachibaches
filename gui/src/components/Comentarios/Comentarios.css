@@ -7,3 +7,28 @@
 	border-radius: 25px;
 	border:1px solid #f2f2f2;
 }
+
+.Comentarios button:focus{
+	outline: none;
+}
+
+.Comentarios .ListaComentarios{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.VerMas{
+	border-radius: 15px;
+	border: 3px solid #cbd1db;
+	background: #f2f2f2;
+	margin: 30px;
+	width: 50%;
+	min-width: 450px;
+	transition-duration: 0.3s;
+}
+
+.VerMas:hover{
+	background-color: #FFBF00;
+	border-color: white;
+	color:white;
+}

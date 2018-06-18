@@ -58,7 +58,6 @@ export default class categoria extends Component{
 	}
 
 	verMas = () => {
-		console.log("verMas");
 		let vistas = this.state.vistas;
 		let data = this.state.data;
 		let cant = 5;
@@ -74,8 +73,6 @@ export default class categoria extends Component{
 		this.setState({
 			vistas: vistas
 		});
-
-		console.log(vistas);
 	}
 
 	render() {
@@ -109,7 +106,9 @@ export default class categoria extends Component{
 				<div>
 					<BarraCategorias className={Classes.Categorias} action={this.catSelected}/>
 				</div>
-				{content}
+				<div>
+					{content}
+				</div>
 			</div>
 		);
 	}

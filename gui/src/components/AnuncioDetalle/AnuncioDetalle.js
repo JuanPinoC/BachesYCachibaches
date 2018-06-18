@@ -4,6 +4,7 @@ import axios from '../../AxiosFiles/axios';
 
 import Classes from './AnuncioDetalle.css';
 
+import SlideShow from '../SlideShow/SlideShow';
 import Valoracion from '../Perfil/Valoracion/Valoracion';
 import Comentarios from '../Comentarios/Comentarios';
 
@@ -33,8 +34,9 @@ export default class anuncioDetalle extends Component{
 				precio: data.precio,
 				sub_cat: data.subcategoria,
 				titulo: data.titulo,
-				usuario: data._id,
-				nombres: data.nombres
+				usuario: data.usuario._id,
+				nombres: data.usuario.nombres,
+				load:true
   			});
   		})
   		.catch((response) => {
@@ -45,43 +47,57 @@ export default class anuncioDetalle extends Component{
 	render(){
 		return(
 			<div className={Classes.AnuncioDetalle}>
-				<center>
-					<tr className={Classes.PublicacionDetalle}>
-						<td className={Classes.Imagen}>
-							<img src={
-								(typeof this.state.img == 'undefined')?
-								img:
-								require('../../backend/uploads/'+this.state.img[0].substring(8))
-							}/>
-						</td>
-						<td className={Classes.Info}>
-							<h2 className={Classes.Precio}>$100</h2>
-							<h2 className={Classes.TituloPublicacionDetalle}>
-								{
-									//this.props.nombre||this.props.match.params.id
-									this.state.titulo
-								}
-							</h2>
-							<h4 className={Classes.TextoPublicacionDetalle}>
-								quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto
-							</h4>
-							<h3 className={Classes.TextoPublicacionDetalle}>
-								Categoria
-							</h3>
-						</td>
-						<div className={Classes.UsuarioPublicacionDetalle}>
-							<div className={Classes.UsuarioImagenDetalle}>
-								<img src={imgUsuario}/>
-							</div>
-							<h4>Usuario</h4>
-							<div className={Classes.UsuarioPuntuacionDetalle}>
+				<div className={Classes.PublicacionDetalle}>
+					<div className={Classes.Imagen}>
+						{(typeof this.state.img != 'undefined')?
+							(<SlideShow data={this.state.img}/>):
+							(<h2>Cargando...</h2>)
+						}
+					</div>
+					<div className={Classes.Info}>
+						<h2 className={Classes.Precio}>S/. {this.state.precio}</h2>
+						<h2 className={Classes.Titulo}>
+							{this.state.titulo}
+						</h2>
+						<h3 className={Classes.TextoPublicacionDetalle}>
+							Categoría: {this.state.nom_cat}
+						</h3>
+						<h3 className={Classes.TextoPublicacionDetalle}>
+							Subcategoría: {this.state.sub_cat}
+						</h3>
+						<br/>
+						<h4 className={Classes.Texto}>
+							Descripción:
+							quia et suscipit\n
+							suscipit recusandae consequuntur expedita et cum\n
+							reprehenderit molestiae ut ut quas totam\n
+							nostrum rerum est autem sunt rem eveniet architecto
+							quia et suscipit\n
+							suscipit recusandae consequuntur expedita et cum\n
+							reprehenderit molestiae ut ut quas totam\n
+							nostrum rerum est autem sunt rem eveniet architecto
+							quia et suscipit\n
+							suscipit recusandae consequuntur expedita et cum\n
+							reprehenderit molestiae ut ut quas totam\n
+							nostrum rerum est autem sunt rem eveniet architecto
+						</h4>
+					</div>
+					<div className={Classes.InfoUsuario}>
+						<center>
+							<img src={imgUsuario}/>
+							<h4>{this.state.nombres}</h4>
+							<div className={Classes.Valoracion}>
 								<Valoracion val={3}/>
 							</div>
-						</div>
-					</tr>
-				</center>
-					<Comentarios anuncio={this.state.anuncioId} />
+							<br/>
+							<center><h3>Opciones</h3></center>
+							<button className={Classes.Opcion}><h3>Contactar</h3></button>
+							<button className={Classes.Opcion}><h3>Reportar</h3></button>
+						</center>
+					</div>
 				</div>
+				<Comentarios anuncioId={this.state.anuncioId} />
+			</div>
 		);
 	}	
 }

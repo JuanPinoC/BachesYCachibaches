@@ -37,12 +37,33 @@ class formularioAnuncio extends Component {
   	}
 
   	SubmitHandler = (e) => {
-  		const data = this.state;
+  		let imgs = [];
+
+  		for(let i=0, l=this.state.imagen; i < l; i++){
+  			imgs.push(this.state.imagen[i].file);
+  		}
+
+  		this.setState({
+  			imagen: imgs
+  		});
+
+  		console.log(this.state.imagen);
+
+  		const formData = new FormData();
+  		formData.append("titulo",this.state.titulo);
+  		formData.append("descripcion",this.state.descripcion);
+  		formData.append("precio",this.state.precio);
+  		formData.append("categoria",this.state.categoria);
+  		formData.append("subcategoria",this.state.subcategoria);
+  		formData.append("userId",this.state.userId);
+  		formData.append("imagen",this.state.imagen[0]);
+
+  		console.log(formData);
   		
   		axios({
   			method: 'post',
   			url: 'anuncios/',
-  			data: data,
+  			data: formData,
 			config: { 
   				headers: { 
   					'Content-Type': 'multipart/form-data',
@@ -55,8 +76,6 @@ class formularioAnuncio extends Component {
   		.catch((response) => {
   			//handle error
   			console.log(response);
-  			console.log(sessionStorage.getItem('jwtToken'));
-  			console.log(data);
   		});
   	}
 

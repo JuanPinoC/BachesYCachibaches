@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const checkAuth = require('../middlewares/check-auth');
 const Plan = require('../controllers/planController');
 
 router.get('/find',checkAuth,Plan.find);

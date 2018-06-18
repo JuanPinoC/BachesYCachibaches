@@ -35,13 +35,16 @@ module.exports = {
 			});
 	},
 	create: (req,res,next)=>{
+
 		const imagenes = [];
+		console.log("req.files: " + req.files);
 		for(let i = 0; i < req.files.length;i++){
 			imagenes[i]=req.files[i].path;
 		}
 		const anuncio = new Anuncio({
 			_id: new mongoose.Types.ObjectId(),
-			usuario: req.userData.userId,
+			//usuario: req.userData.userId,
+			usuario: req.body.userId,
 			titulo: req.body.titulo,
 			descripcion: req.body.descripcion,
 			fec_pub: req.body.fec_pub,

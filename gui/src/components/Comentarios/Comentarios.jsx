@@ -2,10 +2,11 @@ import React,{ Component } from 'react';
 
 import axios from '../../AxiosFiles/axios';
 
-import classes from './Comentarios.css';
+import Classes from './Comentarios.css';
 
 import FormularioComentario from './FormularioComentario/FormularioComentario';
 import Comentario from './Comentario/Comentario';
+import Spinner from '../Spinner/Spinner';
 
 export default class comentarios extends Component {
 
@@ -13,69 +14,77 @@ export default class comentarios extends Component {
 		super(props);
 		
 		this.state = {
+			anuncioId: props.anuncioId,
 			data: null,
 			vistas: []
 		};
 
-		this.getComentarios = this.getComentarios.bind(this);
-	}
-	
-
-	componentWillMount = () => {
-		this.getComentarios();
+		this.agregarComentarios = this.agregarComentarios.bind(this);
 	}
 
-	getComentarios = () => {
-		axios.get('comentarios/')
-		.then(response => {
-			this.setState({
-				data: response.data.products
-			});
-			this.agregarComentarios();
-		});
+	componentDidMount = () => {
+		this.agregarComentarios();
 	}
 
 	agregarComentarios = () => {
-		const data = this.state.data;
-		let vistas = [];
-		for(let i=0,l=data.length;i < l; i++){
-			vistas.push(
-				<Comentario
-					img={data[i].usuario._id}
-					usuario={data[i].usuario.nombres}
-					comentario={data[i].comentario}
-					fecha={data[i].fecha}
-				/>);
+		axios.get('comentarios/')
+		.then((response) => {
+
+			const data = response.data.products;
+			let vistas = [];
+
+			for(let i=0,l=data.length;i < l && i < 5; i++){
+				vistas.push(<Comentario data={data[i]} key={i} />);
+			}
+
+			this.setState({
+				data: data,
+				vistas: vistas,
+				load:true
+			});
+		})
+		.catch((response) => {
+			console.log(response);
+		})
+	}
+
+	verMas = () => {
+		let vistas = this.state.vistas;
+		let data = this.state.data;
+		let cant = 5;
+
+		for(let i = vistas.length; cant != 0 && i < data.length ; i++){
+			vistas.push(<Comentario data={data[i]} key={i}/>);
+			cant--;
 		}
+
 		this.setState({
 			vistas: vistas
 		});
 	}
 
 	render(){
-		return (this.state.vistas == null)?
-		(
-			<div className={classes.Comentarios}>
-			<FormularioComentario action={this.getComentarios} />
+		let comentarios = (<Spinner />);
+		if(this.state.load)comentarios = this.state.vistas;
+
+		return(
+			<div className={Classes.Comentarios}>
+				<FormularioComentario 
+					anuncioId={this.state.anuncioId} 
+					action={this.agregarComentarios} />
 				<br/>
-				<Comentario 
-						comentario={"quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"} 
-						usuario={"User1"} 
-						fecha={"08/01/2018"} />
-				<Comentario 
-						comentario={"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"}
-						usuario={"User2"}
-						fecha={"20/04/2018"} />
-				<Comentario
-						comentario={"Hola mundo!"}
-						usuario={"User3"}
-						fecha={"05/06/2018"} />
-			</div>
-		):(
-			<div className={classes.Comentarios}>
-				<FormularioComentario />
+				<div className={Classes.ListaComentarios}>
+					{comentarios}
+				</div>
 				<br/>
-				{this.state.vistas}
+				<center>
+				{(this.state.load && this.state.vistas.length != this.state.data.length)?
+					(<button className={Classes.VerMas} onClick={this.verMas}>
+						<h3>Ver más</h3>
+					</button>):
+					(<h4>No hay más comentarios</h4>)
+				}
+				</center>
 			</div>
 		);
 	}

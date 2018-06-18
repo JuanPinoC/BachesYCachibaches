@@ -9,11 +9,14 @@
 }
 
 .ComentarioTexto p{
+	max-width: 500px;
+	word-wrap: break-word;
 	border-radius: 0px 25px 25px 25px;
 	margin: 10px;
 	background-color: white;
-	padding: 10px;
-	border: 1px solid grey;
+	padding: 20px;
+	border: 2px solid #f2f2f2;
+	box-shadow: 10px 10px 14px -5px rgba(138,138,138,1);
 }
 
 .ComentarioUsuario{

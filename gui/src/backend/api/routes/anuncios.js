@@ -7,6 +7,7 @@ const checkAuth = require('../middlewares/check-auth');
 
 const storage = multer.diskStorage({
 	destination: function(req, file, cb){
+		console.log("file: " + file);
 		cb(null,'./uploads/');
 	},
 	filename: function(req, file, cb){
@@ -37,6 +38,6 @@ router.post('/update',checkAuth, upload.array('imagen',10), Anuncio.update);
 router.post('/delete',checkAuth, Anuncio.delete);
 router.post('/highlight',checkAuth, Anuncio.highlight);
 router.get('/', Anuncio.show);
-router.post('/', checkAuth, upload.array('imagen',10),Anuncio.create);
+router.post('/', upload.array('imagen',10),Anuncio.create);
 
 module.exports = router;

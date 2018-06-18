@@ -10,13 +10,15 @@ const comentario = (props) => {
 		<tr className={classes.Comentario}>
 			<td className={classes.ComentarioUsuario}>
 				<img src={ imgDefault }/>
-				<a src='/usuario'>{props.usuario}</a>
+				<a src={'/usuario/find?userId' + props.data.usuario._id}>
+					{props.data.usuario.nombres}
+				</a>
 			</td>
 			<td className={classes.ComentarioTexto}>
-				<p>{props.comentario}</p>
+				<p>{props.data.comentario}</p>
 			</td>
 			<td className={classes.ComentarioFecha}>
-				<p>{props.fecha}</p>
+				<p>{props.data.fecha.substring(0,10)}</p>
 			</td>
 		</tr>
 	);

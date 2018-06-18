@@ -3,42 +3,32 @@
 }
 
 .PublicacionDetalle{
-	background-color: #FFBF00;
-	border:1%;
-	border-style:solid;
-	border-color: #FFBF00;
+	background: #FFBF00;
+	border:1% solid #FFBF00;
+	border-radius: 30px;
 	transition-duration: 0.4s;
+	padding: 10px;
+	margin-left: 10%;
+	margin-right: 10%;
 }
 
 .PublicacionDetalle a{
     text-decoration: none;
-
 }
 
-.PublicacionDetalle td{
-	float: left;
+.PublicacionDetalle .Imagen, .Info, .InfoUsuario{
+	display: inline-block;
 }
 
-.PublicacionDetalle .Imagen img{
-	margin:20px;
-	width: 600px;
-    height: auto;
-    transition-duration: 0.4s;
-}
-
-.PublicacionDetalle .Imagen img:hover{
-    border-radius: 25px;
+.PublicacionDetalle .Imagen{
+	width: 400px;
+	height: auto;
+	margin-right: 15px;
 }
 
 .PublicacionDetalle .Info{
 	padding: 20px 60px 20px 20px;
-	width: 400px;
-}
-
-.PublicacionDetalle .Destacado{
-	width: 35px;
-    height: auto;
-	float: right;
+	width: 350px;
 }
 
 .PublicacionDetalle .Precio{
@@ -46,42 +36,46 @@
 	font-size: 30px;
 }
 
-.PublicacionDetalle .TituloPublicacionDetalle{
+.PublicacionDetalle .Titulo{
 	text-align: left;
 	margin-top: 70px;
 	font-size: 35px;
 }
 
-.PublicacionDetalle .TextoPublicacionDetalle{
+.PublicacionDetalle .Texto{
 	text-align: left;
 }
 
-.PublicacionDetalle .UsuarioPublicacionDetalle{
-	margin: 20px;
+.PublicacionDetalle .InfoUsuario{
+	width: 150px;
+	height: auto;
+	border-left: 6px solid black;
 }
 
-.PublicacionDetalle .UsuarioImagenDetalle img{
-	width: 70px;
-	height: 70px;
-	margin: 10px;
-	border-radius: 35px;
+.PublicacionDetalle .InfoUsuario img{
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
 }
 
-.PublicacionDetalle .UsuarioPuntuacionDetalle img{
+.PublicacionDetalle .InfoUsuario .Valoracion img{
 	width: 25px;
-	height: 25px;
+	height: auto;
 }
 
-.PublicacionDetalle .Contactar{
-	text-align: center;
-	margin-top: 200px;
-	padding: 30px;
-	border: 2px solid black;
+.Opcion{
 	background: transparent;
-	transition-duration: 0.3s;
+	border: none;
+	padding: 5px;
+	width: 100%;
+	transition-duration: 0.4s;
 }
 
-.PublicacionDetalle .Contactar:hover{
-	background: black;
+.Opcion:focus{
+	outline: none;
+}
+
+.Opcion:hover{
+	background-color: black;
 	color: #FFBF00;
 }

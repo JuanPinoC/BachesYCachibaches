@@ -9,9 +9,9 @@ import imgUsuario from '../../Perfil/Usuario/userExample.png';
 class formularioComentario extends Component {
 
   state = {
-		anuncio:"5b062af57af17f2478603ddb",
+		anuncio: this.props.anuncioId,
 		usuario: "5b059f41cf0a481d145eb72c",
-		comentario:""
+		comentario: ""
   }
 
 	onChangeHandler = (e) => {
@@ -50,7 +50,7 @@ class formularioComentario extends Component {
 					<center>
 						<img src={imgUsuario}/>
 						<textarea onChange={this.onChangeHandler} value={this.state.comentario}/>
-						<button onClick={this.SubmitHandler}>Comentar</button>
+						<button onClick={this.SubmitHandler}><h3>Comentar</h3></button>
 					</center>
 				</div>
   			);
