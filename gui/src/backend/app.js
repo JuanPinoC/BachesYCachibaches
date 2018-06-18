@@ -26,12 +26,12 @@ app.use((req,res,next)=>{
 		'Origin, X-Requested-Width, Content-Type, Accept, Authorization'
 		);
 	res.header('Access-Control-Allow-Methods','PUT,POST,PATCH,DELETE,GET');
-	
-	if (req.method === 'POST') {
-		//return res.status(200).json({});
-	}
 
 	next();
+});
+
+app.options("/*",function(req,res,next){
+	res.sendStatus(200);
 });
 
 app.use('/usuarios',userRoutes);

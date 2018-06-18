@@ -59,16 +59,16 @@ class formularioAnuncio extends Component {
   		formData.append("imagen",this.state.imagen[0]);
 
   		console.log(formData);
-  		
-  		axios({
+  		const params = {
   			method: 'post',
   			url: 'anuncios/',
-  			data: formData,
-			config: { 
-  				headers: { 
-  					'Content-Type': 'multipart/form-data',
-  					'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')}}
-  		})
+  			data: formData, 
+			headers: { 
+				'Content-Type': 'multipart/form-data',
+				'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')}
+		}
+  		console.log("mis parametros: ",params);
+  		axios(params)
   		.then((response) => {
   			//handle success
   			console.log(response);
