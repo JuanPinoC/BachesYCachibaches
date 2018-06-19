@@ -37,6 +37,9 @@ router.post('/edit',checkAuth, Anuncio.edit);
 router.post('/update',checkAuth, upload.array('imagen',10), Anuncio.update);
 router.post('/delete',checkAuth, Anuncio.delete);
 router.post('/highlight',checkAuth, Anuncio.highlight);
+router.get('/categoria',Anuncio.listByCategory);
+router.get('/subcategoria',Anuncio.listBySubCategory);
+router.get('/usuario',checkAuth,Anuncio.listByTokken);
 router.get('/', Anuncio.show);
 router.post('/',checkAuth, upload.array('imagen',10),Anuncio.create);
 

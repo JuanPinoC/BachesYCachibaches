@@ -232,5 +232,95 @@ module.exports = {
 				console.log(err);
 				res.status(500).json({error: err});
 			});
+	},
+	listByCategory:(req,res,next)=>{
+		Anuncio.find({categoria:req.query.categoriaId})
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.populate('usuario','nombres')
+			.populate('categoria','nombre')
+			.exec()
+			.then(docs => {
+				res.status(200).json({
+					count: docs.length,
+					orders: docs.map(doc => {
+						return {
+							_id: doc._id,
+							usuario: doc.usuario,
+							titulo: doc.titulo,
+							fec_pub: doc.fec_pub,
+							categoria: doc.categoria,
+							subcategoria: doc.subcategoria,
+							precio: doc.precio,
+							imagen: doc.imagen
+						}
+					})
+				});
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				})
+			});
+	},
+	listBySubCategory:(req,res,next)=>{
+		Anuncio.find({subcategoria: req.query.subcategoria})
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.populate('usuario','nombres')
+			.populate('categoria','nombre')
+			.exec()
+			.then(docs => {
+				res.status(200).json({
+					count: docs.length,
+					orders: docs.map(doc => {
+						return {
+							_id: doc._id,
+							usuario: doc.usuario,
+							titulo: doc.titulo,
+							fec_pub: doc.fec_pub,
+							categoria: doc.categoria,
+							subcategoria: doc.subcategoria,
+							precio: doc.precio,
+							imagen: doc.imagen
+						}
+					})
+				});
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				})
+			});
+	},
+	listByTokken:(req,res,next)=>{
+		Anuncio.find({usuario: req.userData.userId})
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.populate('usuario','nombres')
+			.populate('categoria','nombre')
+			.exec()
+			.then(docs => {
+				res.status(200).json({
+					count: docs.length,
+					orders: docs.map(doc => {
+						return {
+							_id: doc._id,
+							usuario: doc.usuario,
+							titulo: doc.titulo,
+							fec_pub: doc.fec_pub,
+							categoria: doc.categoria,
+							subcategoria: doc.subcategoria,
+							precio: doc.precio,
+							imagen: doc.imagen
+						}
+					})
+				});
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				})
+			});
 	}
 }
