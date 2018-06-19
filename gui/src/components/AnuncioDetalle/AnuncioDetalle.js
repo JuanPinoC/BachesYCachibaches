@@ -34,6 +34,7 @@ export default class anuncioDetalle extends Component{
 				precio: data.precio,
 				sub_cat: data.subcategoria,
 				titulo: data.titulo,
+				descripcion: data.descripcion,
 				usuario: data.usuario._id,
 				nombres: data.usuario.nombres,
 				load:true
@@ -68,18 +69,7 @@ export default class anuncioDetalle extends Component{
 						<br/>
 						<h4 className={Classes.Texto}>
 							Descripción:
-							quia et suscipit\n
-							suscipit recusandae consequuntur expedita et cum\n
-							reprehenderit molestiae ut ut quas totam\n
-							nostrum rerum est autem sunt rem eveniet architecto
-							quia et suscipit\n
-							suscipit recusandae consequuntur expedita et cum\n
-							reprehenderit molestiae ut ut quas totam\n
-							nostrum rerum est autem sunt rem eveniet architecto
-							quia et suscipit\n
-							suscipit recusandae consequuntur expedita et cum\n
-							reprehenderit molestiae ut ut quas totam\n
-							nostrum rerum est autem sunt rem eveniet architecto
+							{this.state.descripcion}
 						</h4>
 					</div>
 					<div className={Classes.InfoUsuario}>

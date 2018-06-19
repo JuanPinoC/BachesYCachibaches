@@ -10,7 +10,7 @@ import Spinner from '../Spinner/Spinner';
 
 export default class comentarios extends Component {
 
-	constructor (props) {
+	constructor (props){
 		super(props);
 		
 		this.state = {

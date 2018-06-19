@@ -21,34 +21,39 @@ class formularioComentario extends Component {
 
 	SubmitHandler = (e) => {
   		e.preventDefault();
-  		const data = this.state;
-      console.log(data);
+      
+      const data = this.state;
+      console.log("data",data);
       const formData = new FormData();
       formData.append("anuncio",data.anuncio);
       formData.append("comentario",data.comentario);
+      console.log("formData",formData);
 
-  		axios({
-  			method: 'post',
-  			url: 'comentarios/',
-  			data: formData,
-  			headers: { 
-          'Content-Type': 'text/html',
+      const params = {
+        method: 'post',
+        url: '/comentarios',
+        data: formData,
+        headers: {
+          'Content-Type':'multipart/form-data',
           'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
         }
-  		})
-  		.then((response) => {
-  			//handle success
-  			this.setState({
-  				comentario: ""
-  			});
-  			alert("Se añadio tu comentario!");
-        this.props.action();
-  		})
-  		.catch((response) => {
-  			//handle error
-  			console.log(response);
-  			alert("Error al añadir el comentario.");
-  		});
+      };
+
+  		axios(params)
+    		.then((response) => {
+    			//handle success
+          console.log(response);
+    			this.setState({
+    				comentario: ""
+    			});
+    			alert("Se añadio tu comentario!");
+          this.props.action();
+    		})
+    		.catch((err) => {
+    			//handle error
+    			console.log("Error catch",err);
+    			alert("Error al añadir el comentario.");
+    		});
   	}
 
   	render(){

@@ -31,13 +31,13 @@ module.exports = {
 			});
 	},
 	create:(req,res,next)=>{
+		console.log("Ya entre mijo");
 		console.log(req.body.anuncio);
 		console.log(req.body.comentario);
 		const comentario = new Comentario({
 			_id: new mongoose.Types.ObjectId(),
 			anuncio: req.body.anuncio,
 			usuario: req.userData.userId,
-			fecha: req.body.fecha,
 			comentario: req.body.comentario
 		});
 		comentario

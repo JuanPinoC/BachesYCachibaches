@@ -30,6 +30,7 @@
 	padding-left: 20px;
 	resize: none;
 	margin-bottom: 10px;
+	transition-duration: 0.3s;
 }
 
 .FormularioComentario textarea:focus{

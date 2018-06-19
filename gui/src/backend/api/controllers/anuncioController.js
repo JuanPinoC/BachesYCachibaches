@@ -81,7 +81,7 @@ module.exports = {
 	find: (req,res,next)=>{
 		const id = req.query.anuncioId;
 		Anuncio.findById(id)
-			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.select('_id usuario titulo descripcion fec_pub categoria subcategoria precio imagen')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
 			.exec()
