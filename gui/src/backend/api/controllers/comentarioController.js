@@ -117,5 +117,32 @@ module.exports = {
 					error: err
 				});
 			});
+	},
+	listByAd:(req,res,next)=>{
+		Comentario.find({anuncio:req.query.anuncioId})
+			.select('_id usuario anuncio fecha comentario')
+			.populate('usuario','nombres')
+			.exec()
+			.then(docs => {
+				const response = {
+					count: docs.length,
+					products: docs.map(doc => {
+						return {
+							anuncio: doc.anuncio,
+							usuario: doc.usuario,
+							fecha: doc.fecha,
+							comentario: doc.comentario,
+							_id: doc._id
+						}
+					})
+				};
+				res.status(200).json(response);
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				});
+			});
 	}
 }
