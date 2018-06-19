@@ -10,7 +10,6 @@ class formularioComentario extends Component {
 
   state = {
 		anuncio: this.props.anuncioId,
-		usuario: "5b059f41cf0a481d145eb72c",
 		comentario: ""
   }
 
@@ -23,11 +22,19 @@ class formularioComentario extends Component {
 	SubmitHandler = (e) => {
   		e.preventDefault();
   		const data = this.state;
+      console.log(data);
+      const formData = new FormData();
+      formData.append("anuncio",data.anuncio);
+      formData.append("comentario",data.comentario);
+
   		axios({
   			method: 'post',
   			url: 'comentarios/',
-  			data: data,
-  			config: { headers: {'Content-Type': 'multipart/form-data' }}
+  			data: formData,
+  			headers: { 
+          'Content-Type': 'text/html',
+          'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+        }
   		})
   		.then((response) => {
   			//handle success

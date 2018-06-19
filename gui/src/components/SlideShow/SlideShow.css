@@ -1,5 +1,4 @@
 .SlideShow{
-	margin-top: 50px;
 	width: 400px;
 	max-height: 500px;
 }
@@ -10,11 +9,8 @@
     max-height: 500px;
     min-width: 400px;
     transition-duration: 0.4s;
-    background: white;
-}
-
-.SlideShow img:hover{
     border-radius: 25px;
+    background: white;
 }
 
 .SlideShow button:focus{
@@ -24,8 +20,11 @@
 .SlideShow .Btn{
 	width: 20px;
 	height: 20px;
-	background: white;
+	margin: 10px;
 	border: 1px solid white;
+	border-radius: 50%;
+	background: white;
+	transition-duration: 0.3s;
 }
 
 .SlideShow .BtnActivo{
@@ -34,34 +33,3 @@
 	background: black;
 	border: 1px solid black;	
 }
-
-/*
-.SlideShow button{
-	cursor: pointer;
-	width: 50px;
-	height: 150px;
-	margin-top: 20px;
-	padding: 15px;
-	background: transparent;
-	position: absolute;
-	vertical-align: middle;
-	border: transparent;
-	color: transparent;
-	transition-duration: 0.3s;
-	font-weight: bold;
-}
-
-.SlideShow button:hover{
-	background: rgba(255,255,255,0.3);
-	border: transparent;
-	color: black;
-}
-
-.SlideShow .BtnPrev{
-	margin-left: 20px;
-}
-
-.SlideShow .BtnNext{
-	margin-left: 350px;
-}
-*/

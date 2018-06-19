@@ -31,6 +31,8 @@ module.exports = {
 			});
 	},
 	create:(req,res,next)=>{
+		console.log(req.body.anuncio);
+		console.log(req.body.comentario);
 		const comentario = new Comentario({
 			_id: new mongoose.Types.ObjectId(),
 			anuncio: req.body.anuncio,

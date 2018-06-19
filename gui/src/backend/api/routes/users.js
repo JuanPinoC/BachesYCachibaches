@@ -36,6 +36,6 @@ router.get('/find',checkAuth, User.find);
 router.post('/update',checkAuth, upload.single('foto'), User.update);
 router.post('/delete',checkAuth, User.delete);
 router.get('/',checkAuth, User.show);
-router.post('/',checkAuth, upload.single('foto'), User.create);
+router.post('/', upload.single('foto'), User.create);
 
 module.exports = router;

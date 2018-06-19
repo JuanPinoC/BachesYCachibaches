@@ -20,11 +20,8 @@ class formularioAnuncio extends Component {
 				precio: props.data.precio,
 				categoria: props.data.categoria,
 				subcategoria: props.data.subcategoria,
-				destacado: props.data.destacado,
-				userId: "5b09a556220ed019884c25cc"
-			}:{
-				userId: "5b09a556220ed019884c25cc"
-			};
+				destacado: props.data.destacado
+			}:{};
 
 		this.AtributoHandler = this.AtributoHandler.bind(this);
 	}
@@ -38,16 +35,11 @@ class formularioAnuncio extends Component {
 
   	SubmitHandler = (e) => {
   		let imgs = [];
-
-  		for(let i=0, l=this.state.imagen; i < l; i++){
-  			imgs.push(this.state.imagen[i].file);
+  		let data = this.state.imagen;
+  		
+  		for(let i=0, l=data.length; i < l; i++){
+  			imgs.push(data[i].file);
   		}
-
-  		this.setState({
-  			imagen: imgs
-  		});
-
-  		console.log(this.state.imagen);
 
   		const formData = new FormData();
   		formData.append("titulo",this.state.titulo);
@@ -55,19 +47,21 @@ class formularioAnuncio extends Component {
   		formData.append("precio",this.state.precio);
   		formData.append("categoria",this.state.categoria);
   		formData.append("subcategoria",this.state.subcategoria);
-  		formData.append("userId",this.state.userId);
-  		formData.append("imagen",this.state.imagen[0]);
 
-  		console.log(formData);
+  		for(let i=0, l=imgs.length; i < l; i++){
+  			formData.append("imagen",imgs[i],imgs[i].name);
+  		}
+  		
   		const params = {
   			method: 'post',
   			url: 'anuncios/',
   			data: formData, 
 			headers: { 
 				'Content-Type': 'multipart/form-data',
-				'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')}
+				'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+			}
 		}
-  		console.log("mis parametros: ",params);
+
   		axios(params)
   		.then((response) => {
   			//handle success

@@ -12,7 +12,7 @@ class formularioUsuario extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state =(props.userId)?
+		this.state = (props.userId)?
 			{
 				tipo: "Editar",
 				userId: props.userId
@@ -44,11 +44,24 @@ class formularioUsuario extends Component {
 
   	SubmitHandler = (e) => {
   		const data = this.state;
+
+  		const formData = new FormData();
+  		formData.append("nombres",data.nombres);
+  		formData.append("apellidos",data.apellidos);
+  		formData.append("email",data.email);
+  		formData.append("contrasenia",data.contrasenia);
+  		formData.append("direccion",data.direccion);
+  		formData.append("celular",data.celular);
+  		formData.append("telefono",data.telefono);
+  		formData.append("foto",data.foto);
+
   		axios({
   			method: 'post',
   			url: 'usuarios/',
-  			data: data,
-  			config: { headers: {'Content-Type': 'multipart/form-data' }}
+  			data: formData,
+  			headers: { 
+				'Content-Type': 'multipart/form-data',
+			}
   		})
   		.then(function (response) {
   			//handle success
