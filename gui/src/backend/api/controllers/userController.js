@@ -211,12 +211,10 @@ module.exports = {
 	},
 	//Funccion por desarrollar
 	password: (req,res,next)=>{
-		const id = req.body.userId;
-		console.log(id);
-		console.log(req.body);
+		const contrasenia = req.body.contrasenia;
 		bcrypt.hash(req.body.contrasenia, 10, (err,hash)=>{
 			if (err) throw err;
-			User.update({_id: id},{$set: {contrasenia: hash}})
+			User.update({contrasenia: contrasenia},{$set: {contrasenia: hash}})
 				.exec();
 				console.log('Contraseña actualizada');
 		});
@@ -265,5 +263,40 @@ module.exports = {
 				error: err
 			});
 		});
-	}
+	},
+	edit:(req,res,next)=>{
+		User.findById(req.userData.userId)
+			.select('telefono celular direccion puntuacion latitud longitud foto nombres apellidos email')
+			.exec()
+			.then(doc => {
+				if (doc) {
+					res.status(200).json({
+						usuario: doc
+					});
+				}else{
+					res.status(404).json({message: 'No valid entry found for provided ID'});
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({error: err});
+			});
+	},
+	menu:(req,res,next)=>{
+		User.findById(req.userData.userId)
+			.select('nombres foto email')
+			.exec()
+			.then(doc => {
+				if (doc) {
+					res.status(200).json({
+						usuario: doc
+					});
+				}else{
+					res.status(404).json({message: 'No valid entry found for provided ID'});
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({error: err});
+			});	}
 }

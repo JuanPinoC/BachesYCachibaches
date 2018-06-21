@@ -7,6 +7,7 @@ module.exports = {
 			.select('_id usuario anuncio fecha comentario')
 			.populate('usuario','nombres')
 			.populate('anuncio','titulo')
+			.sort({fecha: -1})
 			.exec()
 			.then(docs => {
 				const response = {
@@ -67,6 +68,7 @@ module.exports = {
 			.select('_id anuncio usuario fecha comentario')
 			.populate('anuncio','titulo')
 			.populate('usuario','nombres')
+			.sort({fecha: -1})
 			.exec()
 			.then(doc => {
 				if (doc) {
