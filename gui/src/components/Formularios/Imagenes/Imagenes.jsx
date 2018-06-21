@@ -8,15 +8,50 @@ class imagenes extends Component {
     state = {
       files: [],
       imgs:[],
-      views: []
+      views: [],
+      data: (this.props.data)?this.props.data:[]
     };
+
+    componentWillMount = () => {
+      this.addData();
+    }
+
+    addData = () => {
+      /*
+      let blob = null;
+      let req = new XMLHttpRequest();
+      let route = '../../../backend/uploads/' + this.state.data[0].substring(8);
+      console.log("ruta",route);
+      req.open("GET",route);
+      req.setRequestHeader("Response-Type","blob");
+      req.overrideMimeType('text/plain; charset=utf-8');
+      req.onload = (e) => {
+        console.log("response",req.multipart);
+      }
+
+      req.send();
+      */
+      
+      /*let myReader = new FileReader();
+      myReader.readAsArrayBuffer(blob);
+      myReader.onloadend = (e) => {
+        let buffer = e.srcElement.result;
+      };
+      */
+      /*
+      const file = require('../../../backend/uploads/' + this.props.data[0].substring(8));
+      let archivo = new File(file);
+      console.log("Imagen",archivo);
+      */
+
+    }
 
   ImageChangeHandler = (e) => {
     e.preventDefault();
 
     let reader = new FileReader();
     let file = e.target.files[0];
-    
+
     if(typeof file != 'undefined'){
       reader.onloadend = () => {
         this.setState({

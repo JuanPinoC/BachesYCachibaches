@@ -90,7 +90,7 @@ module.exports = {
 		})
 	},
 	find: (req,res,next)=>{
-		const id = req.body.userId
+		const id = req.userData.userId;
 		User.findById(id)
 			.select('nombres apellidos email puntuacion foto _id')
 			.exec()

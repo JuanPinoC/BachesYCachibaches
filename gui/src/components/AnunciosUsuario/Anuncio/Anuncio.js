@@ -48,7 +48,7 @@ export default class anuncio extends Component{
 							<NavLink to={"/anuncio/"+this.state._id} exact>
 								<h4 className={Classes.Opcion}>Ver</h4>
 							</NavLink>
-							<NavLink to={"/anuncio/"+this.state._id} exact>
+							<NavLink to={"/EditarAnuncio/"+this.state._id} exact>
 								<h4 className={Classes.Opcion}>Editar</h4>
 							</NavLink>
 							<NavLink to={"/anuncio/"+this.state._id} exact>

@@ -31,7 +31,8 @@ class atributo extends Component {
   				{(this.state.type == "select")?
   				(<Select 
   					name={this.state.name}
-  					contenido={this.state.contenido}
+            categoria={this.props.categoria}
+            subcategoria={this.props.subcategoria}
             action={this.props.action} />):
   				(<input
   					type={this.state.type}
