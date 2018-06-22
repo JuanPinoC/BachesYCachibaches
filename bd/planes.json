@@ -1,0 +1,12 @@
+{"_id":{"$oid":"5b048dfc1626d127904d955e"},"porcentaje":0.25,"tiempo":7,"precio":0.01,"__v":0}
+{"_id":{"$oid":"5b048e161626d127904d955f"},"porcentaje":0.25,"tiempo":15,"precio":0.02,"__v":0}
+{"_id":{"$oid":"5b048e221626d127904d9560"},"porcentaje":0.25,"tiempo":30,"precio":0.04,"__v":0}
+{"_id":{"$oid":"5b048e3e1626d127904d9561"},"porcentaje":0.5,"tiempo":7,"precio":0.03,"__v":0}
+{"_id":{"$oid":"5b048e4e1626d127904d9562"},"porcentaje":0.5,"tiempo":15,"precio":0.07,"__v":0}
+{"_id":{"$oid":"5b048e581626d127904d9563"},"porcentaje":0.5,"tiempo":30,"precio":0.09,"__v":0}
+{"_id":{"$oid":"5b048e6e1626d127904d9564"},"porcentaje":0.75,"tiempo":7,"precio":0.05,"__v":0}
+{"_id":{"$oid":"5b048eaf1626d127904d9565"},"porcentaje":0.75,"tiempo":15,"precio":0.08,"__v":0}
+{"_id":{"$oid":"5b048ebf1626d127904d9566"},"porcentaje":0.75,"tiempo":30,"precio":0.11,"__v":0}
+{"_id":{"$oid":"5b048eda1626d127904d9567"},"porcentaje":1,"tiempo":7,"precio":0.6,"__v":0}
+{"_id":{"$oid":"5b048ef21626d127904d9568"},"porcentaje":1,"tiempo":15,"precio":0.1,"__v":0}
+{"_id":{"$oid":"5b048efd1626d127904d9569"},"porcentaje":1,"tiempo":30,"precio":0.15,"__v":0}

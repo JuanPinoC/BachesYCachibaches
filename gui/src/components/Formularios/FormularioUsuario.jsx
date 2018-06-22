@@ -33,23 +33,29 @@ class formularioUsuario extends Component {
 	}
 
 	getUsuario = () => {
-		axios.get('usuarios/find',{
+		axios.get('usuarios/edit',{
 			headers: { 
 				"Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken')
 			}
 		})
 		.then(response => {
-			const data = response.data.product
+			const data = response.data.usuario;
+
 			this.setState({
 				data: data,
-				_id: data._id,
 				apellidos: data.apellidos,
+				celular: data.celular,
+				direccion: data.direccion,
 				email: data.email,
 				foto: data.foto,
+				latitud: data.latitud,
+				longitud: data.longitud,
 				nombres: data.nombres,
 				puntuacion: data.puntuacion,
+				telefono: data.telefono,
 				load: true
 			});
+
 			console.log(this.state);
 		}).catch(response => {
 			console.log(response);
