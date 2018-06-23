@@ -111,7 +111,6 @@ module.exports = {
 	update: (req,res,next)=>{
 		const id = req.userData.userId;
 		const obj = req.body;
-		const pass = req.body.contrasenia;
 		delete obj.userId;
 		delete obj.contrasenia;
 		if (req.file !== undefined) {
@@ -135,25 +134,6 @@ module.exports = {
 				.exec();
 			})
 			.catch(err=>{throw err});
-		}
-		if (req.body.newpass !== '' && req.body.contrasenia !== '') {
-			User.findById(id)
-			.select('contrasenia')
-			.exec()
-			.then(doc=>{
-				bcrypt.compare(pass, doc.contrasenia, (err,res)=>{
-					if (res) {
-						bcrypt.hash(req.body.newpass, 10, (err,hash)=>{
-							if(err) throw err;
-							User.update({_id: id},{$set: {contrasenia: hash}})
-							.exec();
-							console.log('Contraseña actualizada');
-						});
-					}else{
-						return console.log('Contraseña antigua incorrecta');
-					}
-				});
-			});
 		}
 		delete obj.foto;
 		User.update({_id: id},{$set: obj})
@@ -262,7 +242,7 @@ module.exports = {
 					//process.env.JWT_KEY,
 					'secret',
 					{
-						expiresIn: "1h"
+						expiresIn: "2h"
 					}
 					);
 					return res.status(200).json({
