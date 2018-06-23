@@ -97,7 +97,7 @@ module.exports = {
 			.then(doc => {
 				if (doc) {
 					res.status(200).json({
-						product: doc,
+						user: doc,
 					});
 				}else{
 					res.status(404).json({message:'No valid entry found for provided ID'});
@@ -109,7 +109,7 @@ module.exports = {
 			})
 	},
 	update: (req,res,next)=>{
-		const id = req.body.userId;
+		const id = req.userData.userId;
 		const obj = req.body;
 		const pass = req.body.contrasenia;
 		delete obj.userId;
@@ -171,7 +171,7 @@ module.exports = {
 			});
 	},
 	delete: (req,res,next)=>{
-		const id = req.body.userId;
+		const id = req.userData.userId;
 		User.findById(id)
 			.select('foto')
 			.exec()
@@ -209,15 +209,34 @@ module.exports = {
 				});
 			});
 	},
-	//Funccion por desarrollar
 	password: (req,res,next)=>{
+		const email = req.body.email;
 		const contrasenia = req.body.contrasenia;
-		bcrypt.hash(req.body.contrasenia, 10, (err,hash)=>{
-			if (err) throw err;
-			User.update({contrasenia: contrasenia},{$set: {contrasenia: hash}})
-				.exec();
-				console.log('Contraseña actualizada');
-		});
+		User.find({email: email})
+			.exec()
+			.then(user => {
+				if (user.length < 1) {
+					return res.status(409).json({
+						message: 'Email does not exist'
+					});
+				}else{
+					bcrypt.hash(contrasenia, 10, (err,hash)=>{
+						if (err) throw err;
+						User.update({email: email},{$set: {contrasenia: hash}})
+							.exec();
+							console.log('Contraseña actualizada');
+					});
+				}
+				res.status(201).json({
+					message: 'Password Updated'
+				});
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				});
+			});
 	},
 	login: (req,res,next)=>{
 		User.find({ email: req.body.email})

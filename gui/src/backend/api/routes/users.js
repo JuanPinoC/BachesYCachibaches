@@ -32,11 +32,11 @@ const upload = multer({
 
 router.post('/password',User.password);
 router.post('/login',User.login);
-router.get('/find',checkAuth, User.find);
+router.post('/find',checkAuth, User.find);
 router.get('/menu',checkAuth, User.menu);
 router.get('/edit',checkAuth, User.edit);
 router.post('/update',checkAuth, upload.single('foto'), User.update);
-router.post('/delete',checkAuth, User.delete);
+router.get('/delete',checkAuth, User.delete);
 router.get('/',checkAuth, User.show);
 router.post('/', upload.single('foto'), User.create);
 
