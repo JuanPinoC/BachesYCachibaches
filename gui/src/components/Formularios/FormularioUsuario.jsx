@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
 
 import Spinner from '../Spinner/Spinner';
 import Foto from './Foto/Foto';
 import Atributo from './Atributo/Atributo';
+
+import img from '../Perfil/Usuario/user.png';
 
 import Classes from './Formulario.css';
 
@@ -47,19 +50,35 @@ class formularioUsuario extends Component {
 				celular: data.celular,
 				direccion: data.direccion,
 				email: data.email,
-				foto: data.foto,
+				fotoUrl: data.foto,
 				latitud: data.latitud,
 				longitud: data.longitud,
 				nombres: data.nombres,
 				puntuacion: data.puntuacion,
 				telefono: data.telefono,
-				load: true
+				load: true,
+				cambiarFoto: false
 			});
 
-			console.log(this.state);
 		}).catch(response => {
 			console.log(response);
 		});
+	}
+
+	cambiarFoto = () => {
+		const oldState = this.state.cambiarFoto;
+		
+		if(oldState == true){
+			this.setState({
+				cambiarFoto:!oldState,
+				foto: null
+			});
+		}else{
+			this.setState({
+				cambiarFoto:!oldState
+			});
+		}
+
 	}
 
 	AtributoHandler = (campo, valor) => {
@@ -79,9 +98,16 @@ class formularioUsuario extends Component {
   		formData.append("telefono",data.telefono);
   		formData.append("foto",data.foto);
 
+  		let url = 'usuarios/';
+
+  		if(data.tipo == "Editar"){
+  			formData.append("cambiarFoto",data.cambiarFoto);
+  			url = url + 'update';
+  		}
+
   		axios({
   			method: 'post',
-  			url: 'usuarios/',
+  			url: url,
   			data: formData,
   			headers: { 
 				'Content-Type': 'multipart/form-data',
@@ -89,7 +115,10 @@ class formularioUsuario extends Component {
   		})
   		.then(function (response) {
   			//handle success
-  			console.log(response);
+  			let redirect = <Redirect to="/" />;
+  			this.setState({
+  				redirect: redirect
+  			});
   		})
   		.catch(function (response) {
   			//handle error
@@ -102,6 +131,7 @@ class formularioUsuario extends Component {
   			(<Spinner/>
   			):(
 			<div className={Classes.Formulario}>
+			{this.state.redirect}
 			<center><h1>{this.state.tipo} Usuario</h1></center>
 			<hr/>
 			<div className={Classes.Form}>
@@ -123,7 +153,31 @@ class formularioUsuario extends Component {
 					<Atributo titulo={"Teléfono"} nombre={"telefono"}
 						tipo={"number"} contenido={this.state.telefono} action={this.AtributoHandler}/>
 				</div>
-				<Foto action={this.AtributoHandler}/>
+				<br/>
+				<br/>
+				{(	(this.state.tipo == "Crear") ||
+					(this.state.tipo == "Editar" && this.state.cambiarFoto))?
+					(
+					<div>
+						<Foto action={this.AtributoHandler}/>
+						{(this.state.tipo == "Editar")?
+							(<button className={Classes.BtnFotoCancel} onClick={this.cambiarFoto}>
+								<h3>Cancelar</h3>
+							</button>):(<br/>)}
+					</div>
+					):
+					(
+					<div className={Classes.FotoEditar}>
+						<img src={(typeof this.state.load)?
+									require('../../backend/profilePictures/'+this.state.fotoUrl.substring(17)):
+									img}/>
+						<br/>
+						<button className={Classes.BtnCambiarFoto} onClick={this.cambiarFoto}>
+							<h3>Cambiar Foto</h3>
+						</button>
+					</div>)
+				}
+
 				<div className={Classes.Botones}>
 					<button onClick={this.SubmitHandler} className={Classes.BtnCrear}>
 						<h2>Crear</h2>

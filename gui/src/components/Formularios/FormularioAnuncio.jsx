@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
 
@@ -13,15 +14,10 @@ class formularioAnuncio extends Component {
 	constructor(props) {
 		super(props);
 		this.state = (typeof props.match.params.id != 'undefined')?
-						{tipo:'Editar'}
-						:{
-							tipo: 'Crear',
-							titulo: '',
-							descripcion: '',
-							precio: '',
-							categoria: '',
-							subcategoria: '',
-							destacado: ''
+						{
+							tipo:'Editar'
+						}:{
+							tipo: 'Crear'
 						};
 
 		this.AtributoHandler = this.AtributoHandler.bind(this);
