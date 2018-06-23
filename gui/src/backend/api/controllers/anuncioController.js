@@ -297,7 +297,7 @@ module.exports = {
 	},
 	listByTokken:(req,res,next)=>{
 		Anuncio.find({usuario: req.userData.userId})
-			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
 			.exec()
@@ -313,6 +313,7 @@ module.exports = {
 							categoria: doc.categoria,
 							subcategoria: doc.subcategoria,
 							precio: doc.precio,
+							destacado: doc.destacado,
 							imagen: doc.imagen
 						}
 					})

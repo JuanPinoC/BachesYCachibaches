@@ -32,9 +32,6 @@ module.exports = {
 			});
 	},
 	create:(req,res,next)=>{
-		console.log("Ya entre mijo");
-		console.log(req.body.anuncio);
-		console.log(req.body.comentario);
 		const comentario = new Comentario({
 			_id: new mongoose.Types.ObjectId(),
 			anuncio: req.body.anuncio,
@@ -86,10 +83,8 @@ module.exports = {
 	},
 	update:(req,res,next)=>{
 		const id = req.body.comentarioId;
-		const updateOps = {};
-		for(const ops of req.body){
-			updateOps[ops.propName] = ops.value;
-		}
+		const updateOps = req.body;
+		delete updateOps._id
 		Comentario.update({_id: id},{$set: updateOps})
 			.exec()
 			.then(result => {
@@ -124,6 +119,7 @@ module.exports = {
 		Comentario.find({anuncio:req.query.anuncioId})
 			.select('_id usuario anuncio fecha comentario')
 			.populate('usuario','nombres foto')
+			.sort({fecha: -1})
 			.exec()
 			.then(docs => {
 				const response = {
