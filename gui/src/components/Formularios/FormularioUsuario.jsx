@@ -86,7 +86,9 @@ class formularioUsuario extends Component {
   	}
 
   	SubmitHandler = (e) => {
+
   		const data = this.state;
+  		const file = data.foto;
 
   		const formData = new FormData();
   		formData.append("nombres",data.nombres);
@@ -96,31 +98,36 @@ class formularioUsuario extends Component {
   		formData.append("direccion",data.direccion);
   		formData.append("celular",data.celular);
   		formData.append("telefono",data.telefono);
-  		formData.append("foto",data.foto);
+  		
+  		if(file){
+  			formData.append("foto",file,file.name);
+  		}
 
   		let url = 'usuarios/';
 
   		if(data.tipo == "Editar"){
-  			formData.append("cambiarFoto",data.cambiarFoto);
   			url = url + 'update';
   		}
 
-  		axios({
+  		const params = {
   			method: 'post',
   			url: url,
   			data: formData,
-  			headers: { 
+  			headers: {
 				'Content-Type': 'multipart/form-data',
+				"Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken')
 			}
-  		})
-  		.then(function (response) {
+  		};
+
+  		axios(params)
+  		.then( (response) => {
   			//handle success
   			let redirect = <Redirect to="/" />;
   			this.setState({
   				redirect: redirect
   			});
   		})
-  		.catch(function (response) {
+  		.catch( (response) => {
   			//handle error
   			console.log(response);
   		});
@@ -143,7 +150,7 @@ class formularioUsuario extends Component {
 					<Atributo titulo={"E-mail"} nombre={"email"}
 						tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
 					<Atributo titulo={"Contraseña"} nombre={"contrasenia"}
-						tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
+						tipo={"password"} contenido={this.state.contrasenia} action={this.AtributoHandler}/>
 				</div>
         		<div className={Classes.Parte}>
         			<Atributo titulo={"Dirección"} nombre={"direccion"}
@@ -169,7 +176,7 @@ class formularioUsuario extends Component {
 					(
 					<div className={Classes.FotoEditar}>
 						<img src={(typeof this.state.load)?
-									require('../../backend/profilePictures/'+this.state.fotoUrl.substring(17)):
+									require('../../backend/profilePictures/'+this.state.fotoUrl.substring(16)):
 									img}/>
 						<br/>
 						<button className={Classes.BtnCambiarFoto} onClick={this.cambiarFoto}>
@@ -180,7 +187,7 @@ class formularioUsuario extends Component {
 
 				<div className={Classes.Botones}>
 					<button onClick={this.SubmitHandler} className={Classes.BtnCrear}>
-						<h2>Crear</h2>
+						<h2>{this.state.tipo}</h2>
 					</button>
 					<button className={Classes.BtnCancelar}>
 						<h2>Cancelar</h2>

@@ -36,9 +36,8 @@ class formularioAnuncio extends Component {
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
   		.then((response) => {
   			const data = response.data.anuncio;
-  			console.log("ESTAS SON TUS IMAGENES: ", data.imagen );
+
   			this.setState({
-  				tipo:'Editar',
   				_id: data._id,
 				id_cat: data.categoria._id,
 				nom_cat: data.categoria.nombre,
@@ -50,7 +49,8 @@ class formularioAnuncio extends Component {
 				descripcion: data.descripcion,
 				usuario: data.usuario._id,
 				nombres: data.usuario.nombres,
-				load:true
+				load:true,
+				cambiarImagenes: false
   			});
   		})
   		.catch((response) => {
@@ -67,6 +67,7 @@ class formularioAnuncio extends Component {
   	}
 
   	SubmitHandler = (e) => {
+
   		let imgs = [];
   		let data = this.state.imagen;
   		

@@ -13,7 +13,7 @@ class imagenes extends Component {
     };
 
     componentWillMount = () => {
-      this.addData();
+      
     }
 
   ImageChangeHandler = (e) => {
