@@ -38,11 +38,11 @@ class foto extends Component {
     return (
       <div className={Classes.FotoFormulario}>
         <div className={Classes.AtributoImagen}>
-          <label  
-            for='imagen'
-            className={Classes.ImagenLabel}>
-              Agregar Imagen
-          </label>
+            <label  
+              for='imagen'
+              className={Classes.ImagenLabel}>
+                Agregar Imagen
+            </label>
           <input 
             className={Classes.ImagenInput}
             name='imagen'
@@ -51,7 +51,7 @@ class foto extends Component {
             onChange={this.ImageChangeHandler}/>
         </div>
         <div className={Classes.Imagen}>
-          <img src={this.state.imagePreviewUrl}/>
+          {(this.state.imagePreviewUrl)?<img src={this.state.imagePreviewUrl}/>:<div></div>}
         </div>
       </div>
     );
