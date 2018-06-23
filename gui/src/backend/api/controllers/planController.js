@@ -78,10 +78,8 @@ module.exports = {
 	},
 	update: (req,res,next)=>{
 		const id = req.body.planId;
-		const updateOps = {};
-		for(const ops of req.body){
-			updateOps[ops.propName] = ops.value;
-		}
+		const updateOps = req.body;
+		delete updateOps._id
 		Plan.update({_id: id},{$set: updateOps })
 			.exec()
 			.then(result => {
