@@ -17,6 +17,20 @@ export default class anunciosUsuario extends Component{
 
 	componentDidMount = () => {
   		this.agregarAnuncios();
+  		this.getUsuario();
+	}
+
+	getUsuario = () => {
+		axios.get('usuarios/menu',
+  			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
+  		.then((response) => {
+  			const data = response.data.usuario;
+  			this.setState({nombre: data.nombres});
+
+  		})
+  		.catch((response) => {
+  			console.log(response);
+  		});
 	}
 
 	agregarAnuncios = () => {

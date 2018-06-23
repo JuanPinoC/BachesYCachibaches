@@ -55,6 +55,7 @@ a{
 
 .Precio{
 	float: right;
+	margin-left: 20px;
 }
 
 .TituloPublicacion{}

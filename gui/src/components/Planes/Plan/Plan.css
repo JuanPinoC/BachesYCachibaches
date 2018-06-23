@@ -1,0 +1,26 @@
+.Plan25,.Plan50,.Plan75,.Plan100 {
+	width: 150px;
+	height: auto;
+	border-radius: 15px;
+	padding: 10px;
+	margin: 10px;
+	background: #f2f2f2;
+	display: inline-block;
+	transition-duration: 0.3s;
+}
+
+.Plan25:hover{
+	background: #4264ff;
+}
+
+.Plan50:hover{
+	background: #ff9721;
+}
+
+.Plan75:hover{
+	background: #b520ff;
+}
+
+.Plan100:hover{
+	background: #ff203d;
+}

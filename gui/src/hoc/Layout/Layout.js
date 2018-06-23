@@ -20,7 +20,10 @@ import Informacion from '../../components/Informacion/informacion';
 import AnuncioDetalle from '../../components/AnuncioDetalle/AnuncioDetalle';
 
 import FormularioAnuncio from '../../components/Formularios/FormularioAnuncio';
+import DestacarAnuncio from '../../components/Planes/Planes';
+
 import FormularioUsuario from '../../components/Formularios/FormularioUsuario';
+
 import FormularioCategoria from '../../components/Formularios/FormularioCategoria';
 import FormularioPlan from '../../components/Formularios/FormularioPlan';
 import FormularioComentario from '../../components/Formularios/FormularioComentario';
@@ -68,7 +71,7 @@ class Layout extends Component {
                             <Route path="/anuncio/:id" component={AnuncioDetalle}/>
                             <Route path="/formularioAnuncio" component={FormularioAnuncio} />
                             <Route path="/EditarAnuncio/:id" component={FormularioAnuncio} />
-                            <Route path="/formularioUsuario" component={FormularioUsuario}/>
+                            <Route path="/destacarAnuncio/:id" component={DestacarAnuncio} />
                             <Route path="/EditarUsuario" 
                                     render={() => (<FormularioUsuario tipo="Editar"/>)} />
                             <Route path="/formularioCategoria" component={FormularioCategoria}/>
