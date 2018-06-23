@@ -136,6 +136,8 @@ module.exports = {
 			.catch(err=>{throw err});
 		}
 
+
+
 		delete obj.foto;
 		User.update({_id: id},{$set: obj})
 			.exec()
@@ -243,7 +245,7 @@ module.exports = {
 					//process.env.JWT_KEY,
 					'secret',
 					{
-						expiresIn: "1h"
+						expiresIn: "2h"
 					}
 					);
 					return res.status(200).json({

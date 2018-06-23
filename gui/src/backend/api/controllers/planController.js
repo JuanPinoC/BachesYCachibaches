@@ -56,7 +56,7 @@ module.exports = {
 			});
 	},
 	find: (req,res,next)=>{
-		const id = req.body.planId;
+		const id = req.query.planId;
 		Plan.findById(id)
 			.select('porcentaje tiempo precio _id')
 			.exec()

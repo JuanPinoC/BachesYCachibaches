@@ -16,6 +16,7 @@ import MisAnuncios from '../../components/AnunciosUsuario/AnunciosUsuario';
 
 import Portada from '../../components/Portada/portada';
 import Usuario from '../../components/Perfil/Usuario/Usuario';
+import Informacion from '../../components/Informacion/informacion';
 import AnuncioDetalle from '../../components/AnuncioDetalle/AnuncioDetalle';
 
 import FormularioAnuncio from '../../components/Formularios/FormularioAnuncio';
@@ -82,7 +83,7 @@ class Layout extends Component {
                             <Route path="/ingresar" render={() => (
                                 <Login action={this.UserLogged}/>)}/>
                             <Route path="/registrarse" component={FormularioUsuario}/>
-                            <Route path="/info" component={Usuario}/>
+                            <Route path="/info" component={Informacion}/>
                             <Route path="/" component={Portada}/>
                         </Switch>
                     )}                

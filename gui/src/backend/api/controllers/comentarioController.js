@@ -123,7 +123,7 @@ module.exports = {
 	listByAd:(req,res,next)=>{
 		Comentario.find({anuncio:req.query.anuncioId})
 			.select('_id usuario anuncio fecha comentario')
-			.populate('usuario','nombres')
+			.populate('usuario','nombres foto')
 			.exec()
 			.then(docs => {
 				const response = {
