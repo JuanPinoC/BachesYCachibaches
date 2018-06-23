@@ -36,13 +36,11 @@ class categoriaSelect extends Component {
 	}
 
 	cargarSubcats = () => {
-		console.log("data: ", this.state.data);
 		let subcategorias = [];
 		let data = this.state.data;
 		let selected;
 
 		for(let i=0; i < data.length; i++){
-			console.log("ya entre mija");
 			if(this.state.contenido == data[i]._id){
 				selected = data[i].subcategorias[0]._id;
 				for(let j=0; j < data[i].subcategorias.length; j++){
@@ -87,9 +85,6 @@ class categoriaSelect extends Component {
 	}
 
   	render(){
-  		console.log("cat: " + this.state.contenido);
-  		console.log("subcat: " + this.state.contenido_subcat);
-  		console.log(this.state.subcats);
   		return (!this.state.load)?(<div></div>):(
   			<div className={Classes.SelectCategorias}>
 	  			<select className={Classes.Select} 

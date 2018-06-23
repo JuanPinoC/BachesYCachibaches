@@ -49,6 +49,29 @@
 	box-shadow: 0px 0px 75px -2px rgba(0,0,0,0.75);
 }
 
+
+.Formulario .ImagenesEditar{
+	margin-top: 30px;
+	margin-bottom: 50px;
+	margin-left: 20%;
+	margin-right: 15%;
+}
+
+.Formulario .ImagenesEditar img{
+	margin-top: 30px;
+	margin-left: 10px;
+	height: 200px;
+	width: auto;
+	border-radius: 10%;
+	border: 1px solid #cbd1db;
+	transition-duration: 0.3s;
+}
+
+.Formulario .ImagenesEditar img:hover{
+	border-color: transparent;
+	box-shadow: 0px 0px 75px -2px rgba(0,0,0,0.75);
+}
+
 .Formulario .Botones{
 	margin-top: 30px;
 	margin-bottom: 50px;

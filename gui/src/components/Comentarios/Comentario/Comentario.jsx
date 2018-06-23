@@ -26,7 +26,7 @@ const comentario = (props) => {
 	return (
 		<tr className={classes.Comentario}>
 			<td className={classes.ComentarioUsuario}>
-				<img src={ imgDefault }/>
+				<img src={require('../../../backend/profilePictures/' + props.data.usuario.foto.substring(16)) }/>
 				<a src={'/usuario/find?userId' + props.data.usuario._id}>
 					{props.data.usuario.nombres}
 				</a>

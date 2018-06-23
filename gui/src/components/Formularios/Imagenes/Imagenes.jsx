@@ -8,8 +8,7 @@ class imagenes extends Component {
     state = {
       files: [],
       imgs:[],
-      views: [],
-      data: (this.props.data)?this.props.data:[]
+      views: []
     };
 
     componentWillMount = () => {

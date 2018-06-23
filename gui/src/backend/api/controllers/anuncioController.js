@@ -105,6 +105,8 @@ module.exports = {
 		const id = req.body._id;
 		const obj = req.body;
 		delete obj._id;
+		console.log("body: ",req.body);
+		console.log("files: ",req.files);
 		if (req.files.length > 0) {
 			Anuncio.findById(id)
 			.select('imagen')
