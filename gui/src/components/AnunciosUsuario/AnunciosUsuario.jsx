@@ -1,3 +1,5 @@
+import axios from '../../AxiosFiles/axios';
+
 import React,{Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
@@ -6,10 +8,40 @@ import Classes from './AnunciosUsuario.css';
 import Anuncio from './Anuncio/Anuncio';
 
 export default class anunciosUsuario extends Component{
-	
+
 	state = {
 		nombre: "Pedro Perez",
-		anuncios: []
+		data: null,
+		vistas: []
+	}
+
+	componentDidMount = () => {
+  		this.agregarAnuncios();
+	}
+
+	agregarAnuncios = () => {
+		axios.get('anuncios/usuario',
+  			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
+  		.then((response) => {
+
+			const data = response.data.orders;
+			let vistas = [];
+			
+			for(let i=0,l=data.length ;i < l; i++){
+				vistas.push(
+					<Anuncio data={data[i]} key={i}/>
+				);
+			}
+
+			this.setState({
+				data: data,
+				vistas: vistas,
+				load: true
+			});
+  		})
+  		.catch((response) => {
+  			console.log(response);
+  		});
 	}
 
 	render(){
@@ -22,9 +54,7 @@ export default class anunciosUsuario extends Component{
 				</NavLink>
 				<div className={Classes.Anuncios}>
 				<center>
-					<Anuncio/>
-					<Anuncio/>
-					<Anuncio/>
+					{(this.state.load)?this.state.vistas:(<h1>Cargando...</h1>)}
 				</center>
 				</div>
 			</div>

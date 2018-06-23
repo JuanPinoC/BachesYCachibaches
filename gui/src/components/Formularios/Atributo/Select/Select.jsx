@@ -9,8 +9,8 @@ class categoriaSelect extends Component {
 
 	state = {
 		name: this.props.nombre,
-		contenido: this.props.contenido,
-		contenido_subcat: this.props.contenido_subcat,
+		contenido: this.props.categoria,
+		contenido_subcat: this.props.subcategoria,
 		data: [],
 		categorias: [],
 		subcats: []
@@ -26,25 +26,28 @@ class categoriaSelect extends Component {
 			}
 
 			this.setState({
-				contenido: data[0]._id,
+				contenido: (this.props.categoria)?this.props.categoria:data[0]._id,
 				data: data,
 				categorias: categorias
 			});
+
 			this.cargarSubcats();
 		});
 	}
 
 	cargarSubcats = () => {
+		console.log("data: ", this.state.data);
 		let subcategorias = [];
 		let data = this.state.data;
 		let selected;
 
 		for(let i=0; i < data.length; i++){
+			console.log("ya entre mija");
 			if(this.state.contenido == data[i]._id){
 				selected = data[i].subcategorias[0]._id;
 				for(let j=0; j < data[i].subcategorias.length; j++){
 					subcategorias.push(
-						<option value={data[i].subcategorias[j]._id}>
+						<option value={data[i].subcategorias[j].nombre}>
 							{data[i].subcategorias[j].nombre}
 						</option>
 					);
@@ -55,7 +58,8 @@ class categoriaSelect extends Component {
 
 		this.setState({
 			subcats: subcategorias,
-			contenido_subcat: selected
+			contenido_subcat: (this.props.subcategoria)?this.props.subcategoria:selected,
+			load:true
 		});
 
 		this.updatePadre();
@@ -83,23 +87,26 @@ class categoriaSelect extends Component {
 	}
 
   	render(){
-  		return(
+  		console.log("cat: " + this.state.contenido);
+  		console.log("subcat: " + this.state.contenido_subcat);
+  		console.log(this.state.subcats);
+  		return (!this.state.load)?(<div></div>):(
   			<div className={Classes.SelectCategorias}>
-  			<select className={Classes.Select} 
-  				name={"categoria"}
-  				value={this.state.contenido} 
-  				onClick={this.onChangeHandler} onChange={this.onChangeHandler}>
-  				{this.state.categorias}
-  			</select>
-  			<br/>
-  			<label>Subcategoría:</label>
-  			<br/>
-  			<select className={Classes.Select} 
-  				name={"subcategoria"} 
-  				value={this.state.contenido_subcat}
-  				onClick={this.subcatChangeHandler} onChange={this.subcatChangeHandler}>
-  				{this.state.subcats}
-  			</select>
+	  			<select className={Classes.Select} 
+	  				name={"categoria"}
+	  				value={this.state.contenido} default={this.state.contenido}
+	  				onClick={this.onChangeHandler} onChange={this.onChangeHandler}>
+	  				{this.state.categorias}
+	  			</select>
+	  			<br/>
+	  			<label>Subcategoría:</label>
+	  			<br/>
+	  			<select className={Classes.Select} 
+	  				name={"subcategoria"} 
+	  				value={this.state.contenido_subcat} default={this.state.contenido_subcat}
+	  				onClick={this.subcatChangeHandler} onChange={this.subcatChangeHandler}>
+	  				{this.state.subcats}
+	  			</select>
   			</div>
   		)
   	}

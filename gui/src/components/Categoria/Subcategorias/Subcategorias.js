@@ -3,10 +3,16 @@ import React from 'react';
 import Classes from './Subcategorias.css';
 
 const subcategorias = (props) => {
+
 	let elementos = [];
 	if(props.data!=null){
 		for(let i=0,l=props.data.length;i < l;i++){
-			elementos.push(<li className={Classes.Subcategoria}><a>{props.data[i].nombre}</a></li>);
+			elementos.push(
+				<li className={Classes.Subcategoria} >
+					<a onClick={() => {props.action(props.data[i].nombre)} }>
+					{props.data[i].nombre}
+					</a>
+				</li>);
 		}
 	}
 

@@ -27,7 +27,8 @@ export default class comentarios extends Component {
 	}
 
 	agregarComentarios = () => {
-		axios.get('comentarios/')
+		axios.get('comentarios/anuncio?anuncioId='+this.state.anuncioId,
+  			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
 		.then((response) => {
 
 			const data = response.data.products;

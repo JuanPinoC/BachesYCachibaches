@@ -18,20 +18,39 @@ export default class categoria extends Component{
 			categoria: null
 		}
 		this.catSelected = this.catSelected.bind(this);
+		this.subcatSelected = this.subcatSelected.bind(this);
 	}
 
 	componentDidMount = () => {
-  		this.agregarAnuncios();
+		this.agregarAnuncios();
 	}
 
 	catSelected = (cat) => {
 		this.setState({
+			data:[],
+			vistas:[],
 			categoria: cat
 		});
+		this.agregarAnuncios('categoria',cat._id);		
 	}
 
-	agregarAnuncios = () => {
-		axios.get('anuncios/',
+	subcatSelected = (subcat) => {
+		this.setState({
+			data:[],
+			vistas:[]
+		});
+		this.agregarAnuncios('subcategoria',subcat);	
+	}
+
+	agregarAnuncios = (selected,id) => {
+		let url = 'anuncios/';
+		if(selected == 'categoria'){
+			url = 'anuncios/categoria?categoriaId='+id;
+		}else if(selected == 'subcategoria'){
+			url = 'anuncios/subcategoria?subcategoria='+id;
+		}
+
+		axios.get(url,
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
   		.then((response) => {
   			console.log(response.data.orders);
@@ -84,7 +103,10 @@ export default class categoria extends Component{
 					<h1 className={Classes.TituloCategoria}>
 						{(this.state.categoria)?this.state.categoria.name:'Categoria'}
 					</h1>
-					<Subcategorias data={this.state.categoria && this.state.categoria.subcategorias}/>
+					<Subcategorias 
+						data={this.state.categoria && this.state.categoria.subcategorias}
+						action={this.subcatSelected}
+						/>
 					<hr/>
 					<div className={Classes.Publicaciones}>
 						{this.state.vistas}

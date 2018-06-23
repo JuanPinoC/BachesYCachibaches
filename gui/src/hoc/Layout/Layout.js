@@ -65,9 +65,11 @@ class Layout extends Component {
                             <Route path="/buscar" component={Categoria}/>
                             <Route path="/categoria/:nombre" component={Categoria}/>
                             <Route path="/anuncio/:id" component={AnuncioDetalle}/>
-                            <Route path="/formularioAnuncio" 
-                                    render={() => (<FormularioAnuncio data={this.data}/>)} />
+                            <Route path="/formularioAnuncio" component={FormularioAnuncio} />
+                            <Route path="/EditarAnuncio/:id" component={FormularioAnuncio} />
                             <Route path="/formularioUsuario" component={FormularioUsuario}/>
+                            <Route path="/EditarUsuario" 
+                                    render={() => (<FormularioUsuario tipo="Editar"/>)} />
                             <Route path="/formularioCategoria" component={FormularioCategoria}/>
                             <Route path="/formularioPlan" component={FormularioPlan}/>
                             <Route path="/formularioComentario" component={FormularioComentario}/>
@@ -81,7 +83,6 @@ class Layout extends Component {
                                 <Login action={this.UserLogged}/>)}/>
                             <Route path="/registrarse" component={FormularioUsuario}/>
                             <Route path="/info" component={Usuario}/>
-                            <Route path="/anuncio/:id" component={AnuncioDetalle}/>
                             <Route path="/" component={Portada}/>
                         </Switch>
                     )}                

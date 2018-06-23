@@ -20,21 +20,14 @@ class formularioComentario extends Component {
 	}
 
 	SubmitHandler = (e) => {
-  		e.preventDefault();
-      
-      const data = this.state;
-      console.log("data",data);
-      const formData = new FormData();
-      formData.append("anuncio",data.anuncio);
-      formData.append("comentario",data.comentario);
-      console.log("formData",formData);
 
+      const data = this.state;
+      
       const params = {
         method: 'post',
         url: '/comentarios',
-        data: formData,
+        data: data,
         headers: {
-          'Content-Type':'multipart/form-data',
           'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
         }
       };

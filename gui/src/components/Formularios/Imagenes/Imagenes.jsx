@@ -8,15 +8,25 @@ class imagenes extends Component {
     state = {
       files: [],
       imgs:[],
-      views: []
+      views: [],
+      data: (this.props.data)?this.props.data:[]
     };
+
+    componentWillMount = () => {
+      this.addData();
+    }
 
   ImageChangeHandler = (e) => {
     e.preventDefault();
+    for(let i=0, l=e.target.files.length; i < l; i++ ){
+      this.addFile(e, i);
+    }
+  }
 
+  addFile = (e, i) => {
     let reader = new FileReader();
-    let file = e.target.files[0];
-    
+    let file = e.target.files[i];
+
     if(typeof file != 'undefined'){
       reader.onloadend = () => {
         this.setState({
@@ -77,7 +87,7 @@ class imagenes extends Component {
             name='imagen'
             id='imagen'
             type="file"
-            onChange={this.ImageChangeHandler}/>
+            onChange={this.ImageChangeHandler} multiple/>
         </div>
         <div className={Classes.Imagenes}>
           {this.state.views}

@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
 
+import Spinner from '../Spinner/Spinner';
 import Foto from './Foto/Foto';
 import Atributo from './Atributo/Atributo';
 
@@ -12,30 +13,53 @@ class formularioUsuario extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = (props.userId)?
-			{
-				tipo: "Editar",
-				userId: props.userId
-			}:{
-				tipo: "Crear"
-			};
-			
+		this.state = 
+			(typeof props.tipo != 'undefined')?
+				{
+					tipo: 'Editar'
+				}:{
+					tipo: 'Crear'
+				};
+
 		this.AtributoHandler = this.AtributoHandler.bind(this);
 	}
 
 	componentWillMount = () => {
-		if(this.state.tipo=="Editar"){
-			axios.get('users/find?userId=' + this.state.userId,
-  			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
-				.then(response => {
-					this.setState({
-						data: response
-					});
-				}).catch(response => {
-					console.log(response);
-					}
-				);
+		if(this.state.tipo === 'Editar'){
+			this.getUsuario();
+		}else{
+			this.setState({load:true})
 		}
+	}
+
+	getUsuario = () => {
+		axios.get('usuarios/edit',{
+			headers: { 
+				"Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken')
+			}
+		})
+		.then(response => {
+			const data = response.data.usuario;
+
+			this.setState({
+				data: data,
+				apellidos: data.apellidos,
+				celular: data.celular,
+				direccion: data.direccion,
+				email: data.email,
+				foto: data.foto,
+				latitud: data.latitud,
+				longitud: data.longitud,
+				nombres: data.nombres,
+				puntuacion: data.puntuacion,
+				telefono: data.telefono,
+				load: true
+			});
+
+			console.log(this.state);
+		}).catch(response => {
+			console.log(response);
+		});
 	}
 
 	AtributoHandler = (campo, valor) => {
@@ -74,7 +98,9 @@ class formularioUsuario extends Component {
   	}
 
   	render(){
-  		return (
+  		return (!this.state.load)?
+  			(<Spinner/>
+  			):(
 			<div className={Classes.Formulario}>
 			<center><h1>{this.state.tipo} Usuario</h1></center>
 			<hr/>
