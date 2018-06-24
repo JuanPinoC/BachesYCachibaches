@@ -60,7 +60,7 @@ module.exports = {
 			});
 	},
 	find:(req,res,next)=>{
-		const id = req.body.comentarioId;
+		const id = req.query.comentarioId;
 		Comentario.findById(id)
 			.select('_id anuncio usuario fecha comentario')
 			.populate('anuncio','titulo')
