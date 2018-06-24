@@ -149,8 +149,13 @@ class formularioUsuario extends Component {
 						tipo={"text"} contenido={this.state.apellidos} action={this.AtributoHandler}/>
 					<Atributo titulo={"E-mail"} nombre={"email"}
 						tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
-					<Atributo titulo={"Contraseña"} nombre={"contrasenia"}
-						tipo={"password"} contenido={this.state.contrasenia} action={this.AtributoHandler}/>
+					{(this.state.tipo == "Editar")?
+						(<div></div>):
+						(
+						<Atributo titulo={"Contraseña"} nombre={"contrasenia"}
+							tipo={"password"} contenido={this.state.contrasenia} action={this.AtributoHandler}/>
+						)
+					}
 				</div>
         		<div className={Classes.Parte}>
         			<Atributo titulo={"Dirección"} nombre={"direccion"}

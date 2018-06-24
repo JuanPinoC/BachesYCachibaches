@@ -74,7 +74,7 @@ export default class planes extends Component{
   		axios(params)
   		.then((response) => {
   			//handle success
-  			let redirect = <Redirect to="/" />;
+  			let redirect = <Redirect to="/misAnuncios" />;
   			this.setState({
   				redirect: redirect
   			});
@@ -89,6 +89,7 @@ export default class planes extends Component{
 	render(){
 		return(
 			<div className={Classes.Planes}>
+				{this.state.redirect}
 				<div className={Classes.Opciones}>
 					{this.state.planes}
 				</div>

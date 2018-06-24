@@ -11,6 +11,7 @@ import Classes from './Perfil.css';
 export default class perfil extends Component{	
 
 	state = {
+		userId: this.props.match.params.id,
 		dataUsuario: null,
 		vistas: [],
 		load: false
@@ -22,14 +23,14 @@ export default class perfil extends Component{
 	}
 
 	getUsuario = () => {
-		axios.get('usuarios/find',{
+		axios.get('usuarios/getUserById?userId=' + this.state.userId,{
 			headers: { 
 				"Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken')
 			}
 		})
 		.then(response => {
-			const data = response.data.user;
-
+			console.log("AKIIIIII",response);
+			const data = response.data.usuario;
 			this.setState({
 				dataUsuario: data
 			});

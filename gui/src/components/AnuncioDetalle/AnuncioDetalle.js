@@ -39,6 +39,7 @@ export default class anuncioDetalle extends Component{
 				descripcion: data.descripcion,
 				usuario: data.usuario._id,
 				nombres: data.usuario.nombres,
+				foto_usuario: data.usuario.foto.substring(16),
 				load:true
   			});
   		})
@@ -76,14 +77,17 @@ export default class anuncioDetalle extends Component{
 					</div>
 					<div className={Classes.InfoUsuario}>
 						<center>
-							<img src={imgUsuario}/>
+							<img src={(typeof this.state.foto_usuario != 'undefined')?
+									require('../../backend/profilePictures/' + this.state.foto_usuario):imgUsuario}/>
 							<h4>{this.state.nombres}</h4>
 							<div className={Classes.Valoracion}>
 								<Valoracion val={3}/>
 							</div>
 							<br/>
 							<center><h3>Opciones</h3></center>
-							<button className={Classes.Opcion}><h3>Contactar</h3></button>
+							<NavLink to={"/perfil/"+this.state.usuario} exact >
+								<button className={Classes.Opcion}><h3>Contactar</h3></button>
+							</NavLink>
 							<button className={Classes.Opcion}><h3>Reportar</h3></button>
 						</center>
 					</div>

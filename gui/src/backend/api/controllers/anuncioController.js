@@ -82,7 +82,7 @@ module.exports = {
 		const id = req.query.anuncioId;
 		Anuncio.findById(id)
 			.select('_id usuario titulo descripcion fec_pub categoria subcategoria precio imagen')
-			.populate('usuario','nombres')
+			.populate('usuario','nombres foto')
 			.populate('categoria','nombre')
 			.exec()
 			.then(doc => {

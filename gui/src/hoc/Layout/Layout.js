@@ -64,7 +64,7 @@ class Layout extends Component {
                 <main className={classes.Content}>
                     {(this.state.token != "null")?(
                         <Switch>
-                            <Route path="/perfil" component={Perfil}/>
+                            <Route path="/perfil/:id" component={Perfil}/>
                             <Route path="/misAnuncios" component={MisAnuncios}/>
                             <Route path="/cuenta" component={FormularioUsuario}/>
                             <Route path="/buscar" component={Categoria}/>
