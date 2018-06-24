@@ -328,7 +328,7 @@ module.exports = {
 	},
 	listById:(req,res,next)=>{
 		const id = req.query.userId;
-		Anuncio.findById(id)
+		Anuncio.find({usuario: id})
 			.select('_id titulo descripcion categoria subcategoria precio imagen activo')
 			.exec()
 			.then(doc=>{
