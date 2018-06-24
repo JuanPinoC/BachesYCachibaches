@@ -46,7 +46,10 @@ export default class slideShow extends Component{
 		return(
 			<div className={Classes.SlideShow}>
 				<center>
-					{this.state.vistas[this.state.puntero]}
+					<div className={Classes.Imagen}>
+						<span className={Classes.Helper}></span>
+						{this.state.vistas[this.state.puntero]}
+					</div>
 					{this.state.buttons}
 				</center>
 			</div>

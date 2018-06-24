@@ -1,0 +1,27 @@
+.UserInfo{
+	width: 200px;
+	height: auto;
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	background: black;
+	color: white;
+	transition-duration: 0.3s;
+}
+
+.UserInfo:hover{
+	background: #FFBF00;
+	color: black;
+}
+
+.UserInfo img{
+	margin: 20px;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 100px;
+	height: 100px;
+}
+
+.UserInfo h4{
+	text-align: center;
+}

@@ -12,6 +12,8 @@ import img from './img.jpg';
 import imgUsuario from '../Perfil/Usuario/userExample.png';
 import imgDestacado from '../Anuncio/star.png';
 
+import Spinner from '../Spinner/Spinner';
+
 
 export default class anuncioDetalle extends Component{
 
@@ -52,7 +54,7 @@ export default class anuncioDetalle extends Component{
 					<div className={Classes.Imagen}>
 						{(typeof this.state.img != 'undefined')?
 							(<SlideShow data={this.state.img}/>):
-							(<h2>Cargando...</h2>)
+							(<Spinner />)
 						}
 					</div>
 					<div className={Classes.Info}>

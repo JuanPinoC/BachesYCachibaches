@@ -6,6 +6,8 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import NavigationItemsUser from '../NavigationItems/NavigationItemsLoggedUser';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import Searchbar from '../SearchBar/SearchBar';
+import UserInfo from '../..//UserInfo/UserInfo';
+
 
 const toolbar = ( props ) => (
     <div>
@@ -21,9 +23,10 @@ const toolbar = ( props ) => (
             {
                 (sessionStorage.getItem('jwtToken')!="null")?
                 <NavigationItemsUser action={props.action}/>:<NavigationItems/>    
-            }    
+            }
         </nav>
     </header>
+    {(sessionStorage.getItem('jwtToken')!="null")?<UserInfo />:<div></div>}
     </div>
 );
 

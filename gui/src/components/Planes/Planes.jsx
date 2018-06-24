@@ -92,9 +92,28 @@ export default class planes extends Component{
 				<div className={Classes.Opciones}>
 					{this.state.planes}
 				</div>
-				<div className={Classes.Fomulario}>
-					<div>{(this.state.plan != null)?(<h1>{this.state.plan.porcentaje}</h1>):(<div>No has seleccionado un plan</div>)}</div>
-					<button onClick={this.submitHandler}><h3>Aceptar</h3></button>
+				<div className={Classes.Formulario}>
+					<div>{(this.state.plan != null)?
+						(
+							<div>
+								<center>
+									<h1>{(parseFloat(this.state.plan.porcentaje)*100).toFixed(0)}%</h1>
+									<h2>Durante {this.state.plan.tiempo} días</h2>	
+								</center>
+								<button onClick={this.submitHandler}><h3>Aceptar</h3></button>	
+							</div>
+										
+						):(
+							<div>
+								<center>
+								<h2>No has seleccionado un plan</h2>
+								</center>
+								<button 
+								className={Classes.Disabled}
+								onClick={this.submitHandler} disabled><h3>Aceptar</h3></button>
+							</div>
+						)}
+					</div>
 				</div>
 			</div>	
 		);
