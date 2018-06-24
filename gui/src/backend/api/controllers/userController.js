@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const defaultPicture = '/profilePictures/default.jpeg';
+const defaultPicture = 'profilePictures\\default.jpeg';
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 	
