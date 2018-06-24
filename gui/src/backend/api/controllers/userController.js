@@ -268,7 +268,7 @@ module.exports = {
 	},
 	edit:(req,res,next)=>{
 		User.findById(req.userData.userId)
-			.select('telefono celular direccion puntuacion latitud longitud foto nombres apellidos email')
+			.select('_id telefono celular direccion puntuacion latitud longitud foto nombres apellidos email')
 			.exec()
 			.then(doc => {
 				if (doc) {
@@ -300,5 +300,24 @@ module.exports = {
 			.catch(err => {
 				console.log(err);
 				res.status(500).json({error: err});
-			});	}
+			});	
+	},
+	getUserById:(req,res,next)=>{
+		User.findById(req.query.userId)
+			.select('_id telefono celular direccion puntuacion latitud longitud foto nombres apellidos email')
+			.exec()
+			.then(doc => {
+				if (doc) {
+					res.status(200).json({
+						usuario: doc
+					});
+				}else{
+					res.status(404).json({message: 'No valid entry found for provided ID'});
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({error: err});
+			});
+	}
 }

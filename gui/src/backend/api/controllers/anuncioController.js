@@ -325,5 +325,26 @@ module.exports = {
 					error: err
 				})
 			});
+	},
+	listById:(req,res,next)=>{
+		const id = req.query.userId;
+		Anuncio.findById(id)
+			.select('_id titulo descripcion categoria subcategoria precio imagen activo')
+			.exec()
+			.then(doc=>{
+				if (doc.length < 1) {
+					res.status(401).json({
+						message: 'Ad does not exist'
+					});
+				}else{
+					res.status(200).json({
+						result:doc
+					});	
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({error:err});
+			});
 	}
 }
