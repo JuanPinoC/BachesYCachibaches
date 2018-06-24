@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const defaultPicture = '/profilePictures/default.jpeg';
+const defaultPicture = 'profilePictures\\default.jpeg';
 
 const userSchema = mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
