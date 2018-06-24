@@ -18,7 +18,8 @@ class login extends Component {
     
     this.state = {
       email: '',
-      contrasenia: ''
+      contrasenia: '',
+      newPassForm: false
     };
 
     this.AtributoHandler = this.AtributoHandler.bind(this);
@@ -28,25 +29,50 @@ class login extends Component {
     this.setState({ [campo]: valor });
   }
 
+  changeForm = () => {
+    const oldState = this.state.newPassForm;
+    this.setState({
+      newPassForm: !oldState
+    });
+  }
+
   SubmitHandler = (e) => {
     e.preventDefault();
     const data = this.state;
+
+    let url = 'usuarios/login';
+
+    if(data.newPassForm){
+      url = 'usuarios/password';
+    }
+
     axios({
       method: 'post',
-      url: 'usuarios/login',
+      url: url,
       data: data,
       config: { headers: {'Content-Type': 'multipart/form-data',  }}
     })
     .then((response) => {
       //handle success
-      sessionStorage.setItem('jwtToken', response.data.token);
-      this.props.action();
-      console.log(response);
+      if(!data.newPassForm){
+        sessionStorage.setItem('jwtToken', response.data.token);
+        this.props.action();
+      }else{
+        this.changeForm();
+        alert("Contraseña cambiada con exito.");
+      }
+
+      //console.log(response);
     })
     .catch((response) => {
       //handle error
       this.props.action();
-      console.log(response);
+      if(!data.newPassForm){
+        alert("Usuario o contraseña incorrectos.");
+      }else{
+        alert("Usuario no encontrado.");
+      }
+      //console.log(response);
     });
   }
 
@@ -60,17 +86,37 @@ class login extends Component {
           <div className={Classes.Parte}>
           <Atributo titulo={"E-mail"} nombre={"email"}
             tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
-          <Atributo titulo={"Contraseña"} nombre={"contrasenia"}
-            tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
+          {
+            (this.state.newPassForm)?(
+            <Atributo titulo={"Nueva Contraseña"} nombre={"contrasenia"}
+              tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
+            ):(
+            <Atributo titulo={"Contraseña"} nombre={"contrasenia"}
+              tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
+            )
+          }
           </div>
-          <div className={Classes.Botones}>
-            <button onClick={this.SubmitHandler} className={Classes.BtnIngresar}>
-              <h3>Ingresar</h3>
-            </button>
-            <button className={Classes.BtnForgotPassword}>
-              Olvide mi contraseña :c
-            </button>
-          </div>
+          {
+            (this.state.newPassForm)?(
+              <div className={Classes.Botones}>
+                <button onClick={this.SubmitHandler} className={Classes.BtnIngresar}>
+                  <h3>Cambiar Contraseña</h3>
+                </button>
+                <button className={Classes.BtnForgotPassword} onClick={this.changeForm}>
+                  Volver
+                </button>
+              </div>
+            ):(
+              <div className={Classes.Botones}>
+                <button onClick={this.SubmitHandler} className={Classes.BtnIngresar}>
+                  <h3>Ingresar</h3>
+                </button>
+                <button className={Classes.BtnForgotPassword} onClick={this.changeForm}>
+                  Olvide mi contraseña :c
+                </button>
+              </div>
+            )
+          }
         </div>
         <div className={Classes.Info}>
           <div className={Classes.Texto}>

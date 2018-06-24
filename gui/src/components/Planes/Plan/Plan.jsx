@@ -16,10 +16,10 @@ const plan = (props) => {
 
 	return(
 		<div className={estilo} onClick={() =>{ props.action(data)}}>
-			<h3>Plan {props.id + 1}</h3>
+			
 			<h2>{parseFloat(data.porcentaje)*100}%</h2>
 			<p>Tiempo:{data.tiempo}</p>
-			<p>Precio:{data.precio}</p>
+			<p>Precio:{(parseFloat(data.precio)*100).toFixed(0)}% </p>
 		</div>			
 		);	
 }

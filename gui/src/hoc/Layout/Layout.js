@@ -51,6 +51,7 @@ class Layout extends Component {
         this.setState({
             token: sessionStorage.getItem('jwtToken')
         });
+
     }
 
     render () {
