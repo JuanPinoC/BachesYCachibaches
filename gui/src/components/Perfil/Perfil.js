@@ -42,7 +42,7 @@ export default class perfil extends Component{
 
 	getAnuncios = () => {
 
-		axios.get('anuncios/usuario',
+		axios.get('anuncios/listById?userId=' + this.state.userId,
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
   		.then((response) => {
 
