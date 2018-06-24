@@ -319,5 +319,38 @@ module.exports = {
 				console.log(err);
 				res.status(500).json({error: err});
 			});
+	},
+	search:(req,res,next)=>{
+		const string = req.body.string;
+		User.find({nombres:{ $regex: string , $options:'i'}})
+			.select('_id telefono celular direccion puntuacion latitud longitud foto nombres apellidos email')
+			.exec()
+			.then(docs => {
+				if (docs.length == []) {
+					res.status(404).json({message:'No entries found'})
+				}
+				res.status(200).json({
+					count: docs.length,
+					result: docs.map(doc => {
+						return {
+							_id: doc._id,
+							telefono: doc.telefono,
+							celular: doc.celular,
+							direccion: doc.direccion,
+							puntuacion: doc.puntuacion,
+							latitud: doc.latitud,
+							longitud: doc.longitud,
+							foto: doc.foto,
+							nombres: doc.nombres,
+							apellidos: doc.apellidos,
+							email: doc.email
+						}
+					})
+				});
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({error:err});
+			});
 	}
 }

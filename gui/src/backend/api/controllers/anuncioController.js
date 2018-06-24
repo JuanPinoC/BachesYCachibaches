@@ -6,7 +6,7 @@ const fs = require('fs');
 module.exports = {
 	show: (req,res,next)=>{
 		Anuncio.find()
-			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
 			.exec()
@@ -81,7 +81,7 @@ module.exports = {
 	find: (req,res,next)=>{
 		const id = req.query.anuncioId;
 		Anuncio.findById(id)
-			.select('_id usuario titulo descripcion fec_pub categoria subcategoria precio imagen')
+			.select('_id usuario titulo descripcion fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres foto')
 			.populate('categoria','nombre')
 			.exec()
@@ -237,7 +237,7 @@ module.exports = {
 	},
 	listByCategory:(req,res,next)=>{
 		Anuncio.find({categoria:req.query.categoriaId})
-			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
 			.exec()
@@ -267,7 +267,7 @@ module.exports = {
 	},
 	listBySubCategory:(req,res,next)=>{
 		Anuncio.find({subcategoria: req.query.subcategoria})
-			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen')
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
 			.exec()
@@ -329,7 +329,7 @@ module.exports = {
 	listById:(req,res,next)=>{
 		const id = req.query.userId;
 		Anuncio.find({usuario: id})
-			.select('_id titulo descripcion categoria subcategoria precio imagen activo')
+			.select('_id titulo descripcion categoria subcategoria precio imagen activo destacado')
 			.exec()
 			.then(doc=>{
 				if (doc.length < 1) {
@@ -341,6 +341,35 @@ module.exports = {
 						result:doc
 					});	
 				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({error:err});
+			});
+	},
+	search:(req,res,next) => {
+		const string = req.body.string;
+		Anuncio.find({titulo: { $regex: string , $options:'i'}})
+		.sort({destacado:-1})
+			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
+			.exec()
+			.then(docs => {
+				res.status(200).json({
+					count: docs.length,
+					result: docs.map(doc => {
+						return {
+							_id: doc._id,
+							usuario: doc.usuario,
+							titulo: doc.titulo,
+							fec_pub: doc.fec_pub,
+							categoria: doc.categoria,
+							subcategoria: doc.subcategoria,
+							precio: doc.precio,
+							imagen: doc.imagen,
+							destacado: doc.destacado
+						}
+					})
+				});
 			})
 			.catch(err => {
 				console.log(err);

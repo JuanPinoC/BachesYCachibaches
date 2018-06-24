@@ -33,6 +33,7 @@ const upload = multer({
 });
 
 router.get('/find', Anuncio.find);
+router.post('/search',Anuncio.search);
 router.post('/edit',checkAuth, Anuncio.edit);
 router.post('/update',checkAuth, upload.array('imagen',10), Anuncio.update);
 router.post('/delete',checkAuth, Anuncio.delete);
