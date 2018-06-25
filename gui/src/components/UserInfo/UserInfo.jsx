@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-
+import {NavLink} from 'react-router-dom';
 import axios from '../../AxiosFiles/axios';
 
 import Classes from './UserInfo.css';
@@ -26,7 +26,7 @@ export default class userInfo extends Component{
 		.then(response => {
 			const data = response.data.usuario;
 			console.log(data);
-
+			console.log(data.foto);
 			this.setState({
 				email: data.email,
 				foto: data.foto.substring(16),
@@ -45,8 +45,10 @@ export default class userInfo extends Component{
 			<div></div>
 		):(
 			<div className={Classes.UserInfo}>
-				<img src={require("../../backend/profilePictures/" + this.state.foto)} />
-				<h4>{this.state.nombres}</h4>
+				<NavLink to='/misCompras'>
+					<img src={require("../../backend/profilePictures/" + this.state.foto)} />
+					<h4>{this.state.nombres}</h4>
+				</NavLink>
 			</div>
 		);
 	}

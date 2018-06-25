@@ -5,6 +5,7 @@ const checkAuth = require('../middlewares/check-auth');
 const Compra = require('../controllers/compraController');
 
 router.get('/find',checkAuth,Compra.find);
+router.get('/getByToken',checkAuth,Compra.getPurchaseByToken);
 router.post('/update',checkAuth,Compra.update);
 router.post('/delete',checkAuth,Compra.delete);
 router.get('/',checkAuth, Compra.show);

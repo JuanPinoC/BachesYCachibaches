@@ -123,5 +123,38 @@ module.exports = {
 					error: err
 				});
 			});
-	}
+	},
+	getPurchaseByToken:(req,res,next)=>{
+		const id = req.userData.userId;
+		Compra.find({usuario:id})
+			.select('_id anuncio usuario fecha')
+			.populate('anuncio','titulo precio')
+			.populate('usuario','nombres email')
+			.exec()
+			.then(docs => {
+				if (docs < 1) {
+					res.status(404).json({
+						message:'Not found'
+					});
+				}
+				const response = {
+					count: docs.length,
+					compra: docs.map(doc => {
+						return {
+							anuncio: doc.anuncio,
+							usuario: doc.usuario,
+							fecha: doc.fecha,
+							_id: doc._id
+						}
+					})
+				};
+				res.status(200).json(response);
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				});
+			});
+	},
 } 

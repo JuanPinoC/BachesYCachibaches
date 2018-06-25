@@ -1,0 +1,11 @@
+.Compra{
+	padding:20px;
+	margin: 20px;
+	border-radius: 15px;
+	border: 2px solid black;
+	transition-duration: 0.3s;
+}
+
+.Compra:hover{
+	background-color: #FFBF00; 
+}

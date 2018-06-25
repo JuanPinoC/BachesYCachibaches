@@ -13,6 +13,7 @@ import Registrar from '../../components/Registrar/Registrar';
 import Login from '../../components/Login/login';
 import Perfil from '../../components/Perfil/Perfil';
 import MisAnuncios from '../../components/AnunciosUsuario/AnunciosUsuario';
+import MisCompras from '../../components/Compras/Compras';
 
 import Portada from '../../components/Portada/portada';
 import Usuario from '../../components/Perfil/Usuario/Usuario';
@@ -82,6 +83,7 @@ class Layout extends Component {
                             <Route path="/formularioPlan" component={FormularioPlan}/>
                             <Route path="/formularioComentario" component={FormularioComentario}/>
                             <Route path="/nosotros" component={Portada}/>
+                            <Route path="/misCompras" component={MisCompras}/>
                             <Route path="/info" component={Usuario}/>
                             <Route path="/" component={Portada}/>
                         </Switch>

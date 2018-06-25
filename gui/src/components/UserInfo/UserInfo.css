@@ -20,8 +20,10 @@
 	margin-right: 25%;
 	width: 100px;
 	height: 100px;
+	border-radius: 15%;
 }
 
 .UserInfo h4{
 	text-align: center;
+	color: white;
 }

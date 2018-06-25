@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
-
+import Compra from './Compra/Compra';
 import axios from '../../AxiosFiles/axios';
 
 import Classes from './Compras.css';
@@ -9,70 +9,40 @@ export default class formularioVendido extends Component {
 
 	state = {
 		inputText: "",
-		selected: null,
-		usuarios: []
+		compras: []
 	}
 
-	getUsuarios = () => {
-		axios.post();
-	}
-
-	usuarioSeleccionado = () => {
-
-		const data = this.state;
-		
-      	const params = {
-        	method: 'post',
-        	url: '/usuarios/',
-        	data: data,
+	componentWillMount = () => {
+		const params = {
+        	method: 'get',
+        	url: '/compras/getByToken',
         	headers: {
         		'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
         	}
 		};
-
-  		axios(params)
-		.then((response) => {
-
-			const data = response.data.products;
-			let usuarios = [];
-
-			for(let i=0,l=data.length;i < l && i < 5; i++){
-				usuarios.push(
-								<div className={Classes.Usuario}>
-									<h4>Usuario:{data[i].nombres}</h4>
-									<h4>Correo:{data[i].email}</h4> 
-								</div>
-							);
+		let compras = [];
+		axios(params)
+		.then(docs => {
+			let data = docs.data.compra;
+			for(let i=0,l=data.length;i < l; i++){
+				compras.push(
+					<Compra data={data[i]} />
+					)
 			}
-
-			this.setState({
-				usuarios: usuarios
-			});
+			this.setState({compras: compras});
 		})
-		.catch((response) => {
-			console.log(response);
-		})
-	}
-
-	inputChange = (e) => {
-		this.setState({
-			inputText: e.target.value
+		.catch(err => {
+			console.log(err);
 		});
 	}
 
   	render(){
   		return (
 			<div className={Classes.FormularioVendido}>
-			<center><h1> Anuncio Vendido </h1></center>
-			<h3>Seleccionar usuario comprador:</h3>
+			<center><h1> Anuncios Vendidos </h1></center>
 			<hr/>
-			<div className={Classes.BarraBusqueda}>
-				<input type='text' onChange={this.inputChange} value={this.state.inputText} />
-				<button className={Classes.BtnBuscar} onClick={this.getUsuarios}><h3>Buscar</h3></button>
-				<button className={Classes.BtnCancelar}><h3>Regresar</h3></button>
-			</div>
-			<div className={Classes.ListaUsuarios}>
-				{this.state.usuarios}
+			<div>
+				{this.state.compras}
 			</div>
 			</div>
 		);
