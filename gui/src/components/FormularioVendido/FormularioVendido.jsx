@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
 
@@ -86,7 +87,11 @@ export default class formularioVendido extends Component {
 
   		axios(params)
 		.then((response) => {
-			console.log(response);
+			let redirect = <Redirect to="/" />;
+  			this.setState({
+  				redirect: redirect
+  			});
+
 		})
 		.catch((response) => {
 			console.log(response);
@@ -96,6 +101,7 @@ export default class formularioVendido extends Component {
   	render(){
   		return (
 			<div className={Classes.FormularioVendido}>
+				{this.state.redirect}
 				<center><h1> Anuncio Vendido </h1></center>
 				{(this.state.userId!='')?
 					(<div>

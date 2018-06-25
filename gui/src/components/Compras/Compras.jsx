@@ -5,7 +5,7 @@ import axios from '../../AxiosFiles/axios';
 
 import Classes from './Compras.css';
 
-export default class formularioVendido extends Component {
+export default class compras extends Component {
 
 	state = {
 		inputText: "",
@@ -16,6 +16,7 @@ export default class formularioVendido extends Component {
 		const params = {
         	method: 'get',
         	url: '/compras/getByToken',
+
         	headers: {
         		'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
         	}
@@ -29,11 +30,13 @@ export default class formularioVendido extends Component {
 					<Compra data={data[i]} />
 					)
 			}
+
 			this.setState({compras: compras});
 		})
 		.catch(err => {
 			console.log(err);
 		});
+
 	}
 
   	render(){
