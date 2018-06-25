@@ -28,3 +28,44 @@
 	border-color: #FFBF00;
 	color:white;
 }
+
+.BarraBusqueda input{
+	margin: 20px 0px 20px 20px;
+	height: 30px;
+	width: 70%;
+	border-radius: 15px;
+	border:2px solid #cbd1db;
+	padding: 10px;
+	font-size: 1.7em;
+	transition-duration: 0.4s;
+}
+
+.BarraBusqueda{
+	width: 100%;
+}
+
+.BarraBusqueda input:focus{
+	outline: none;
+	border:2px solid black;
+}
+
+.BarraBusqueda .BtnBuscar{
+	width: 100px;
+	margin-left: 20px;
+	padding: 1px;
+	background: white;
+	border-radius: 15px;
+	border:2px solid #FFBF00;
+	color: #FFBF00;
+	transition-duration: 0.4s;
+}
+
+.BarraBusqueda .BtnBuscar:hover{
+	border: 2px solid white;
+	background: #FFBF00;
+	color: white;
+}
+
+.BarraBusqueda .BtnBuscar:active{
+	border: 2px solid white;
+}

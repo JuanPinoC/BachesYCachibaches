@@ -6,19 +6,25 @@ import img from './img.jpg';
 import imgDestacado from './star.png';
 
 export default class anuncio extends Component{
-	
-	state = {
-		data: this.props.data,
-		_id: this.props.data._id,
-		id_cat: this.props.data.categoria._id,
-		nom_cat: this.props.data.categoria.nombre,
-		fec_pub: this.props.data.fec_pub,
-		img: this.props.data.imagen,
-		precio: this.props.data.precio,
-		sub_cat: this.props.data.subcategoria,
-		titulo: this.props.data.titulo,
-		usuario: this.props.data.usuario._id,
-		nombres: this.props.data.usuario.nombres
+
+	constructor (props) {
+		super(props);
+
+		const data = props.data;
+
+		this.state = {
+			data: data,
+			_id: data._id,
+			id_cat: data.categoria._id,
+			nom_cat: data.categoria.nombre,
+			fec_pub: data.fec_pub,
+			img: data.imagen,
+			precio: data.precio,
+			sub_cat: data.subcategoria,
+			titulo: data.titulo,
+			usuario: (data.usuario)?data.usuario._id:"",
+			nombres: (data.usuario)?data.usuario.nombres:""
+		}
 	}
 
 	render(){

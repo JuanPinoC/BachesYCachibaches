@@ -15,7 +15,8 @@ export default class categoria extends Component{
 		this.state = {
 			data: null,
 			vistas: [],
-			categoria: null
+			categoria: null,
+			inputText:(typeof this.props.match.params.string != 'undefined')?this.props.match.params.string:""
 		}
 		this.catSelected = this.catSelected.bind(this);
 		this.subcatSelected = this.subcatSelected.bind(this);
@@ -23,6 +24,7 @@ export default class categoria extends Component{
 
 	componentDidMount = () => {
 		this.agregarAnuncios();
+		this.buscarInput();
 	}
 
 	catSelected = (cat) => {
@@ -94,15 +96,70 @@ export default class categoria extends Component{
 		});
 	}
 
+	inputHandler = (e) => {
+		this.setState({
+			inputText: e.target.value
+		});
+	}
+
+	buscarInput = (e) => {
+
+		this.setState({
+			vistas: [],
+			categoria: null
+		});
+		
+		const data = {
+			string: this.state.inputText
+		}
+
+		const params = {
+        	method: 'post',
+        	url: 'anuncios/search',
+        	data: data,
+        	headers: {
+        		'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+        	}
+		};
+
+		axios(params)
+  		.then((response) => {
+  			console.log(response);
+
+			const data = response.data.result;
+			let vistas = [];
+			
+			for(let i=0,l=data.length ;i < l && i < 5 ; i++){
+				console.log(data[i]);
+				vistas.push(
+					<Anuncio data={data[i]} key={i}/>
+				);
+			}
+
+			this.setState({
+				data: data,
+				vistas: vistas,
+				load: true
+			});
+  		})
+  		.catch((response) => {
+  			console.log(response);
+  		});
+	}
+
 	render() {
 		let content = (<Spinner />);
 							
 		if(this.state.load){
 			content = (
 				<div>
-					<h1 className={Classes.TituloCategoria}>
-						{(this.state.categoria)?this.state.categoria.name:'Categoria'}
-					</h1>
+					<div className={Classes.BarraBusqueda}>
+							<input value={this.state.inputText} onChange={this.inputHandler}/>
+							<button className={Classes.BtnBuscar} onClick={this.buscarInput}><h3>Buscar</h3></button>
+							<h1 className={Classes.TituloCategoria}>
+								{(this.state.categoria)?this.state.categoria.name:'Anuncios'}
+							</h1>
+					</div>
 					<Subcategorias 
 						data={this.state.categoria && this.state.categoria.subcategorias}
 						action={this.subcatSelected}

@@ -10,7 +10,28 @@ class formularioComentario extends Component {
 
   state = {
 		anuncio: this.props.anuncioId,
-		comentario: ""
+		comentario: "",
+    foto:''
+  }
+
+  componentWillMount = () => {
+    axios.get('usuarios/menu',{
+      headers: { 
+        "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken')
+      }
+    })
+    .then(response => {
+      const data = response.data.usuario;
+      console.log(data);
+
+      this.setState({
+        foto: data.foto.substring(16),
+        load:true
+      });
+
+    }).catch(response => {
+      console.log(response);
+    });
   }
 
 	onChangeHandler = (e) => {
@@ -53,7 +74,7 @@ class formularioComentario extends Component {
   		return (
   				<div className={classes.FormularioComentario}>
 					<center>
-						<img src={imgUsuario}/>
+						<img src={(this.state.load)?require("../../../backend/profilePictures/" + this.state.foto):imgUsuario}/>
 						<textarea onChange={this.onChangeHandler} value={this.state.comentario}/>
 						<button onClick={this.SubmitHandler}><h3>Comentar</h3></button>
 					</center>

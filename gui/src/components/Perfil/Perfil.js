@@ -45,8 +45,8 @@ export default class perfil extends Component{
 		axios.get('anuncios/listById?userId=' + this.state.userId,
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
   		.then((response) => {
-
-			const data = response.data.orders;
+  			console.log(response);
+			const data = response.data.result;
 			let vistas = [];
 			
 			for(let i=0,l=data.length ;i < l && i < 5 ; i++){

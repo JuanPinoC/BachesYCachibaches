@@ -41,7 +41,7 @@ module.exports = {
 				const compra = new Compra({
 					_id: mongoose.Types.ObjectId(),
 					anuncio: req.body.anuncio,
-					usuario: req.userData.userId,
+					usuario: req.body.userId, //usuario: req.userData.userId,
 					fecha: req.body.fecha
 				});
 				return compra
