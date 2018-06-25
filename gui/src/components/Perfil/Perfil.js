@@ -11,15 +11,33 @@ import Classes from './Perfil.css';
 export default class perfil extends Component{	
 
 	state = {
-		userId: this.props.match.params.id,
+		userId: (typeof this.props.match.params.id != 'undefined')?this.props.match.params.id:"",
 		dataUsuario: null,
 		vistas: [],
 		load: false
 	}
 
 	componentWillMount = () => {
-		this.getUsuario();
-		this.getAnuncios();
+		if(this.state.userId != ''){
+			this.getUsuario();
+			this.getAnuncios();	
+		}else{
+			axios.get('usuarios/menu',
+				{
+					headers:{"Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken')}
+				})
+			.then(response => {
+				const usuario = response.data.usuario;
+
+				this.setState({
+					userId: usuario._id
+				});
+				this.getUsuario();
+				this.getAnuncios();	
+			}).catch(response => {
+				console.log(response);
+			});
+		}
 	}
 
 	getUsuario = () => {
@@ -29,7 +47,6 @@ export default class perfil extends Component{
 			}
 		})
 		.then(response => {
-			console.log("AKIIIIII",response);
 			const data = response.data.usuario;
 			this.setState({
 				dataUsuario: data
@@ -41,7 +58,6 @@ export default class perfil extends Component{
 	}
 
 	getAnuncios = () => {
-
 		axios.get('anuncios/listById?userId=' + this.state.userId,
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
   		.then((response) => {

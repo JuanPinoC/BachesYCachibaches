@@ -286,7 +286,7 @@ module.exports = {
 	},
 	menu:(req,res,next)=>{
 		User.findById(req.userData.userId)
-			.select('nombres foto email')
+			.select('nombres foto email _id')
 			.exec()
 			.then(doc => {
 				if (doc) {
