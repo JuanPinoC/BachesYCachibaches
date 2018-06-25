@@ -5,21 +5,18 @@ import axios from '../../AxiosFiles/axios';
 
 import Classes from './Compras.css';
 
-export default class formularioVendido extends Component {
+export default class compras extends Component {
 
 	state = {
-		inputText: "",
-		selected: null,
-		usuarios: []
+		compras: []
 	}
 
-	getUsuarios = () => {
-		axios.post();
+	componentWillMount = () => {
+		this.getCompras();
 	}
 
-	usuarioSeleccionado = () => {
-
-		const data = this.state;
+	getCompras = () => {
+			const data = this.state;
 		
       	const params = {
         	method: 'post',
@@ -51,13 +48,7 @@ export default class formularioVendido extends Component {
 		})
 		.catch((response) => {
 			console.log(response);
-		})
-	}
-
-	inputChange = (e) => {
-		this.setState({
-			inputText: e.target.value
-		});
+		})		
 	}
 
   	render(){
