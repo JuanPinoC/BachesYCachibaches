@@ -130,6 +130,11 @@ class formularioUsuario extends Component {
   		.catch( (response) => {
   			//handle error
   			console.log(response);
+  			if(this.state.tipo == "Crear"){
+  				alert("El usuario no ha sido creado debido a un error");
+  			}else{
+  				alert("El usuario no ha sido editado debido a un error");
+  			}
   		});
   	}
 
