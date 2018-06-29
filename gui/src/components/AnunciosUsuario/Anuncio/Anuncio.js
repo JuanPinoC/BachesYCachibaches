@@ -18,6 +18,7 @@ export default class anuncio extends Component{
 		precio: this.props.data.precio,
 		sub_cat: this.props.data.subcategoria,
 		titulo: this.props.data.titulo,
+		
 		usuario: this.props.data.usuario._id,
 		nombres: this.props.data.usuario.nombres,
 		destacado: this.props.data.destacado
@@ -35,14 +36,12 @@ export default class anuncio extends Component{
 			<table className={Classes.Anuncio}>
 					<tr className={Classes.Publicacion}>
 						<td className={Classes.Imagen}>
-							<img src={(typeof this.state.img == 'undefined')?
-								img:
-								require('../../../backend/uploads/'+this.state.img[0].substring(8))}/>
+							<img src={localStorage.getItem('path') + this.state.img[0]}/>
 						</td>
 						<td className={Classes.Info}>
 							<h2 className={Classes.Precio}>{"S/. " + this.state.precio}</h2>
 							<h2>{this.state.titulo}</h2>
-							<p>Descripción de la publicación</p>
+							
 							<h3>{this.state.sub_cat}</h3>
 							<h4>{this.sub_cat}</h4>
 							{(this.state.destacado.plan != null)?

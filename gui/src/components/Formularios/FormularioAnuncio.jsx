@@ -57,7 +57,7 @@ class formularioAnuncio extends Component {
   			});
   			let array = [];
   			for(let i=0, l=this.state.imagenUrl.length;i < l; i++){
-  				array.push(<img src={require('../../backend/uploads/'+this.state.imagenUrl[i].substring(8))} />);
+  				array.push(<img src={localStorage.getItem('path') + this.state.imagenUrl[i]} />);
   			}
   			this.setState({
   				imagenUrlPreviews: array,

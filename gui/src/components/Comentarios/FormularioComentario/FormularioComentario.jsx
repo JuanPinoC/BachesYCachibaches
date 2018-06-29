@@ -25,7 +25,7 @@ class formularioComentario extends Component {
       console.log(data);
 
       this.setState({
-        foto: data.foto.substring(16),
+        foto: data.foto,
         load:true
       });
 
@@ -74,7 +74,7 @@ class formularioComentario extends Component {
   		return (
   				<div className={classes.FormularioComentario}>
 					<center>
-						<img src={(this.state.load)?require("../../../backend/profilePictures/" + this.state.foto):imgUsuario}/>
+						<img src={localStorage.getItem('path') + this.state.foto}/>
 						<textarea onChange={this.onChangeHandler} value={this.state.comentario}/>
 						<button onClick={this.SubmitHandler}><h3>Comentar</h3></button>
 					</center>

@@ -13,18 +13,17 @@ const comentarioRoutes = require('./api/routes/comentarios');
 
 mongoose.connect('mongodb://localhost/baches');
 mongoose.Promise = global.Promise;
-/*
+
 app.set('view engine','jade');
 
 app.get('/',function(req,res){
 	res.render('main');
 });
-*/
 
 app.use(morgan('dev'));
 app.use('/uploads',express.static('uploads'));
 app.use('/profilePictures',express.static('profilePictures'));
-//app.use('/react',express.static('views'));
+app.use('/react',express.static('static'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 

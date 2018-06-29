@@ -29,7 +29,7 @@ export default class userInfo extends Component{
 			console.log(data.foto);
 			this.setState({
 				email: data.email,
-				foto: data.foto.substring(16),
+				foto: data.foto,
 				nombres: data.nombres,
 				load: true
 			});
@@ -46,7 +46,7 @@ export default class userInfo extends Component{
 		):(
 			<div className={Classes.UserInfo}>
 				<NavLink to='/misCompras'>
-					<img src={require("../../backend/profilePictures/" + this.state.foto)} />
+					<img src={localStorage.getItem('path') + this.state.foto} />
 					<h4>{this.state.nombres}</h4>
 				</NavLink>
 			</div>

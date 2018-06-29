@@ -10,7 +10,7 @@ const navigationItemsLoggedUser = (props) => (
             <li className={classes.BarSuperiorBtn}>Perfil</li>
         </NavLink>
     	<NavLink to="/misAnuncios" exact >
-            <li className={classes.BarSuperiorBtn}>Anuncios</li>
+            <li className={classes.BarSuperiorBtn}>Mis Anuncios</li>
         </NavLink>
         <NavLink to="/EditarUsuario" exact >
             <li className={classes.BarSuperiorBtn}>Cuenta</li>

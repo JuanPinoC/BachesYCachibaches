@@ -12,7 +12,7 @@ const usuario = (props) => {
 	return(
 		<tr className={Classes.Usuario}>
 			<td className={Classes.Imagen}>
-				<img src={(data.foto)?require("../../../backend/profilePictures/" + data.foto.substring(16)):foto}/>
+				<img src={localStorage.getItem('path') + data.foto}/>
 			</td>
 			<td className={Classes.Info}>
 				<Valoracion val={(data.puntuacion)/20}/>
