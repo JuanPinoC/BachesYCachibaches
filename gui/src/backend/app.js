@@ -13,9 +13,9 @@ const comentarioRoutes = require('./api/routes/comentarios');
 
 mongoose.connect('mongodb://localhost/baches');
 mongoose.Promise = global.Promise;
-/*
-app.set('view engine','jade');
 
+//app.set('view engine','jade');
+/*
 app.get('/',function(req,res){
 	res.render('main');
 });
