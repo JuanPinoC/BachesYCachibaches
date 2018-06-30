@@ -41,12 +41,12 @@ export default class compras extends Component {
 
   	render(){
   		return (
-			<div className={Classes.FormularioVendido}>
-			<center><h1> Anuncios Vendidos </h1></center>
-			<hr/>
-			<div>
-				{this.state.compras}
-			</div>
+			<div className={Classes.Compras}>
+				<center><h1> Compras Realizadas </h1></center>
+				<hr/>
+				<div className={Classes.ListaCompras}>
+					{this.state.compras}
+				</div>
 			</div>
 		);
   	}

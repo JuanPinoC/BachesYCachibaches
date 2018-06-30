@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 import classes from './Toolbar.css';
 import Logo from '../../Logo/Logo';
@@ -14,7 +15,9 @@ const toolbar = ( props ) => (
     <header className={classes.Toolbar}>
         <DrawerToggle clicked={props.drawerToggleClicked} />
         <div className={classes.Logo}>
-            <Logo />
+            <NavLink to="/">
+                <Logo />
+            </NavLink>
         </div>
         <div className={classes.SearchBar}>
         	<Searchbar />

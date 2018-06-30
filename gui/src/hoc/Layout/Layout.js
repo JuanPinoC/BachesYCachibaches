@@ -31,77 +31,81 @@ import FormularioPlan from '../../components/Formularios/FormularioPlan';
 import FormularioComentario from '../../components/Formularios/FormularioComentario';
 
 class Layout extends Component {
-    
-    constructor(props){
-        super(props);
-        this.state = {
-            token: sessionStorage.getItem('jwtToken')
-        }
-        this.UserLogged = this.UserLogged.bind(this);
-    }
+	
+	constructor(props){
+		super(props);
+		this.state = {
+			token: sessionStorage.getItem('jwtToken')
+		}
+		localStorage.setItem('path','http://35.238.122.18/');
+		this.UserLogged = this.UserLogged.bind(this);
+	}
 
-    componentWillMount(){
-        if(sessionStorage.getItem('jwtToken')==null || sessionStorage.getItem('jwtToken')==''){
-            sessionStorage.setItem('jwtToken','null');
-        }
-        this.setState({
-            token: sessionStorage.getItem('jwtToken')
-        });
-    }
+	componentWillMount(){
+		if(sessionStorage.getItem('jwtToken')==null || sessionStorage.getItem('jwtToken')==''){
+			sessionStorage.setItem('jwtToken','null');
+		}
+		this.setState({
+			token: sessionStorage.getItem('jwtToken')
+		});
+	}
 
-    UserLogged = () => {
-        this.setState({
-            token: sessionStorage.getItem('jwtToken')
-        });
+	UserLogged = () => {
+		this.setState({
+			token: sessionStorage.getItem('jwtToken')
+		});
+	}
 
-    }
+	componentWillUpdate = () => {
+		window.scrollTo(0, 0)
+	}
 
-    render () {
-        return (
-            <Aux>
-                <Toolbar
-                    drawerToggleClicked={this.sideDrawerToggleHandler}
-                    action={this.UserLogged}
-                />
-                <main className={classes.Content}>
-                    {(this.state.token != "null")?(
-                        <Switch>
-                            <Route path="/perfil/:id" component={Perfil}/>
-                            <Route path="/perfil" component={Perfil}/>
-                            <Route path="/misAnuncios" component={MisAnuncios}/>
-                            <Route path="/cuenta" component={FormularioUsuario}/>
-                            <Route path="/buscar/:string" component={Categoria}/>
-                            <Route path="/buscar" component={Categoria}/>
-                            <Route path="/categoria/:nombre" component={Categoria}/>
-                            <Route path="/anuncio/:id" component={AnuncioDetalle}/>
-                            <Route path="/formularioAnuncio" component={FormularioAnuncio} />
-                            <Route path="/EditarAnuncio/:id" component={FormularioAnuncio} />
-                            <Route path="/destacarAnuncio/:id" component={DestacarAnuncio} />
-                            <Route path="/Vendido/:id" component={FormularioVendido} />
-                            <Route path="/EditarUsuario" 
-                                    render={() => (<FormularioUsuario tipo="Editar"/>)} />
-                            <Route path="/formularioCategoria" component={FormularioCategoria}/>
-                            <Route path="/formularioPlan" component={FormularioPlan}/>
-                            <Route path="/formularioComentario" component={FormularioComentario}/>
-                            <Route path="/nosotros" component={Portada}/>
-                            <Route path="/misCompras" component={MisCompras}/>
-                            <Route path="/info" component={Usuario}/>
-                            <Route path="/" component={Portada}/>
-                        </Switch>
-                    ):(
-                        <Switch>
-                            <Route path="/ingresar" render={() => (
-                                <Login action={this.UserLogged}/>)}/>
-                            <Route path="/registrarse" component={FormularioUsuario}/>
-                            <Route path="/info" component={Informacion}/>
-                            <Route path="/" component={Portada}/>
-                        </Switch>
-                    )}                
-                </main>
-                <Footer />
-            </Aux>
-        )
-    }
+	render () {
+		return (
+			<Aux>
+				<Toolbar
+					drawerToggleClicked={this.sideDrawerToggleHandler}
+					action={this.UserLogged}
+				/>
+				<main className={classes.Content}>
+					{(this.state.token != "null")?(
+						<Switch>
+							<Route path="/perfil/:id" component={Perfil}/>
+							<Route path="/perfil" component={Perfil}/>
+							<Route path="/misAnuncios" component={MisAnuncios}/>
+							<Route path="/cuenta" component={FormularioUsuario}/>
+							<Route path="/buscar/:string" component={Categoria}/>
+							<Route path="/buscar" component={Categoria}/>
+							<Route path="/categoria/:nombre" component={Categoria}/>
+							<Route path="/anuncio/:id" component={AnuncioDetalle}/>
+							<Route path="/formularioAnuncio" component={FormularioAnuncio} />
+							<Route path="/EditarAnuncio/:id" component={FormularioAnuncio} />
+							<Route path="/destacarAnuncio/:id" component={DestacarAnuncio} />
+							<Route path="/Vendido/:id" component={FormularioVendido} />
+							<Route path="/EditarUsuario" 
+									render={() => (<FormularioUsuario tipo="Editar"/>)} />
+							<Route path="/formularioCategoria" component={FormularioCategoria}/>
+							<Route path="/formularioPlan" component={FormularioPlan}/>
+							<Route path="/formularioComentario" component={FormularioComentario}/>
+							<Route path="/nosotros" component={Portada}/>
+							<Route path="/misCompras" component={MisCompras}/>
+							<Route path="/info" component={Usuario}/>
+							<Route path="/" component={Portada}/>
+						</Switch>
+					):(
+						<Switch>
+							<Route path="/ingresar" render={() => (
+								<Login action={this.UserLogged}/>)}/>
+							<Route path="/registrarse" component={FormularioUsuario}/>
+							<Route path="/info" component={Informacion}/>
+							<Route path="/" component={Portada}/>
+						</Switch>
+					)}                
+				</main>
+				<Footer />
+			</Aux>
+		)
+	}
 }
 
 export default Layout;

@@ -39,7 +39,7 @@ export default class anuncioDetalle extends Component{
 				descripcion: data.descripcion,
 				usuario: data.usuario._id,
 				nombres: data.usuario.nombres,
-				foto_usuario: data.usuario.foto.substring(16),
+				foto_usuario: data.usuario.foto,
 				load:true
   			});
   		})
@@ -77,8 +77,7 @@ export default class anuncioDetalle extends Component{
 					</div>
 					<div className={Classes.InfoUsuario}>
 						<center>
-							<img src={(typeof this.state.foto_usuario != 'undefined')?
-									require('../../backend/profilePictures/' + this.state.foto_usuario):imgUsuario}/>
+							<img src={localStorage.getItem('path') + this.state.foto_usuario}/>
 							<h4>{this.state.nombres}</h4>
 							<div className={Classes.Valoracion}>
 								<Valoracion val={3}/>

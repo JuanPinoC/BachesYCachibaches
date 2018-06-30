@@ -42,7 +42,7 @@ class categoriaSelect extends Component {
 
 		for(let i=0; i < data.length; i++){
 			if(this.state.contenido == data[i]._id){
-				selected = data[i].subcategorias[0]._id;
+				selected = data[i].subcategorias[0].nombre;
 				for(let j=0; j < data[i].subcategorias.length; j++){
 					subcategorias.push(
 						<option value={data[i].subcategorias[j].nombre}>

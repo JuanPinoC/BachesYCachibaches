@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-
+import Spinner from '../Spinner/Spinner';
 import Classes from './SlideShow.css';
 
 export default class slideShow extends Component{
@@ -19,7 +19,7 @@ export default class slideShow extends Component{
 		for(let i=0,l=urls.length;i < l; i++){
 				vistas.push(
 					<img 
-						src={require('../../backend/uploads/' + urls[i].substring(8))}/>
+						src={localStorage.getItem('path') + urls[i]}/>
 				);
 				buttons.push(
 					<button 
@@ -32,7 +32,8 @@ export default class slideShow extends Component{
 		
 		this.setState({
 			vistas: vistas,
-			buttons: buttons
+			buttons: buttons,
+			load: true
 		});
 	}
 
@@ -43,7 +44,7 @@ export default class slideShow extends Component{
 	}
 
 	render(){
-		return(
+		return(!this.state.load)?(<Spinner />):(
 			<div className={Classes.SlideShow}>
 				<center>
 					<div className={Classes.Imagen}>

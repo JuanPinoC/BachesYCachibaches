@@ -1,6 +1,7 @@
 .Content {
     margin-top: 56px;
     min-height: 310px;
+    -webkit-user-select: none;
 }
 
 main{

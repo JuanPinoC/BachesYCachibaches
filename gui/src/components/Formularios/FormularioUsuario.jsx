@@ -130,6 +130,11 @@ class formularioUsuario extends Component {
   		.catch( (response) => {
   			//handle error
   			console.log(response);
+  			if(this.state.tipo == "Crear"){
+  				alert("El usuario no ha sido creado debido a un error");
+  			}else{
+  				alert("El usuario no ha sido editado debido a un error");
+  			}
   		});
   	}
 
@@ -180,9 +185,7 @@ class formularioUsuario extends Component {
 					):
 					(
 					<div className={Classes.FotoEditar}>
-						<img src={(typeof this.state.load)?
-									require('../../backend/profilePictures/'+this.state.fotoUrl.substring(16)):
-									img}/>
+						<img src={localStorage.getItem('path') + this.state.fotoUrl}/>
 						<br/>
 						<button className={Classes.BtnCambiarFoto} onClick={this.cambiarFoto}>
 							<h3>Cambiar Foto</h3>
@@ -192,7 +195,7 @@ class formularioUsuario extends Component {
 
 				<div className={Classes.Botones}>
 					<button onClick={this.SubmitHandler} className={Classes.BtnCrear}>
-						<h2>{this.state.tipo}</h2>
+						<h2>{(this.state.tipo == "Editar")?"Guardar":this.state.tipo}</h2>
 					</button>
 					<button className={Classes.BtnCancelar}>
 						<h2>Cancelar</h2>

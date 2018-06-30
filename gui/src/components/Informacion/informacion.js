@@ -4,7 +4,7 @@ import Classes from './informacion.css';
 import team from './team/team.js';
 import analista from './images/analyst.jpg';
 import jefe from './images/boss.png';
-import diseño from './images/designer.png';
+import designer from './images/designer.png';
 import programador from './images/programmer.png';
 import test from './images/testing.png';
 
@@ -24,7 +24,7 @@ const informacion = () => (
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ut nulla dicta, ab doloremque consequatur harum mollitia, ipsam minus magnam quaerat praesentium ratione, amet aperiam incidunt. Iste porro molestiae non.</p>
 				</div>
 				<div className={Classes.contentdetailsfora}>
-				<img src={diseño}/>
+				<img src={designer}/>
 				<h3>Bootstrap</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ut nulla dicta, ab doloremque consequatur harum mollitia, ipsam minus magnam quaerat praesentium ratione, amet aperiam incidunt. Iste porro molestiae non.</p>
 				</div>
@@ -46,14 +46,7 @@ const informacion = () => (
 				</div>
 				
 			</div>
-		</div>
-
-	
-		
-	
-		
-	
-		
+		</div>	
 	</div>
 
 )
