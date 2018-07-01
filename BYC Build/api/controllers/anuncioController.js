@@ -332,9 +332,10 @@ module.exports = {
 			.select('_id titulo descripcion categoria subcategoria precio imagen activo destacado')
 			.exec()
 			.then(doc=>{
+
 				res.status(200).json({
 					result:doc
-				}
+				})
 			})
 			.catch(err => {
 				console.log(err);
