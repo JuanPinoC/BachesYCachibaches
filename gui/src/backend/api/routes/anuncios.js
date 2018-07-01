@@ -32,6 +32,7 @@ const upload = multer({
 	fileFilter: fileFilter
 });
 
+router.get('/test',Anuncio.test);
 router.get('/find', Anuncio.find);
 router.post('/search',Anuncio.search);
 router.post('/edit',checkAuth, Anuncio.edit);

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Anuncio = require('../models/anuncio');
 const Comentario = require('../models/comentario');
 const fs = require('fs');
+const cron = require('node-cron');
 
 module.exports = {
 	show: (req,res,next)=>{
@@ -375,5 +376,11 @@ module.exports = {
 				console.log(err);
 				res.status(500).json({error:err});
 			});
+	},
+	test:(req,res,next)=>{
+		cron.schedule('10 * * * * *',()=>{
+			console.log('Probando');
+		})
+		res.status(200).json({message: 'Ok'})
 	}
 }
