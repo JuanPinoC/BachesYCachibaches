@@ -65,8 +65,12 @@ export default class perfil extends Component{
 	getAnuncios = () => {
 		axios.get('anuncios/listById?userId=' + this.state.userId,
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
-  		.then((response) => {
-  			console.log(response);
+  		.then(response => {
+  			console.log("Error then",response);
+  			if(response.data.result < 1){
+  				console.log("There isn't ads")
+  				this.setState({load:true});
+  			}
 			const data = response.data.result;
 			let vistas = [];
 			
@@ -82,7 +86,7 @@ export default class perfil extends Component{
 			});
   		})
   		.catch((response) => {
-  			console.log(response);
+  			console.log("Error catch",response);
   		});
 	}
 
