@@ -93,8 +93,15 @@ export default class perfil extends Component{
 	}
 
 	render(){
-		let renderUser = <Spinner />
-		let renderAnuncios = <Spinner/> 
+		let renderUser = <Spinner />;
+		let renderAnuncios = 
+		<Aux>
+			<center>
+				<div className={Classes.Publicaciones}>
+					<h1>Usted aún no tiene Anuncios</h1>
+				</div>
+			</center>
+		</Aux>;
 		if (this.state.loadUsuario) {
 			renderUser = 
 			<Aux>
