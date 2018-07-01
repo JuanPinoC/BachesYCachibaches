@@ -32,12 +32,17 @@ export default class perfil extends Component{
 				this.setState({
 					userId: usuario._id
 				});
-				this.getUsuario();
-				this.getAnuncios();	
+				
+				this.cargarUsuarioYAnuncios();		
 			}).catch(response => {
 				console.log(response);
 			});
 		}
+	}
+
+	cargarUsuarioYAnuncios = () => {
+		this.getUsuario();
+		this.getAnuncios();
 	}
 
 	getUsuario = () => {
