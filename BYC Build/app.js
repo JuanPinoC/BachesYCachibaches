@@ -50,7 +50,7 @@ app.use('/categorias',categoriaRoutes);
 app.use('/anuncios', anuncioRoutes);
 app.use('/compras', compraRoutes);
 app.use('/comentarios', comentarioRoutes);
-
+/*
 app.use((req,res,next)=>{
 	const error = new Error('Page Not found');
 	error.status = 404;
@@ -65,5 +65,5 @@ app.use((error,req,res,next)=>{
 		}
 	});
 });
-
+*/
 module.exports = app;
