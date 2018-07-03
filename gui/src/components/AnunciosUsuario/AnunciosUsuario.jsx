@@ -10,7 +10,7 @@ import Anuncio from './Anuncio/Anuncio';
 export default class anunciosUsuario extends Component{
 
 	state = {
-		nombre: "Pedro Perez",
+		nombre: "",
 		data: null,
 		vistas: []
 	}

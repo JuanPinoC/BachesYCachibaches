@@ -44,6 +44,7 @@ export default class formularioVendido extends Component {
 
   		axios(params)
 		.then((response) => {
+			console.log("Buscar",response);
 			const data = response.data.result;
 			let usuarios = [];
 

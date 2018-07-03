@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
 import Compra from './Compra/Compra';
 import axios from '../../AxiosFiles/axios';
 import Spinner from '../Spinner/Spinner';
@@ -26,8 +25,8 @@ export default class compras extends Component {
 		let compras = [];
 		axios(params)
 		.then(docs => {
-			console.log("Compras",docs);
-			if (docs.length < 1) {
+			console.log("Compras",docs.data.count);
+			if (docs.data.count < 1) {
 				this.setState({validado: false});
 			}else {
 				let data = docs.data.compra;
@@ -49,18 +48,18 @@ export default class compras extends Component {
 
   	render(){
   		let componente = <Spinner/>;
-  		if (this.state.compras === [] && this.state.validado !== false) {
-			componente = <h1>Usted aún no tiene ninguna compra.</h1>
+  		if (this.state.validado === false) {
+			componente = <h2>Usted aún no ha comprado nada.</h2>
   		}
-  		if (this.state.compras.length > 1 && this.state.validado !== false) {
+  		if (this.state.validado !== false) {
   			componente = this.state.compras;
   		}
   		return (
 			<div className={Classes.Compras}>
 				<center><h1> Compras Realizadas </h1></center>
 				<hr/>
-				<div className={Classes.ListaCompras}>
-					{componente}
+				<div>
+					<center>{componente}</center>
 				</div>
 			</div>
 		);

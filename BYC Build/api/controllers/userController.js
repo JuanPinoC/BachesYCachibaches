@@ -326,9 +326,6 @@ module.exports = {
 			.select('_id telefono celular direccion puntuacion latitud longitud foto nombres apellidos email')
 			.exec()
 			.then(docs => {
-				if (docs.length == []) {
-					res.status(404).json({message:'No entries found'})
-				}
 				res.status(200).json({
 					count: docs.length,
 					result: docs.map(doc => {

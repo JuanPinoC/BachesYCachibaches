@@ -15,7 +15,7 @@ export default class perfil extends Component{
 		dataUsuario: null,
 		vistas: [],
 		loadUsuario: false,
-		loadAnuncios: false,
+		loadAnuncios: null,
 	}
 
 	componentWillMount = () => {
@@ -68,10 +68,9 @@ export default class perfil extends Component{
 		axios.get('anuncios/listById?userId=' + this.state.userId,
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
   		.then(response => {
-  			console.log("Error then",response);
-  			if(response.data.result < 1){
-  				console.log("There isn't ads")
-  				this.setState({loadAnuncios:true});
+  			console.log("Anuncios",response.data.result.length);
+  			if(response.data.result.length < 1){
+  				this.setState({loadAnuncios:false});
   			}
 			const data = response.data.result;
 			let vistas = [];
@@ -94,14 +93,16 @@ export default class perfil extends Component{
 
 	render(){
 		let renderUser = <Spinner />;
-		let renderAnuncios = 
-		<Aux>
-			<center>
-				<div className={Classes.Publicaciones}>
-					<h1>Usted aún no tiene Anuncios</h1>
-				</div>
-			</center>
-		</Aux>;
+		let renderAnuncios = <Spinner/>
+		if (this.state.loadAnuncios === false) {
+			renderAnuncios =<Aux>
+								<center>
+									<div className={Classes.Publicaciones}>
+										<h1>Usted aún no tiene Anuncios</h1>
+									</div>
+								</center>
+							</Aux>;
+		}
 		if (this.state.loadUsuario) {
 			renderUser = 
 			<Aux>
