@@ -132,11 +132,6 @@ module.exports = {
 			.populate('usuario','nombres email')
 			.exec()
 			.then(docs => {
-				if (docs < 1) {
-					res.status(404).json({
-						message:'Not found'
-					});
-				}
 				const response = {
 					count: docs.length,
 					compra: docs.map(doc => {

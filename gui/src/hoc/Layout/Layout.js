@@ -92,6 +92,8 @@ class Layout extends Component {
 							<Route path="/nosotros" component={Portada}/>
 							<Route path="/misCompras" component={MisCompras}/>
 							<Route path="/info" component={Usuario}/>
+							<Route path="/ingresar" render={() => (
+								<Login action={this.UserLogged}/>)}/>
 							<Route path="/" exact component={Portada}/>
 							<Route component={PageNotFound}/>
 						</Switch>
