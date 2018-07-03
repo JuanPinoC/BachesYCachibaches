@@ -50,6 +50,11 @@ app.use('/categorias',categoriaRoutes);
 app.use('/anuncios', anuncioRoutes);
 app.use('/compras', compraRoutes);
 app.use('/comentarios', comentarioRoutes);
+
+app.use(function(req,res){
+	res.render('main');
+});
+
 /*
 app.use((req,res,next)=>{
 	const error = new Error('Page Not found');
