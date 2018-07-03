@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { Redirect,Link } from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
 
 import User from './User/User';
 import Classes from './FormularioVendido.css';
+import Spinner from '../Spinner/Spinner';
 
 export default class formularioVendido extends Component {
 
@@ -15,8 +15,11 @@ export default class formularioVendido extends Component {
 			anuncio: props.match.params.id,
 			userId: '',
 			userName: '',
+			foto:null,
 			inputText: "",
-			usuarios: []
+			usuarios: [],
+			pulsado: false,
+			cargado: null
 		}
 		this.usuarioSeleccionado = this.usuarioSeleccionado.bind(this);
 	}
@@ -28,7 +31,7 @@ export default class formularioVendido extends Component {
 	}
 
 	getUsuarios = () => {
-		
+		this.setState({pulsado: true});
 		const data = {
 			string: this.state.inputText
 		};
@@ -47,16 +50,23 @@ export default class formularioVendido extends Component {
 			console.log("Buscar",response);
 			const data = response.data.result;
 			let usuarios = [];
+			
+			if (response.data.count < 1) {
+				this.setState({cargado:false,
+								pulsado:false});
+			}else{
+				for(let i=0,l=data.length;i < l && i < 5; i++){
+					usuarios.push(
+									<User data={data[i]} action={this.usuarioSeleccionado} />
+								);
+				}
 
-			for(let i=0,l=data.length;i < l && i < 5; i++){
-				usuarios.push(
-								<User data={data[i]} action={this.usuarioSeleccionado} />
-							);
+				this.setState({
+					usuarios: usuarios,
+					pulsado: false,
+					cargado: true
+				});
 			}
-
-			this.setState({
-				usuarios: usuarios
-			});
 		})
 		.catch((response) => {
 			console.log(response);
@@ -66,7 +76,8 @@ export default class formularioVendido extends Component {
 	usuarioSeleccionado = (user) => {
 		this.setState({
 			userId: user._id,
-			userName: user.nombres
+			userName: user.nombres,
+			foto: user.foto
 		});
 	}
 
@@ -100,16 +111,31 @@ export default class formularioVendido extends Component {
 	}
 
   	render(){
+  		let componente 
+  		if (this.state.pulsado) {
+  			componente = <Spinner/>
+  		}
+  		if (this.state.cargado && this.state.pulsado !== true) {
+  			componente = this.state.usuarios;
+  		}
+  		if (this.state.cargado === false && this.state.pulsado !== true){
+  			componente = <center><h2>Este usuario no existe.</h2></center>
+  		}
   		return (
 			<div className={Classes.FormularioVendido}>
 				{this.state.redirect}
 				<center><h1> Anuncio Vendido </h1></center>
 				{(this.state.userId!='')?
 					(<div>
-						<h3>Usuario seleccionado: {this.state.userName}</h3>
+						<center>
+						<h2>Usuario seleccionado: {this.state.userName}</h2>
+						<div>
+						<img src={localStorage.getItem('path') + this.state.foto}/>
+						</div>
 						<button className={Classes.BtnAceptar} onClick={this.submitHandler}>
 							<h3>Aceptar</h3>
 						</button>
+						</center>
 					</div>
 					)
 					:(<div></div>)}
@@ -117,11 +143,18 @@ export default class formularioVendido extends Component {
 				<hr/>
 				<div className={Classes.BarraBusqueda}>
 					<input type='text' onChange={this.inputChange} value={this.state.inputText} />
-					<button className={Classes.BtnBuscar} onClick={this.getUsuarios}><h3>Buscar</h3></button>
-					<button className={Classes.BtnCancelar}><h3>Regresar</h3></button>
+					<button 
+					className={Classes.BtnBuscar} 
+					onClick={this.getUsuarios}>
+					<h3>Buscar</h3></button>
+					<Link to="/misAnuncios">
+					<button 
+					className={Classes.BtnCancelar}>
+					<h3>Regresar</h3></button>
+					</Link>
 				</div>
 				<div className={Classes.ListaUsuarios}>
-					{this.state.usuarios}
+					{componente}
 				</div>
 			</div>
 		);
