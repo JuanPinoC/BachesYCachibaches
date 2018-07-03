@@ -7,7 +7,7 @@ const elemento = (props) => (
 		<NavLink to={"/categoria/"+props.data.name} name={props.data.name} _id={props.data._id} exact >
 			<li className={Classes.Elemento} onClick={() => {props.action(props.data)}}>
 				<td>
-					<img src={require("../img/" + props.data.name + ".png")}/>
+					<img src={require("../img/" + props.data.name + ".png")} alt={props.data.name}/>
 				</td>
 				<td>
 					<h3>{props.data.name}</h3>

@@ -331,16 +331,10 @@ module.exports = {
 		Anuncio.find({usuario: id})
 			.select('_id titulo descripcion categoria subcategoria precio imagen activo destacado')
 			.exec()
-			.then(doc=>{
-				if (doc.length < 1) {
-					res.status(401).json({
-						message: 'Ad does not exist'
-					});
-				}else{
-					res.status(200).json({
-						result:doc
-					});	
-				}
+			.then(doc => {
+				res.status(200).json({
+					result:doc
+				})
 			})
 			.catch(err => {
 				console.log(err);

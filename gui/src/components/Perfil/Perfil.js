@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 
 import axios from '../../AxiosFiles/axios';
-
+import Aux from '../../hoc/Auxiliary/Auxiliary.js';
 import Anuncio from '../Anuncio/Anuncio.js';
 import Usuario from './Usuario/Usuario.js';
 import Spinner from '../Spinner/Spinner';
@@ -14,7 +14,8 @@ export default class perfil extends Component{
 		userId: (typeof this.props.match.params.id != 'undefined')?this.props.match.params.id:"",
 		dataUsuario: null,
 		vistas: [],
-		load: false
+		loadUsuario: false,
+		loadAnuncios: false,
 	}
 
 	componentWillMount = () => {
@@ -54,7 +55,8 @@ export default class perfil extends Component{
 		.then(response => {
 			const data = response.data.usuario;
 			this.setState({
-				dataUsuario: data
+				dataUsuario: data,
+				loadUsuario: true
 			});
 
 		}).catch(response => {
@@ -65,8 +67,12 @@ export default class perfil extends Component{
 	getAnuncios = () => {
 		axios.get('anuncios/listById?userId=' + this.state.userId,
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
-  		.then((response) => {
-  			console.log(response);
+  		.then(response => {
+  			console.log("Error then",response);
+  			if(response.data.result < 1){
+  				console.log("There isn't ads")
+  				this.setState({loadAnuncios:true});
+  			}
 			const data = response.data.result;
 			let vistas = [];
 			
@@ -78,32 +84,51 @@ export default class perfil extends Component{
 
 			this.setState({
 				vistas: vistas,
-				load: true
+				loadAnuncios: true
 			});
   		})
   		.catch((response) => {
-  			console.log(response);
+  			console.log("Error catch",response);
   		});
 	}
 
 	render(){
-		return (!this.state.load)?
-		(
-			<Spinner />
-		):(
+		let renderUser = <Spinner />;
+		let renderAnuncios = 
+		<Aux>
+			<center>
+				<div className={Classes.Publicaciones}>
+					<h1>Usted aún no tiene Anuncios</h1>
+				</div>
+			</center>
+		</Aux>;
+		if (this.state.loadUsuario) {
+			renderUser = 
+			<Aux>
+				<h1 className={Classes.Titulos}>Perfil del Usuario</h1>
+					<hr/>
+					<Usuario data={this.state.dataUsuario} />
+					<hr/>
+					<h1 className={Classes.Titulos}>Anuncios</h1>
+					<hr/>
+			</Aux>
+		}
+		if (this.state.loadAnuncios) {
+			renderAnuncios = 
+			<Aux>
+				<center>
+						<div className={Classes.Publicaciones}>
+							{this.state.vistas}
+						</div>
+				</center>
+			</Aux>
+		}
+
+		return (
 			<div className={Classes.Perfil}>
 				<hr/>
-				<h1 className={Classes.Titulos}>Perfil del Usuario</h1>
-				<hr/>
-				<Usuario data={this.state.dataUsuario} />
-				<hr/>
-				<h1 className={Classes.Titulos}>Anuncios</h1>
-				<hr/>
-				<center>
-					<div className={Classes.Publicaciones}>
-						{this.state.vistas}
-					</div>
-				</center>
+				{renderUser}
+				{renderAnuncios}
 			</div>
 		);
 	}
