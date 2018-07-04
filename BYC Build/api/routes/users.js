@@ -38,7 +38,7 @@ router.get('/menu',checkAuth, User.menu);
 router.get('/edit',checkAuth, User.edit);
 router.get('/getUserById',User.getUserById);
 router.post('/update',checkAuth, upload.single('foto'), User.update);
-router.get('/delete',checkAuth, User.delete);
+router.post('/delete',checkAuth, User.delete);
 router.get('/',checkAuth, User.show);
 router.post('/', upload.single('foto'), User.create);
 

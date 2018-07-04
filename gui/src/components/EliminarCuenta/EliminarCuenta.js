@@ -15,6 +15,7 @@ class EliminarCuenta extends Component {
   		axios(params)
   		.then(response => {
   			sessionStorage.setItem('jwtToken', null );
+  			window.location.replace(localStorage.getItem('path'));
   		})
   		.catch(err => {
 			console.log("Error",err);
@@ -24,7 +25,7 @@ class EliminarCuenta extends Component {
 		return(
 			<div className={classes.EliminarCuenta}>
 				<h2>¿Estas seguro que deseas borrar tu cuenta?</h2>
-				<p>Nota: Al borrar tu cuenta todos tus comentarios y anuncio tambien seran borrados.</p>
+				<p>Nota: Al borrar tu cuenta todos tus comentarios y anuncios tambien seran borrados.</p>
 				<button className={classes.BtnCrear} onClick={this.deleteAccountHandler}>Si</button>
 				<button className={classes.BtnCancelar} onClick={this.props.closed}>No</button>
 			</div>
