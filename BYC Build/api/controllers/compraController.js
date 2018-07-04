@@ -133,7 +133,7 @@ module.exports = {
 		const id = req.userData.userId;
 		Compra.find({comprador:id})
 			.select('_id anuncio vendedor fecha')
-			.populate('anuncio','titulo precio')
+			.populate('anuncio','titulo')
 			.populate('vendedor','nombres email foto')
 			.exec()
 			.then(docs => {

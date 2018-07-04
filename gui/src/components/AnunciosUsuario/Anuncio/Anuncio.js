@@ -5,10 +5,13 @@ import Classes from './Anuncio.css';
 import img from './img.jpg';
 import imgNoDestacado from './star.png';
 import imgDestacado from './star-black.png';
+import EliminarAnuncio from '../../EliminarAnuncio/EliminarAnuncio';
+import Aux from '../../../hoc/Auxiliary/Auxiliary';
+import Modal from '../../Modal/Modal';
 
 export default class anuncio extends Component{
 	
-	state = (this.props.data)?{
+	state = {
 		data: this.props.data,
 		_id: this.props.data._id,
 		id_cat: this.props.data.categoria._id,
@@ -21,18 +24,27 @@ export default class anuncio extends Component{
 		
 		usuario: this.props.data.usuario._id,
 		nombres: this.props.data.usuario.nombres,
-		destacado: this.props.data.destacado
-	}:{
-		nom_cat: "Categoria",
-		precio: 200,
-		sub_cat: "subcategoria",
-		titulo: "Titulo",
-		nombres: "Nombres"
+		destacado: this.props.data.destacado,
+		eliminando: false
+	}
+
+	eliminarHandler = () =>{
+		this.setState({eliminando: true})
+	}
+	modalHandler = () => {
+		this.setState({eliminando: false})
 	}
 
 	render(){
 		console.log(this.state.destacado);
+		const style = {
+			border:'1px'
+		}
 		return(
+			<Aux>
+			<Modal show={this.state.eliminando} modalClosed={this.modalHandler}>
+			<EliminarAnuncio anuncioId={this.props.data._id} closed={this.modalHandler}/>
+			</Modal>
 			<table className={Classes.Anuncio}>
 					<tr className={Classes.Publicacion}>
 						<td className={Classes.Imagen}>
@@ -64,11 +76,15 @@ export default class anuncio extends Component{
 								<h4 className={Classes.Opcion}>Editar</h4>
 							</NavLink>
 							<NavLink to={"/Vendido/"+this.state._id} exact>
-								<h4 className={Classes.Opcion}>Vendido (¡Yey!)</h4>
+								<h4 className={Classes.Opcion}>Vender</h4>
 							</NavLink>
+								<h4 
+								className={Classes.Opcion} 
+								onClick={this.eliminarHandler}>Eliminar </h4>
 						</td>
 					</tr>
 			</table>
+			</Aux>
 		);	
 	}
 }

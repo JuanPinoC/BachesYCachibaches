@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
@@ -11,15 +11,17 @@ import Atributo from './Atributo/Atributo';
 import img from '../Perfil/Usuario/user.png';
 
 import Classes from './Formulario.css';
+import Modal from '../Modal/Modal';
+import EliminarCuenta from '../EliminarCuenta/EliminarCuenta';
 
 class formularioUsuario extends Component {
-
 	constructor(props) {
 		super(props);
 		this.state = 
 			(typeof props.tipo != 'undefined')?
 				{
-					tipo: 'Editar'
+					tipo: 'Editar',
+					eliminando: false
 				}:{
 					tipo: 'Crear'
 				};
@@ -138,12 +140,22 @@ class formularioUsuario extends Component {
   		});
   	}
 
+  	eliminarHandler = () =>{
+		this.setState({eliminando: true})
+	}
+	modalHandler = () => {
+		this.setState({eliminando: false})
+	}
+
   	render(){
   		return (!this.state.load)?
   			(<Spinner/>
   			):(
 			<div className={Classes.Formulario}>
 			{this.state.redirect}
+			<Modal show={this.state.eliminando} modalClosed={this.modalHandler}>
+			<EliminarCuenta closed={this.modalHandler}/>
+  			</Modal>
 			<center><h1>{this.state.tipo} Usuario</h1></center>
 			<hr/>
 			<div className={Classes.Form}>
@@ -197,9 +209,16 @@ class formularioUsuario extends Component {
 					<button onClick={this.SubmitHandler} className={Classes.BtnCrear}>
 						<h2>{(this.state.tipo == "Editar")?"Guardar":this.state.tipo}</h2>
 					</button>
+					<Link to ="/">
 					<button className={Classes.BtnCancelar}>
 						<h2>Cancelar</h2>
 					</button>
+					</Link>
+					{(this.state.tipo == "Editar")?
+					<button className={Classes.BtnEliminar} onClick={this.eliminarHandler}>
+						<h2>Eliminar Cuenta</h2>
+					</button>
+					:null}
 				</div>
 			</div>
 			</div>

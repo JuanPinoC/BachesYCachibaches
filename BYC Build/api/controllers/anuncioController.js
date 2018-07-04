@@ -6,6 +6,7 @@ const fs = require('fs');
 module.exports = {
 	show: (req,res,next)=>{
 		Anuncio.find()
+			.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
@@ -237,6 +238,7 @@ module.exports = {
 	},
 	listByCategory:(req,res,next)=>{
 		Anuncio.find({categoria:req.query.categoriaId})
+			.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
@@ -267,6 +269,7 @@ module.exports = {
 	},
 	listBySubCategory:(req,res,next)=>{
 		Anuncio.find({subcategoria: req.query.subcategoria})
+			.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
@@ -297,6 +300,7 @@ module.exports = {
 	},
 	listByTokken:(req,res,next)=>{
 		Anuncio.find({usuario: req.userData.userId})
+			.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
@@ -329,6 +333,7 @@ module.exports = {
 	listById:(req,res,next)=>{
 		const id = req.query.userId;
 		Anuncio.find({usuario: id})
+			.sort({destacado:-1,fecha:-1})
 			.select('_id titulo descripcion categoria subcategoria precio imagen activo destacado')
 			.exec()
 			.then(doc => {
@@ -344,7 +349,7 @@ module.exports = {
 	search:(req,res,next) => {
 		const string = req.body.string;
 		Anuncio.find({titulo: { $regex: string , $options:'i'}})
-		.sort({destacado:-1})
+		.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.exec()
 			.then(docs => {

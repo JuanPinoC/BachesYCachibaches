@@ -36,9 +36,6 @@ a{
     background: white;
 }
 .Imagen img:hover{
-	margin:20px;
-	width: 300px;
-    height: auto;
     border-radius: 15px;
 }
 
@@ -68,7 +65,7 @@ a{
 
 .Opcion{
 	word-wrap: break-word;
-	padding:20px;
+	padding:10px;
 	width: 70px;
 	text-align: center;
 	background: transparent;

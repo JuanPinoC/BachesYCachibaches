@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
@@ -200,9 +200,11 @@ class formularioAnuncio extends Component {
 					<button type='submit' className={Classes.BtnCrear} onClick={this.SubmitHandler}>
 						<h2>{this.state.tipo}</h2>
 					</button>
+					<Link to="/misAnuncios">
 					<button className={Classes.BtnCancelar}>
 						<h2>Cancelar</h2>
 					</button>
+					</Link>
 				</div>
 			</div>
 			</div>

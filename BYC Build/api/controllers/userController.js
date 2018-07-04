@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const fs = require('fs');
 const defaultPicture = 'profilePictures\\default.jpeg';
 const User = require('../models/user');
+const Comentario = require('../models/comentario');
+const Anuncio = require('../models/anuncio');
 const jwt = require('jsonwebtoken');
 	
 module.exports = {
@@ -175,6 +177,14 @@ module.exports = {
 						.then(result => {
 							res.status(200).json({
 								message: 'User deleted',
+							});
+							Comentario.deleteMany({usuario: id},(err)=>{
+								if (err) throw err;
+								console.log('Comentarios eliminados');
+							});
+							Anuncio.deleteMany({usuario: id},(err)=>{
+								if (err) throw err;
+								console.log('Anuncios eliminados');
 							});
 						})
 						.catch(err => {

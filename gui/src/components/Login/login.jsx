@@ -82,18 +82,16 @@ class login extends Component {
       <div className={Classes.Login}>
         {redirect}
         <div className={Classes.Form}>
-          <h1>Ingresar</h1>
+        {(this.state.newPassForm)?<h1>Cambiar Contraseña</h1>:<h1>Ingresar</h1>}
           <div className={Classes.Parte}>
           <Atributo titulo={"E-mail"} nombre={"email"}
             tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
-          {
-            (this.state.newPassForm)?(
+          {(this.state.newPassForm)?
             <Atributo titulo={"Nueva Contraseña"} nombre={"contrasenia"}
               tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
-            ):(
+            :
             <Atributo titulo={"Contraseña"} nombre={"contrasenia"}
               tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
-            )
           }
           </div>
           {

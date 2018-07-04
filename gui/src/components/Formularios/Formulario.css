@@ -2,8 +2,6 @@
 	align-content: center;
 	padding: 10px;
 	margin-bottom: 10px;
-	text-transform: capitalize;
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .Formulario hr{
@@ -28,10 +26,10 @@
 }
 
 .Formulario .FotoEditar{
-	margin-top: 30px;
+	margin-top: 10px;
 	margin-bottom: 50px;
-	margin-right: 25%;
-	margin-left: 30%;
+	margin-right: 20%;
+	margin-left: 35%;
 }
 
 .Formulario .FotoEditar img{
@@ -54,7 +52,7 @@
 	margin-top: 30px;
 	margin-bottom: 50px;
 	margin-left: 20%;
-	margin-right: 15%;
+	margin-right: 20%;
 }
 
 .Formulario .ImagenesEditar img{
@@ -75,8 +73,8 @@
 .Formulario .Botones{
 	margin-top: 30px;
 	margin-bottom: 50px;
-	margin-right: 25%;
-	margin-left: 20%;
+	margin-right: 15%;
+	margin-left: 15%;
 }
 
 .Formulario button{
@@ -84,7 +82,7 @@
 	background: white;
 	transition-duration: 0.3s;
 	width: 200px;
-	margin-top: 20px;
+	margin-top: 10px;
 	margin-left: 10px;
 	border-radius: 10px;
 }
@@ -104,6 +102,10 @@
 
 .Formulario .BtnCancelar{
 	border-color: #F62626;
+}
+
+.Formulario .BtnEliminar{
+	border-color: #CCCCCC;
 }
 
 .Formulario .BtnCambiarFoto{
@@ -126,6 +128,10 @@
 
 .Formulario .BtnCancelar:hover{
 	background-color: #F62626;
+}
+
+.Formulario .BtnEliminar:hover{
+	background-color: #CCCCCC;
 }
 
 .Formulario .BtnCambiarFoto:hover{

@@ -118,9 +118,9 @@ export default class perfil extends Component{
 			renderAnuncios = 
 			<Aux>
 				<center>
-						<div className={Classes.Publicaciones}>
-							{this.state.vistas}
-						</div>
+					<div className={Classes.Publicaciones}>
+						{this.state.vistas}
+					</div>
 				</center>
 			</Aux>
 		}
