@@ -14,7 +14,7 @@ class EliminarCuenta extends Component {
         }
   		axios(params)
   		.then(response => {
-  			sessionStorage.setItem('jwtToken', null );
+  			sessionStorage.removeItem('jwtToken');
   			window.location.replace(localStorage.getItem('path'));
   		})
   		.catch(err => {

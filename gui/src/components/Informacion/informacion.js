@@ -20,29 +20,29 @@ const informacion = () => (
 
 				<div className={Classes.contentdetailsfora}>
 				<img src={jefe}/>
-				<h3>Design</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ut nulla dicta, ab doloremque consequatur harum mollitia, ipsam minus magnam quaerat praesentium ratione, amet aperiam incidunt. Iste porro molestiae non.</p>
+				<h3>Organizacion</h3>
+				<p>Falto mucha organizacion por nuestra parte pero supimos como resolverlo mediante reuniones extra curriculares y repartiendo tareas en el grupo para que los integrantes no se estresen demasiado.</p>
 				</div>
 				<div className={Classes.contentdetailsfora}>
 				<img src={designer}/>
-				<h3>Bootstrap</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ut nulla dicta, ab doloremque consequatur harum mollitia, ipsam minus magnam quaerat praesentium ratione, amet aperiam incidunt. Iste porro molestiae non.</p>
+				<h3>Diseño</h3>
+				<p>El diseño fue respetado a los largo del desarrollo del proyecto tomando como bases diversos mockups creados al inicio del desarrollo por lo que el formato de la pagina siempre estuvo presente.</p>
 				</div>
 
 				<div className={Classes.contentdetailsfora}>
 				<img src={programador}/>
-				<h3>Support</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ut nulla dicta, ab doloremque consequatur harum mollitia, ipsam minus magnam quaerat praesentium ratione, amet aperiam incidunt. Iste porro molestiae non.</p>
+				<h3>Backend</h3>
+				<p>El backend fue lo primero en desarrollarse pero sufrio diversas modificacion porque mientras mas componentes creabamos en el front-end mas funciones necesitabamos en el backend.</p>
 				</div>
 				<div className={Classes.contentdetailsfora}>
 				<img src={analista}/>
-				<h3>Support</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ut nulla dicta, ab doloremque consequatur harum mollitia, ipsam minus magnam quaerat praesentium ratione, amet aperiam incidunt. Iste porro molestiae non.</p>
+				<h3>Analisis</h3>
+				<p>El analisis del proyecto se dio en base a diversos factores que determinaron cual seria la forma final de la pagina lo cual se decidio mientras el proyecto fue avanzando poco a poco.</p>
 				</div>
 				<div className={Classes.contentdetailsfora}>
 				<img src={test}/>
-				<h3>Support</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ut nulla dicta, ab doloremque consequatur harum mollitia, ipsam minus magnam quaerat praesentium ratione, amet aperiam incidunt. Iste porro molestiae non.</p>
+				<h3>Testeo</h3>
+				<p>El testeo fue una parte fundamental de nuestro proyecto, debido a que sin el no podriamos haber comprobado la correcta funcionalidad de muchos componentes.</p>
 				</div>
 				
 			</div>

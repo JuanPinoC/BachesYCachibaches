@@ -55,6 +55,11 @@ app.use(function(req,res){
 	res.render('main');
 });
 
+app.use((error,req,res,next)=>{
+	res.status(error.status || 401);
+	res.redirect('/ingresar');
+});
+
 /*
 app.use((req,res,next)=>{
 	const error = new Error('Page Not found');
