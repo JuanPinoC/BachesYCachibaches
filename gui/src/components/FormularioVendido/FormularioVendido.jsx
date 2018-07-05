@@ -19,11 +19,27 @@ export default class formularioVendido extends Component {
 			inputText: "",
 			usuarios: [],
 			pulsado: false,
-			cargado: null
+			cargado: null,
+			cargadoAnuncio:false
 		}
 		this.usuarioSeleccionado = this.usuarioSeleccionado.bind(this);
 	}
 	
+	componentWillMount = () => {
+		const idAnuncio = this.props.match.params.id;
+
+		axios.get('anuncios/find?anuncioId=' + idAnuncio,
+  			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
+		.then(doc=>{
+			console.log("Anuncio",doc.data.anuncio);
+			this.setState({
+				tituloAnuncio: doc.data.anuncio.titulo,
+				precioAnuncio: doc.data.anuncio.precio,
+				cargadoAnuncio: true
+			})
+		})
+	}
+
 	inputChange = (e) => {
 		this.setState({
 			inputText: e.target.value
@@ -124,7 +140,17 @@ export default class formularioVendido extends Component {
   		return (
 			<div className={Classes.FormularioVendido}>
 				{this.state.redirect}
-				<center><h1> Anuncio Vendido </h1></center>
+				<center><h1> Vendiendo Anuncio </h1>
+						<hr/>
+						{(this.state.cargadoAnuncio)?
+						(<div>
+						 <h2>{this.state.tituloAnuncio}</h2>
+						 <h2>Precio $/.{this.state.precioAnuncio}</h2>
+						 </div>):
+						(<Spinner/>)
+						}
+						
+						<hr/></center>
 				{(this.state.userId!='')?
 					(<div>
 						<center>

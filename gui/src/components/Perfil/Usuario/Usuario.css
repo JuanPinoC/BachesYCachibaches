@@ -1,9 +1,10 @@
 .Usuario{
 	/*background-color: #FFBF00;*/
+	display: flex;
 }
 
 .Usuario td{
-	float: left;
+	width: 100%;
 }
 
 .Imagen{
@@ -31,7 +32,7 @@
 
 .Opciones{
 	margin: 50px;
-	width: 300px;
+	width: 250px;
 	text-align: center;
 	border-left: 6px solid #FFBF00;
 }

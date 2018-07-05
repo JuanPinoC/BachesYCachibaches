@@ -10,6 +10,8 @@ const usuario = (props) => {
 	console.log(data);
 
 	return(
+		<center>
+		<table>
 		<tr className={Classes.Usuario}>
 			<td className={Classes.Imagen}>
 				<img src={localStorage.getItem('path') + data.foto}/>
@@ -22,12 +24,9 @@ const usuario = (props) => {
 				<h3><label>Celular: </label>{data.celular}</h3>
 				<h3><label>Dirección: </label>{data.direccion}</h3>
 			</td>
-			<td className={Classes.Opciones}>
-				<center><h2>Opciones</h2></center>
-				<div><h2>Contactar</h2></div>
-				<div><h2>Reportar</h2></div>
-			</td>
 		</tr>
+		</table>
+		</center>
 	);
 }
 
