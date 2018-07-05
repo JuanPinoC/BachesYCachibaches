@@ -1,20 +1,15 @@
 .Portada{
   margin-top: 55px;
+  width: 100%;
 }
 
 .Portada .SlideShow{
   height: 400px;
   width: 100%;
 }
-
-.Portada .Anuncios{
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-bottom: 20px;
-}
-
-.Portada .Anuncios h1{
-  font-weight: bolder;
+.Anuncios{
+	margin:20px 0px;
+	width: 70%;
 }
 
 @media only screen and (max-width: 500px) {
@@ -24,15 +19,7 @@
 
 	.Portada .SlideShow{
 	  height: 400px;
-	  width: 110%;
+	  width: 100%;
 	}
 
-	.Anuncios{
-		width: 10%;
-	}
-
-	.Portada h1{
-	  width: 10%;
-	  float: left;
-	}
 }

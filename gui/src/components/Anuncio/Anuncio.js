@@ -5,6 +5,7 @@ import Classes from './Anuncio.css';
 import img from './img.jpg';
 import imgNoDestacado from './star.png';
 import imgDestacado from './star-black.png';
+import Aux from '../../hoc/Auxiliary/Auxiliary';
 
 export default class anuncio extends Component{
 
@@ -31,29 +32,29 @@ export default class anuncio extends Component{
 
 	render(){
 		return(
-		<div className={Classes.Table}>
-			<table className={Classes.Anuncio}>
-				<NavLink to={"/anuncio/"+this.state._id} exact >
-					<tr className={Classes.Publicacion}>
-						<td className={Classes.Imagen}>
-							<img alt="" src={localStorage.getItem('path') + this.state.img[0]}
-							/>
-						</td>
-						<td className={Classes.Info}>
-							<h2 className={Classes.Precio}>{"S/. " + this.state.precio}</h2>
-							<h2>{this.state.titulo}</h2>
-							<h3>{this.state.nombres}</h3>
-							
-							<h3>{this.state.sub_cat}</h3>
-							<h4>{this.sub_cat}</h4>
-							{(this.state.destacado !== null)?
-								<img className={Classes.Destacado} alt="Destacado" src={imgDestacado}/>:
-								<img className={Classes.Destacado} alt="No Destacado" src={imgNoDestacado}/>}
-						</td>
-					</tr>
-				</NavLink>
-			</table>
+		<Aux>
+		<NavLink to={"/anuncio/"+this.state._id} exact >
+		<div className={Classes.Anuncio}>
+			<div className={Classes.Foto}>
+				<img alt="" src={localStorage.getItem('path') + this.state.img[0]}/>
+			</div>
+			<div className={Classes.Datos}>
+				<div className={Classes.Primera}>
+					<h2>{this.state.titulo}</h2>
+					<h3>{this.state.nombres}</h3>
+					<h3>{this.state.sub_cat}</h3>
+				</div>
+				<div className={Classes.Segunda}>
+					<h2>{"$/." + this.state.precio}</h2>
+					{(this.state.destacado !== null)?
+								<img alt="Destacado" src={imgDestacado}/>:
+								<img alt="No Destacado" src={imgNoDestacado}/>}
+				</div>
+			</div>
 		</div>
+		</NavLink>
+		
+		</Aux>
 		);	
 	}
 }

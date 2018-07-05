@@ -1,15 +1,24 @@
-.Horizontal div{
+.Horizontal{
 	padding: 5px;
-	display: inline-table;
+	display: flex;
+	width: 100%;
+}
+.BarraCategoria{
+	margin:20px 0px;
+}
+.Content{
+	width:65%; 
 }
 
 .TituloCategoria{
 	margin: 20px;
+	width:100%;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
 }
 
 .Publicaciones{
+	width: 100%;
 	margin: 20px;
 }
 

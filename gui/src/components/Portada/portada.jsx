@@ -53,11 +53,15 @@ class portada extends Component {
 					imagenes={['buy.gif','sell.gif','share.gif']} 
 					labels={['Baches y Cachibaches','Compra y Vende','Comparte']}/>
 				</div>
-				<div className={Classes.Anuncios}>
-					<div><h2>Anuncios Destacados</h2></div>
-					<div>
-						{(this.state.load)?this.state.vistas:<div></div>}
-					</div>
+				<div >
+					<center>
+						<div className={Classes.Titulo}>
+							<h1>Anuncios Destacados</h1>
+						</div>	
+						<div className={Classes.Anuncios}>
+							{(this.state.load)?this.state.vistas:<div></div>}
+						</div>
+					</center>
 				</div>
 			</div>
 		);
