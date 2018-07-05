@@ -19,6 +19,7 @@
 
 .Logo {
     height: 80%;
+    transition-duration: 0.7s;
 }
 
 .SearchBar {
@@ -26,7 +27,9 @@
 }
 
 @media (max-width: 499px) {
-    .DesktopOnly {
+    .DesktopOnly,
+    .Logo,
+    .SearchBar {
         display: none;
     }
 }

@@ -57,6 +57,28 @@ a{
 	float: right;
 }
 
-.TituloPublicacion{}
-
-.Descripcion{}
+@media only screen and (max-width: 500px) {
+	.Anuncio{
+		width: 100%;
+	}
+	.Table table{
+		border-collapse: collapse;
+    	border-spacing: 0;
+    	width: 100%;
+	}
+	.Imagen img{
+		width: 80%;
+		height: 100px;
+	}
+	.Publicacion{
+		float: left;
+		width: 40%;
+	}
+	.Precio{
+		float: left;
+	}
+	.Destacado{
+		float: left;
+	}
+    
+}

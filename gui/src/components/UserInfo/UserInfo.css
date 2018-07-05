@@ -27,3 +27,30 @@
 	text-align: center;
 	color: white;
 }
+
+@media only screen and (max-width: 500px) {
+    .UserInfo {
+        width: 90px;
+		height: 100px;
+		position: fixed;
+		right: 10px;
+		bottom: 5px;
+		background: black;
+		color: white;
+		transition-duration: 0.3s;
+		border-radius: 15%;
+    }
+    .UserInfo img{
+		margin: 5px;
+		margin-left: 25%;
+		margin-right: 15%;
+		width: 50px;
+		height: 50px;
+		border-radius: 15%;
+	}
+		.UserInfo h4{
+		text-align: center;
+		font-size: 10px;
+		color: white;
+	}
+}

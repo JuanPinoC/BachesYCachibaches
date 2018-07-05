@@ -9,9 +9,10 @@
   margin-top: 5px;
   margin-left: 5%;
   margin-bottom: 5px;
-  width: 600px;
-  height: 390px;
+  width: 50%;
+  height: 360px;
   border-radius: 15px;
+  float:left;
 }
 
 .SlideShow .Frame1{
@@ -27,9 +28,29 @@
 .SlideShow .Texto{
   float: right;
   margin-top: 150px;
-  margin-right: 15%;
-  width: 35%;
+  width: 40%;
+  padding-right: 10px;
   font-size: 3em;
   font-weight: bold;
   word-wrap: break-word;
+}
+
+@media only screen and (max-width: 500px) {
+   .SlideShow{
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background-color: #FFBF00;
+  }
+  .SlideShow img{
+    margin-top: 5px;
+    margin-left: 5%;
+    margin-bottom: 5px;
+    width: 80%;
+    height: 260px;
+    border-radius: 15px;
+  }
+  .SlideShow .Texto{
+    display: none;
+  }
 }

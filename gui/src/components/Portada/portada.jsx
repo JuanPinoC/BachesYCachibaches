@@ -23,6 +23,7 @@ class portada extends Component {
 
 		axios.get('anuncios/')
   		.then((response) => {
+  			console.log("Anuncios",response);
 
 			const data = response.data.orders;
 			let vistas = [];
@@ -53,7 +54,7 @@ class portada extends Component {
 					labels={['Baches y Cachibaches','Compra y Vende','Comparte']}/>
 				</div>
 				<div className={Classes.Anuncios}>
-					<div><h1>Anuncios Destacados</h1></div>
+					<div><h2>Anuncios Destacados</h2></div>
 					<div>
 						{(this.state.load)?this.state.vistas:<div></div>}
 					</div>

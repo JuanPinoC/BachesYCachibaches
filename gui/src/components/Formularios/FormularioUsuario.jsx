@@ -156,6 +156,7 @@ class formularioUsuario extends Component {
 			<Modal show={this.state.eliminando} modalClosed={this.modalHandler}>
 			<EliminarCuenta closed={this.modalHandler}/>
   			</Modal>
+  			<hr/>
 			<center><h1>{this.state.tipo} Usuario</h1></center>
 			<hr/>
 			<div className={Classes.Form}>

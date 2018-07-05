@@ -5,13 +5,13 @@ import classes from './NavigationItems.css';
 const navigationItems = () => (
     <ul className={classes.NavigationItems}>  
         <NavLink to="/ingresar" exact >
-            <li className={classes.BarSuperiorBtn}>Ingresar</li>
+            <li>Ingresar</li>
         </NavLink>
     	<NavLink to="/registrarse" exact >
-            <li className={classes.BarSuperiorBtn}>Registrarse</li>
+            <li>Registrarse</li>
         </NavLink>
         <NavLink to="/info" exact >
-            <li className={classes.BarSuperiorBtn}>Información</li>
+            <li>Información</li>
         </NavLink>
     </ul>
 );

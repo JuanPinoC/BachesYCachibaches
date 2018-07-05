@@ -14,6 +14,25 @@
 }
 
 .Portada .Anuncios h1{
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-weight: bolder;
+}
+
+@media only screen and (max-width: 500px) {
+    .Portada{
+	  margin-top: 55px;
+	}
+
+	.Portada .SlideShow{
+	  height: 400px;
+	  width: 110%;
+	}
+
+	.Anuncios{
+		width: 10%;
+	}
+
+	.Portada h1{
+	  width: 10%;
+	  float: left;
+	}
 }

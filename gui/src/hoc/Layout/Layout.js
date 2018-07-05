@@ -37,7 +37,8 @@ class Layout extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			token: sessionStorage.getItem('jwtToken')
+			token: sessionStorage.getItem('jwtToken'),
+			showSideDrawer: false
 		}
 		localStorage.setItem('path','http://35.238.122.18/');
 		this.UserLogged = this.UserLogged.bind(this);
@@ -61,6 +62,16 @@ class Layout extends Component {
 	componentWillUpdate = () => {
 		window.scrollTo(0, 0)
 	}
+	
+	sideDrawerClosedHandler = () => {
+		this.setState({ showSideDrawer: false});
+	}
+
+	sideDrawerToggleHandler = () => {
+		this.setState((prevState) => {
+			return { showSideDrawer: !prevState.showSideDrawer };	
+		});
+	}
 
 	render () {
 		return (
@@ -69,6 +80,10 @@ class Layout extends Component {
 					drawerToggleClicked={this.sideDrawerToggleHandler}
 					action={this.UserLogged}
 				/>
+				<SideDrawer
+				action={this.UserLogged}
+				open={this.state.showSideDrawer} 
+				closed={this.sideDrawerClosedHandler}/>
 				<main className={classes.Content}>
 					{(this.state.token != "null")?(
 						<Switch>

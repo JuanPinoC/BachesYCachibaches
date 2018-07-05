@@ -22,6 +22,7 @@ export default class planes extends Component{
 
 	componentWillMount = () => {
 		this.getPlanes();
+		console.log("Fecha",this.state.fecha);
 	}
 
 	AtributoHandler = (value) => {

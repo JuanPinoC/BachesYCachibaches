@@ -3,7 +3,8 @@ import {NavLink} from 'react-router-dom';
 
 import Classes from './Anuncio.css';
 import img from './img.jpg';
-import imgDestacado from './star.png';
+import imgNoDestacado from './star.png';
+import imgDestacado from './star-black.png';
 
 export default class anuncio extends Component{
 
@@ -11,7 +12,7 @@ export default class anuncio extends Component{
 		super(props);
 
 		const data = props.data;
-
+		console.log("Anuncio",data);
 		this.state = {
 			data: data,
 			_id: data._id,
@@ -22,7 +23,7 @@ export default class anuncio extends Component{
 			precio: data.precio,
 			sub_cat: data.subcategoria,
 			titulo: data.titulo,
-		
+			destacado: data.destacado.fecha,
 			usuario: (data.usuario)?data.usuario._id:"",
 			nombres: (data.usuario)?data.usuario.nombres:""
 		}
@@ -30,11 +31,12 @@ export default class anuncio extends Component{
 
 	render(){
 		return(
+		<div className={Classes.Table}>
 			<table className={Classes.Anuncio}>
 				<NavLink to={"/anuncio/"+this.state._id} exact >
 					<tr className={Classes.Publicacion}>
 						<td className={Classes.Imagen}>
-							<img src={localStorage.getItem('path') + this.state.img[0]}
+							<img alt="" src={localStorage.getItem('path') + this.state.img[0]}
 							/>
 						</td>
 						<td className={Classes.Info}>
@@ -44,11 +46,14 @@ export default class anuncio extends Component{
 							
 							<h3>{this.state.sub_cat}</h3>
 							<h4>{this.sub_cat}</h4>
-							<img className={Classes.Destacado} src={imgDestacado}/>
+							{(this.state.destacado !== null)?
+								<img className={Classes.Destacado} alt="Destacado" src={imgDestacado}/>:
+								<img className={Classes.Destacado} alt="No Destacado" src={imgNoDestacado}/>}
 						</td>
 					</tr>
 				</NavLink>
 			</table>
+		</div>
 		);	
 	}
 }

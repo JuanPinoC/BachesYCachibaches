@@ -47,9 +47,11 @@ export default class slideShow extends Component {
 			<div className={Classes.SlideShow}>
 				<div className={this.state.estilo}>
 					<div className={Classes.Texto}>
-					<center>{this.state.labels[this.state.index]}</center>
-				</div>
-					<img src={require("../img/"+this.state.imgs[this.state.index])}/>
+						<center>{this.state.labels[this.state.index]}</center>
+					</div>
+					<div className={Classes.Imagen}>
+						<img src={require("../img/"+this.state.imgs[this.state.index])}/>
+					</div>
 				</div>
 			</div>
 		):(<Spinner/>);

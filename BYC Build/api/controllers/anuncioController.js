@@ -2,6 +2,19 @@ const mongoose = require('mongoose');
 const Anuncio = require('../models/anuncio');
 const Comentario = require('../models/comentario');
 const fs = require('fs');
+let cron = require('node-cron');
+
+function addDays(startDate,numberOfDays)
+	{
+		var returnDate = new Date(
+								startDate.getFullYear(),
+								startDate.getMonth(),
+								startDate.getDate()+numberOfDays,
+								startDate.getHours(),
+								startDate.getMinutes(),
+								startDate.getSeconds());
+		return returnDate;
+	}
 
 module.exports = {
 	show: (req,res,next)=>{
@@ -23,6 +36,7 @@ module.exports = {
 							categoria: doc.categoria,
 							subcategoria: doc.subcategoria,
 							precio: doc.precio,
+							destacado: doc.destacado,
 							imagen: doc.imagen
 						}
 					})
@@ -200,15 +214,20 @@ module.exports = {
 	highlight: (req,res,next)=>{
 		Anuncio.update({_id: req.body.anuncioId},{$set:{
 			destacado:{
-				plan:req.body.plan,
+				plan:req.body.plan._id,
 				fecha:req.body.fecha
 			}
 		}})
 		.exec()
 		.then(result => {
 			res.status(200).json({
-				message: 'Ad updated'
+				message: 'Ad updated',
+				result: result
 			});
+			req.anuncioId = req.body.anuncioId;
+			req.fecha_inicio = req.body.fecha;
+			req.dias = req.body.plan.tiempo;
+			next();
 		})
 		.catch(err =>{
 			console.log(err);
@@ -216,6 +235,28 @@ module.exports = {
 				error: err
 			});
 		});
+	},
+	cronTask:(req,res,next)=>{
+		let task = cron.schedule('0 0 * * *',()=>{
+			const anuncioId = req.anuncioId;
+			const fecha_actual = new Date();
+			const fecha_final = addDays(req.fecha_inicio,req.dias);
+			if (fecha_actual.getDate() === fecha_final.getDate()) {
+				Anuncio.update({_id: req.body.anuncioId},{$set:{
+					destacado:{
+						plan:null,
+						fecha:null}
+				}})
+				.exec()
+				.then(doc=>{
+					console.log("Highlight was expired",doc);
+					task.destroy();	
+				})
+				.catch(err=>{
+					console.log("Error in cronTask",err);
+				})
+			}
+		})
 	},
 	edit:(req,res,next)=>{
 		Anuncio.findById(req.body.anuncioId)
@@ -255,6 +296,7 @@ module.exports = {
 							categoria: doc.categoria,
 							subcategoria: doc.subcategoria,
 							precio: doc.precio,
+							destacado: doc.destacado,
 							imagen: doc.imagen
 						}
 					})
@@ -286,6 +328,7 @@ module.exports = {
 							categoria: doc.categoria,
 							subcategoria: doc.subcategoria,
 							precio: doc.precio,
+							destacado: doc.destacado,
 							imagen: doc.imagen
 						}
 					})
