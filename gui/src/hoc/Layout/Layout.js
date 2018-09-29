@@ -40,7 +40,8 @@ class Layout extends Component {
 			token: sessionStorage.getItem('jwtToken'),
 			showSideDrawer: false
 		}
-		localStorage.setItem('path','http://35.238.122.18/');
+		//localStorage.setItem('path','http://35.238.122.18/');
+		localStorage.setItem('path','http://localhost:3000/');
 		this.UserLogged = this.UserLogged.bind(this);
 	}
 

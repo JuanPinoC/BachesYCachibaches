@@ -1,9 +1,14 @@
 # BachesYCachibaches
 
-Proyecto TECSUP
+Proyecto TECSUP -------------------------------------- DONE!!!
 
-Tares por cumplir:
+Seguridad
+	-	Se agregan los siguientes componentes:
+			. En Formularios - Atributos - Rules - Rules.js
+			. En Atributo.jsx se agrega metodo validate()
+			. En los formulario se agregan los métodos: 
+				# ValidatedFormHandler
+				# ValidateAllFields
+			. En el contenedor de comentarios, se modifica FormularioComentario.jsx
 
--	Imagenes de Usuario en comentario y anuncio
--	Vendido ()
--	vista de Perfil del usuario
+	*	Nota: No se mencionan los estilos ni modificaciones menores.

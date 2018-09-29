@@ -12,17 +12,41 @@ class formularioChangePassword extends Component {
 		this.state = {
 				userId: 'IDUsuario'
 				contrasenia: '',
-				newpass: ''
+				newpass: '',
+				validated: false,
+				validations: {contrasenia: false,newpass: false}
 			};
 		this.AtributoHandler = this.AtributoHandler.bind(this);
+		this.validatedFormHandler = this.validatedFormHandler.bind(this);
 	}
 
 	AtributoHandler = (campo, valor) => {
     	this.setState({ [campo]: valor });
   	}
 
+  	validatedFormHandler = (campo, validado) => {
+  		let validations = this.state.validations;
+
+  		validations = {...validations, [campo]: validado};
+
+  		this.setState({ validations: validations });
+  		this.setState({ validated: this.validateAllFields(validations) });
+  	}
+
+  	validateAllFields = (validations) => {
+  		for (const i in validations){
+  			if(validations[i] != true){
+  				return false;
+  			}
+  		}
+  		return true;
+  	}
+
   	SubmitHandler = (e) => {
   		e.preventDefault();
+
+  		if(this.state.validated == false) return;
+
   		const data = this.state;
   		axios({
   			method: 'post',
@@ -48,12 +72,15 @@ class formularioChangePassword extends Component {
 			<div className={Classes.Form}>
 				<div className={Classes.Parte}>
 					<Atributo titulo={"Antigua Contraseña"} nombre={"contrasenia"} tipo={"text"} 
-								contenido={this.state.contrasenia} action={this.AtributoHandler} />
+								contenido={this.state.contrasenia} action={this.AtributoHandler}
+								validatedAction={this.validatedFormHandler} />
 					<Atributo titulo={"Nueva contraseña"} nombre={"newpass"} tipo={"text"}
-								contenido={this.state.newpass} action={this.AtributoHandler} />
+								contenido={this.state.newpass} action={this.AtributoHandler}
+								validatedAction={this.validatedFormHandler} />
 				</div>
 				<div className={Classes.Botones}>
-					<button className={Classes.BtnCrear} onClick={this.SubmitHandler}>
+					<button className={(this.state.validated == true)?Classes.BtnCrear:Classes.BtnUnvalidated}
+					 		onClick={this.SubmitHandler}>
 						<h2>Cambiar</h2>
 					</button>
 					<button className={Classes.BtnCancelar}>

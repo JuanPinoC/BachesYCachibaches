@@ -40,5 +40,20 @@
 .Contenedor{
 	margin: 15px;
 	padding: 15px;
+}
 
+.Atributo .Invalid input {
+	background-color: #F62626;
+}
+
+.Atributo .Valid input {
+	background-color: #ffffff;
+}
+
+.Atributo .Invalid textarea {
+	background-color: #F62626;
+}
+
+.Atributo .Valid textarea {
+	background-color: #ffffff;
 }

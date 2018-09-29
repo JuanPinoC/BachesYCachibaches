@@ -98,6 +98,7 @@
 
 .Formulario .BtnCrear{
 	border-color: #61E232;
+	color: black;
 }
 
 .Formulario .BtnCancelar{
@@ -140,4 +141,13 @@
 
 .Formulario .BtnFotoCancel:hover{
 	background-color: #FFBF00;
+}
+
+.Formulario .BtnUnvalidated{
+	background-color: grey;
+	color: black;
+}
+
+.Formulario .BtnUnvalidated:hover{
+	color: black;
 }

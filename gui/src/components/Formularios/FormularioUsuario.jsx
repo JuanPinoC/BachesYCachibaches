@@ -21,12 +21,22 @@ class formularioUsuario extends Component {
 			(typeof props.tipo != 'undefined')?
 				{
 					tipo: 'Editar',
-					eliminando: false
+					eliminando: false,
+					validated: true,
+					validations: {	nombres:true, apellidos: true, email: true,
+									direccion: true, celular: true, telefono: true
+								}
 				}:{
-					tipo: 'Crear'
+					tipo: 'Crear',
+					validated: false,
+					validations: {
+									nombres: false, apellidos: false, email:false, 
+									contrasenia:false, direccion:false, celular:false, telefono:false
+								}
 				};
 
 		this.AtributoHandler = this.AtributoHandler.bind(this);
+		this.validatedFormHandler = this.validatedFormHandler.bind(this);
 	}
 
 	componentWillMount = () => {
@@ -87,7 +97,26 @@ class formularioUsuario extends Component {
     	this.setState({ [campo]: valor });
   	}
 
+  	validatedFormHandler = (campo, validado) => {
+  		let validations = this.state.validations;
+
+  		validations = {...validations, [campo]: validado};
+
+  		this.setState({ validations: validations });
+  		this.setState({ validated: this.validateAllFields(validations) });
+  	}
+
+  	validateAllFields = (validations) => {
+  		for (const i in validations){
+  			if(validations[i] != true){
+  				return false;
+  			}
+  		}
+  		return true;
+  	}
+
   	SubmitHandler = (e) => {
+  		if(this.state.validated == false) return;
 
   		const data = this.state;
   		const file = data.foto;
@@ -162,26 +191,33 @@ class formularioUsuario extends Component {
 			<div className={Classes.Form}>
 				<div className={Classes.Parte}>
 					<Atributo titulo={"Nombres"} nombre={"nombres"}
-						tipo={"text"} contenido={this.state.nombres} action={this.AtributoHandler} />
+						tipo={"text"} contenido={this.state.nombres} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 					<Atributo titulo={"Apellidos"} nombre={"apellidos"}
-						tipo={"text"} contenido={this.state.apellidos} action={this.AtributoHandler}/>
+						tipo={"text"} contenido={this.state.apellidos} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 					<Atributo titulo={"E-mail"} nombre={"email"}
-						tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
+						tipo={"email"} contenido={this.state.email} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 					{(this.state.tipo == "Editar")?
 						(<div></div>):
 						(
 						<Atributo titulo={"Contraseña"} nombre={"contrasenia"}
-							tipo={"password"} contenido={this.state.contrasenia} action={this.AtributoHandler}/>
+							tipo={"password"} contenido={this.state.contrasenia} 
+							action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 						)
 					}
 				</div>
         		<div className={Classes.Parte}>
         			<Atributo titulo={"Dirección"} nombre={"direccion"}
-        				tipo={"text"} contenido={this.state.direccion} action={this.AtributoHandler}/>
+        				tipo={"text"} contenido={this.state.direccion} 
+        				action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 					<Atributo titulo={"Celular"} nombre={"celular"}
-						tipo={"number"} contenido={this.state.celular} action={this.AtributoHandler}/>
+						tipo={"number"} contenido={this.state.celular} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 					<Atributo titulo={"Teléfono"} nombre={"telefono"}
-						tipo={"number"} contenido={this.state.telefono} action={this.AtributoHandler}/>
+						tipo={"number"} contenido={this.state.telefono} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 				</div>
 				<br/>
 				<br/>

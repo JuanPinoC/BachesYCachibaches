@@ -36,10 +36,10 @@ module.exports = {
 			});
 	},
 	create: (req,res,next)=>{
-
+		console.log("First");
 		const imagenes = [];
 		console.log("req.files: " + req.files.length);
-
+		console.log("Second");
 		for(let i = 0; i < req.files.length;i++){
 			imagenes[i]=req.files[i].path;
 		}
@@ -55,6 +55,7 @@ module.exports = {
 			precio: req.body.precio,
 			imagen: imagenes
 		});
+		console.log("Third");
 		anuncio
 			.save()		
 			.then(result=>{

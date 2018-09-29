@@ -11,7 +11,8 @@ class formularioComentario extends Component {
   state = {
 		anuncio: this.props.anuncioId,
 		comentario: "",
-    foto:''
+    foto:'',
+    validated: false
   }
 
   componentWillMount = () => {
@@ -38,9 +39,22 @@ class formularioComentario extends Component {
 		this.setState({
 			comentario: e.target.value
 		});
+    this.validateComment(e.target.value);
 	}
 
+  validateComment = (comment) => {
+    const expression  = new RegExp("^[a-zA-Z0-9!?.-]{5,250}$");
+
+    if(expression.test(comment)) {
+      this.setState({validated: true});
+    } else{
+      this.setState({validated: false});
+    }
+  }
+
 	SubmitHandler = (e) => {
+      
+      if(this.state.validated == false) return;
 
       const data = this.state;
       
@@ -62,6 +76,7 @@ class formularioComentario extends Component {
     			});
     			alert("Se añadio tu comentario!");
           this.props.action();
+          this.setState({validated: false});
     		})
     		.catch((err) => {
     			//handle error
@@ -76,7 +91,9 @@ class formularioComentario extends Component {
 					<center>
 						<img src={localStorage.getItem('path') + this.state.foto}/>
 						<textarea onChange={this.onChangeHandler} value={this.state.comentario}/>
-						<button onClick={this.SubmitHandler}><h3>Comentar</h3></button>
+						<button onClick={this.SubmitHandler} 
+                    className={(this.state.validated == true)?classes.Btn:classes.BtnUnvalidated}>
+            <h3>Comentar</h3></button>
 					</center>
 				</div>
   			);

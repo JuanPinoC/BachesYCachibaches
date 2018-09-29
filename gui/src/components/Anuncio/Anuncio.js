@@ -24,7 +24,7 @@ export default class anuncio extends Component{
 			precio: data.precio,
 			sub_cat: data.subcategoria,
 			titulo: data.titulo,
-			destacado: data.destacado.fecha,
+			destacado: (data.destacado)?data.destacado.fecha:null,
 			usuario: (data.usuario)?data.usuario._id:"",
 			nombres: (data.usuario)?data.usuario.nombres:""
 		}
