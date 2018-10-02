@@ -243,7 +243,8 @@ class formularioUsuario extends Component {
 				}
 
 				<div className={Classes.Botones}>
-					<button onClick={this.SubmitHandler} className={Classes.BtnCrear}>
+					<button onClick={this.SubmitHandler} 
+							className={(this.state.validated == true)?Classes.BtnCrear:Classes.BtnUnvalidated}>
 						<h2>{(this.state.tipo == "Editar")?"Guardar":this.state.tipo}</h2>
 					</button>
 					<Link to ="/">
