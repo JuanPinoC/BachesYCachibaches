@@ -49,6 +49,7 @@ module.exports = {
 						});
 					}else{
 						const foto = req.file === undefined ? defaultPicture : req.file.path;
+						
 						const user = new User({
 							_id: new mongoose.Types.ObjectId(),
 							nombres: req.body.nombres,

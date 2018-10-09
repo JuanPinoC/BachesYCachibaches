@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 
 import Classes from './Login.css';
 
@@ -12,6 +13,26 @@ import Atributo from '../Formularios/Atributo/Atributo';
 import axios from '../../AxiosFiles/axios.js';
 
 class login extends Component {
+
+  state = {
+    isLoggedIn: false,
+    userID: '',
+    name: '',
+    email: '',
+    picture: ''
+  };
+  responseFacebook = response => {
+    console.log(response);
+    this.setState({
+      isLoggedIn: true,
+      userID: response.userID,
+      name: response.name,
+      email: response.email,
+      picture: response.picture.data.url
+    })
+  };
+
+  componentClick = () => console.log("clicked");
 
   constructor(props) {
     super(props);
@@ -77,7 +98,40 @@ class login extends Component {
   }
 
   render() {
+    let fbContent;
     let redirect = (sessionStorage.getItem('jwtToken')!="null")?<Redirect to="/" />:null;
+
+    if(this.state.isLoggedIn){
+      fbContent = (
+          <div style={{
+            with: '400px',
+            margin: 'auto',
+            background: '#f4f4f4',
+            padding: '20px'
+          }}>
+            <img src={this.state.picture} alt={this.state.name} />
+            <h2>Holi {this.state.name}</h2>
+            Email: {this.state.email}
+          </div>
+        )
+    }else{
+      fbContent = (
+        <FacebookLogin
+        appId="451339475272860"
+        autoLoad={true}
+        fields="name,email,picture"
+        onClick={this.componentClicked}
+        callback={this.responseFacebook} />);
+      /*goContent = (
+        <GoogleLogin
+        clientId="606790169121-g9m43sk15b7rdp0eumkaigvr9lc8bqqm.apps.googleusercontent.com"
+        buttonText="Google"
+        onSuccess={this.responseGoogle}
+        onFailure={this.responseGoogle}
+        />);*/
+  
+    }
+
     return (
       <div className={Classes.Login}>
         {redirect}
@@ -113,9 +167,14 @@ class login extends Component {
                   Olvide mi contraseña :c
                 </button>
               </div>
+              
             )
           }
+          <div className={Classes.Botones}>
+            {fbContent}
+          </div>
         </div>
+
         <div className={Classes.Info}>
           <div className={Classes.Texto}>
             <h2>Tal vez te interese...</h2>

@@ -11,7 +11,7 @@ const anuncioRoutes = require('./api/routes/anuncios');
 const compraRoutes = require('./api/routes/compras');
 const comentarioRoutes = require('./api/routes/comentarios');
 
-mongoose.connect('mongodb://localhost/baches');
+mongoose.connect('mongodb://localhost:27017/baches');
 mongoose.Promise = global.Promise;
 
 
