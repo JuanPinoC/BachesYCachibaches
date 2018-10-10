@@ -80,7 +80,7 @@ class login extends Component {
         this.props.action();
       }else{
         this.changeForm();
-        alert("Contraseña cambiada con exito.");
+        alert("Contraseña cambiada con exito, email enviado al correo con la nueva contraseña.");
       }
 
       //console.log(response);
@@ -141,8 +141,7 @@ class login extends Component {
           <Atributo titulo={"E-mail"} nombre={"email"}
             tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
           {(this.state.newPassForm)?
-            <Atributo titulo={"Nueva Contraseña"} nombre={"contrasenia"}
-              tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
+            <h3>Un correo con la nueva contraseña será enviado.</h3>
             :
             <Atributo titulo={"Contraseña"} nombre={"contrasenia"}
               tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>

@@ -4,7 +4,9 @@ const fs = require('fs');
 const defaultPicture = 'profilePictures\\default.jpeg';
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-	
+
+var nodemailer = require('nodemailer');
+
 module.exports = {
 	show: (req,res,next)=>{
 		User.find()
@@ -195,7 +197,7 @@ module.exports = {
 	},
 	password: (req,res,next)=>{
 		const email = req.body.email;
-		const contrasenia = req.body.contrasenia;
+		
 		User.find({email: email})
 			.exec()
 			.then(user => {
@@ -204,12 +206,57 @@ module.exports = {
 						message: 'Email does not exist'
 					});
 				}else{
+
+					/* send email */
+					const contrasenia = String.fromCharCode(
+											Math.floor(Math.random() * (91 - 65)) + 65,
+											Math.floor(Math.random() * (123 - 97)) + 97,
+											Math.floor(Math.random() * (58 - 48)) + 48,
+										) + "@" 
+										+ String.fromCharCode(
+											Math.floor(Math.random() * (91 - 65)) + 65,
+											Math.floor(Math.random() * (123 - 97)) + 97,
+											Math.floor(Math.random() * (58 - 48)) + 48,
+											Math.floor(Math.random() * (123 - 97)) + 97,
+											Math.floor(Math.random() * (123 - 97)) + 97,
+											Math.floor(Math.random() * (123 - 97)) + 97,
+											Math.floor(Math.random() * (123 - 97)) + 97,
+											Math.floor(Math.random() * (58 - 48)) + 48,
+										);
+
+
+					var transporter = nodemailer.createTransport({
+					  service: 'gmail',
+					  auth: {
+					    user: 'bachescachibaches@gmail.com',
+					    pass: 'jeydivision03051702'
+					  }
+					});
+
+					var mailOptions = {
+					  from: 'bachescachibaches@gmail.com',
+					  to: email,
+					  subject: 'Contraseña de la cuenta.',
+					  text: 'Su contraseña es ' + contrasenia
+					};
+
+					transporter.sendMail(mailOptions, function(error, info){
+					  if (error) {
+					    console.log(error);
+					  } else {
+					    console.log('Email sent: ' + info.response);
+					  }
+					});
+					
 					bcrypt.hash(contrasenia, 10, (err,hash)=>{
 						if (err) throw err;
 						User.update({email: email},{$set: {contrasenia: hash}})
 							.exec();
 							console.log('Contraseña actualizada');
 					});
+
+					/* send email */
+
 				}
 				res.status(201).json({
 					message: 'Password Updated'
