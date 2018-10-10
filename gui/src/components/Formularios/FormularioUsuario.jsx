@@ -192,32 +192,32 @@ class formularioUsuario extends Component {
 				<div className={Classes.Parte}>
 					<Atributo titulo={"Nombres"} nombre={"nombres"}
 						tipo={"text"} contenido={this.state.nombres} 
-						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. Juan Juancito" />
 					<Atributo titulo={"Apellidos"} nombre={"apellidos"}
 						tipo={"text"} contenido={this.state.apellidos} 
-						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. Perez Perez" />
 					<Atributo titulo={"E-mail"} nombre={"email"}
 						tipo={"email"} contenido={this.state.email} 
-						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ejemplo@ejemplo.com" />
 					{(this.state.tipo == "Editar")?
 						(<div></div>):
 						(
 						<Atributo titulo={"Contraseña"} nombre={"contrasenia"}
 							tipo={"password"} contenido={this.state.contrasenia} 
-							action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
+							action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="Mayúsculas, Minúsculas, números, signo, min.10 caracteres" />
 						)
 					}
 				</div>
         		<div className={Classes.Parte}>
         			<Atributo titulo={"Dirección"} nombre={"direccion"}
         				tipo={"text"} contenido={this.state.direccion} 
-        				action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
+        				action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. Av. Ejemplo-111" />
 					<Atributo titulo={"Celular"} nombre={"celular"}
 						tipo={"number"} contenido={this.state.celular} 
-						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. 111999111"/>
 					<Atributo titulo={"Teléfono"} nombre={"telefono"}
 						tipo={"number"} contenido={this.state.telefono} 
-						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. 123456 "/>
 				</div>
 				<br/>
 				<br/>

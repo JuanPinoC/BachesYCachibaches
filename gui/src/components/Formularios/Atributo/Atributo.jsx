@@ -15,6 +15,7 @@ class atributo extends Component {
 				name: props.nombre,
 				type: props.tipo,
 				contenido: (props.contenido)?props.contenido:"",
+				mensaje: (props.mensaje)?props.mensaje:"",
 				rules: getRules(props.nombre, props.tipo),
 				validated: false
 		}
@@ -54,13 +55,14 @@ class atributo extends Component {
 
 	render(){
 		let validationStyle = (this.state.validated === false)?Classes.Invalid:Classes.Valid;
+		let mensajeStyle = (this.state.validated != true)?Classes.Message:Classes.HiddenMessage;
 
 		let contenedor =
 					<input
 						type={this.state.type}
 						name={this.state.name}
 						value={this.state.contenido}
-						onChange={this.onChangeHandler} />
+						onChange={this.onChangeHandler}/>
 				
 		if (this.state.type === "select") {
 			contenedor = 
@@ -80,6 +82,8 @@ class atributo extends Component {
 		
 		return (
 			<div className={Classes.Atributo}>
+				{(this.state.validated != true)?<b></b>:<b></b>}
+				<b className={mensajeStyle}>{this.state.mensaje}</b>
 				<div className={Classes.Contenedor, validationStyle}>
 					<label>{this.state.titulo}:</label>
 						{contenedor}

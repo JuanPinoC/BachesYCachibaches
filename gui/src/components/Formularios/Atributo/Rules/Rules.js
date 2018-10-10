@@ -12,7 +12,7 @@ export function getRules(inputName, inputType)  {
 		return {
 			evaluable : true,
 			//Only letters and spaces
-			pattern : "^[a-zA-Z\s]{3,30}$"
+			pattern : "[a-zA-Z\s]{2,30}$"
 		};
 	} else if (inputName === "email"){
 		console.log("rule - email");
