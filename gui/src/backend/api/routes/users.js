@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../controllers/userController');
 const multer = require('multer');
 const checkAuth = require('../middlewares/check-auth');
+const userAccessControl = require('../middlewares/user-access-control');
 
 const storage = multer.diskStorage({
 	destination: function(req, file, cb){
@@ -32,16 +33,16 @@ const upload = multer({
 	fileFilter: fileFilter
 });
 
-router.post('/password',User.password);
+router.post('/password', userAccessControl, User.password);
 router.post('/login',User.login);
-router.get('/find',checkAuth, User.find);
-router.post('/search',checkAuth,User.search);
-router.get('/menu',checkAuth, User.menu);
-router.get('/edit',checkAuth, User.edit);
-router.get('/getUserById',User.getUserById);
-router.post('/update',checkAuth, upload.single('foto'), User.update);
-router.get('/delete',checkAuth, User.delete);
-router.get('/',checkAuth, User.show);
-router.post('/', upload.single('foto'), User.create);
+router.get('/find',checkAuth, userAccessControl, User.find);
+router.post('/search',checkAuth, userAccessControl, User.search);
+router.get('/menu',checkAuth, userAccessControl, User.menu);
+router.get('/edit',checkAuth, userAccessControl, User.edit);
+router.get('/getUserById', checkAuth, userAccessControl, User.getUserById);
+router.post('/update',checkAuth, upload.single('foto'), userAccessControl, User.update);
+router.get('/delete',checkAuth, userAccessControl, User.delete);
+router.get('/',checkAuth, userAccessControl, User.show);
+router.post('/', upload.single('foto'), userAccessControl, User.create);
 
 module.exports = router;

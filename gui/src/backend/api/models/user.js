@@ -25,7 +25,8 @@ const userSchema = mongoose.Schema({
 	latitud: {type:Number, default: null},
 	longitud: {type:Number, default: null},
 	foto: {type:String, default: defaultPicture},
-	contrasenia: {type: String, required: true}
+	contrasenia: {type: String, required: true},
+	tipo: {type: String, required: true}
 });
 module.exports = mongoose.model('User', userSchema,'usuarios');
 

@@ -288,7 +288,8 @@ module.exports = {
 					const token = jwt.sign(
 					{
 						email: user[0].email,
-						userId: user[0]._id
+						userId: user[0]._id,
+						tipo: user[0].tipo
 					},
 					//process.env.JWT_KEY,
 					'secret',
