@@ -20,8 +20,8 @@ module.exports = (req, res, next) => {
 
 	try{
 			url = req.url;
-			method = req.method;			
-			tipoUsuario = req.userData.tipo || 'guest';
+			method = req.method;
+			tipoUsuario = (req.userData)? req.userData.tipo : 'guest';
 			accessGranted = false;
 
 			if(method == "GET"){

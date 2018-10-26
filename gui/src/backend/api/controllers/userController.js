@@ -64,7 +64,8 @@ module.exports = {
 							latitud: req.body.latitud,
 							longitud: req.body.longitud,
 							foto: foto,
-							contrasenia: hash
+							contrasenia: hash,
+							tipo: 'owner'
 						});
 						user 
 							.save()
