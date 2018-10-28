@@ -1,0 +1,32 @@
+.EliminarAnuncio button{
+	border:2px solid white;
+	background: white;
+	transition-duration: 0.3s;
+	width: 200px;
+	margin-top: 20px;
+	margin-left: 10px;
+	border-radius: 10px;
+}
+
+.EliminarAnuncio button:focus{
+	outline: none;
+}
+
+.EliminarAnuncio button:hover{
+	border:2px solid white;
+	color: white;
+}
+.EliminarAnuncio .BtnCrear{
+	border-color: #61E232;
+}
+
+.EliminarAnuncio .BtnCancelar{
+	border-color: #F62626;
+}
+.EliminarAnuncio .BtnCrear:hover{
+	background-color: #61E232;
+}
+
+.EliminarAnuncio .BtnCancelar:hover{
+	background-color: #F62626;
+}

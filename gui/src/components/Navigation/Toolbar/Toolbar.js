@@ -7,18 +7,18 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import NavigationItemsUser from '../NavigationItems/NavigationItemsLoggedUser';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import Searchbar from '../SearchBar/SearchBar';
-import UserInfo from '../..//UserInfo/UserInfo';
+import UserInfo from '../../UserInfo/UserInfo';
 
 
 const toolbar = ( props ) => (
     <div>
     <header className={classes.Toolbar}>
         <DrawerToggle clicked={props.drawerToggleClicked} />
-        <div className={classes.Logo}>
-            <NavLink to="/">
-                <Logo />
-            </NavLink>
-        </div>
+            <div className={classes.Logo}>
+                <NavLink to="/">
+                    <Logo />
+                </NavLink>
+            </div>
         <div className={classes.SearchBar}>
         	<Searchbar />
         </div>

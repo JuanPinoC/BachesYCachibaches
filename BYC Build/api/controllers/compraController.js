@@ -5,9 +5,10 @@ const Anuncio = require('../models/anuncio');
 module.exports = {
 	show: (req,res,next)=> {
 		Compra.find()
-			.select('_id anuncio usuario fecha')
+			.select('_id anuncio comprador vendedor fecha')
 			.populate('anuncio','titulo')
-			.populate('usuario','email')
+			.populate('comprador','email')
+			.populate('vendedor','email')
 			.exec()
 			.then(docs => {
 				const response = {
@@ -15,7 +16,8 @@ module.exports = {
 					compra: docs.map(doc => {
 						return {
 							anuncio: doc.anuncio,
-							usuario: doc.usuario,
+							comprador: doc.comprador,
+							vendedor: doc.vendedor,
 							fecha: doc.fecha,
 							_id: doc._id
 						}
@@ -41,7 +43,8 @@ module.exports = {
 				const compra = new Compra({
 					_id: mongoose.Types.ObjectId(),
 					anuncio: req.body.anuncio,
-					usuario: req.body.userId, //usuario: req.userData.userId,
+					comprador: req.body.userId,
+					vendedor: req.userData.userId, 
 					fecha: req.body.fecha
 				});
 				return compra
@@ -54,7 +57,8 @@ module.exports = {
 					createPurchase: {
 						_id: result._id,
 						anuncio: result.anuncio,
-						usuario: result.usuario,
+						comprador: result.comprador,
+						vendedor: result.vendedor,
 						fecha: result.fecha
 					} 
 				});
@@ -69,9 +73,10 @@ module.exports = {
 	find: (req,res,next)=>{
 		const id = req.query.compraId;
 		Compra.findById(id)
-			.select('_id anuncio usuario fecha')
+			.select('_id anuncio comprador vendedor fecha')
 			.populate('anuncio','titulo')
-			.populate('usuario','email')
+			.populate('comprador','email')
+			.populate('vendedor','email')
 			.exec()
 			.then(doc => {
 				if(doc){
@@ -126,23 +131,18 @@ module.exports = {
 	},
 	getPurchaseByToken:(req,res,next)=>{
 		const id = req.userData.userId;
-		Compra.find({usuario:id})
-			.select('_id anuncio usuario fecha')
+		Compra.find({comprador:id})
+			.select('_id anuncio vendedor fecha')
 			.populate('anuncio','titulo precio')
-			.populate('usuario','nombres email')
+			.populate('vendedor','nombres email')
 			.exec()
 			.then(docs => {
-				if (docs < 1) {
-					res.status(404).json({
-						message:'Not found'
-					});
-				}
 				const response = {
 					count: docs.length,
 					compra: docs.map(doc => {
 						return {
 							anuncio: doc.anuncio,
-							usuario: doc.usuario,
+							vendedor: doc.vendedor,
 							fecha: doc.fecha,
 							_id: doc._id
 						}

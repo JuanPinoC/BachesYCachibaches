@@ -31,14 +31,18 @@ import FormularioPlan from '../../components/Formularios/FormularioPlan';
 import FormularioComentario from '../../components/Formularios/FormularioComentario';
 import PageNotFound from '../../components/PageNotFound/PageNotFound';
 
+import PageNotFound from '../../components/PageNotFound/PageNotFound';
+
 class Layout extends Component {
 	
 	constructor(props){
 		super(props);
 		this.state = {
-			token: sessionStorage.getItem('jwtToken')
+			token: sessionStorage.getItem('jwtToken'),
+			showSideDrawer: false
 		}
-		localStorage.setItem('path','http://35.238.122.18/');
+		//localStorage.setItem('path','http://35.238.122.18/');
+		localStorage.setItem('path','http://localhost:3000/');
 		this.UserLogged = this.UserLogged.bind(this);
 	}
 
@@ -60,6 +64,16 @@ class Layout extends Component {
 	componentWillUpdate = () => {
 		window.scrollTo(0, 0)
 	}
+	
+	sideDrawerClosedHandler = () => {
+		this.setState({ showSideDrawer: false});
+	}
+
+	sideDrawerToggleHandler = () => {
+		this.setState((prevState) => {
+			return { showSideDrawer: !prevState.showSideDrawer };	
+		});
+	}
 
 	render () {
 		return (
@@ -68,6 +82,10 @@ class Layout extends Component {
 					drawerToggleClicked={this.sideDrawerToggleHandler}
 					action={this.UserLogged}
 				/>
+				<SideDrawer
+				action={this.UserLogged}
+				open={this.state.showSideDrawer} 
+				closed={this.sideDrawerClosedHandler}/>
 				<main className={classes.Content}>
 					{(this.state.token != "null")?(
 						<Switch>
@@ -92,9 +110,11 @@ class Layout extends Component {
 							<Route path="/nosotros" component={Portada}/>
 							<Route path="/misCompras" component={MisCompras}/>
 							<Route path="/info" component={Usuario}/>
+
+							<Route path="/ingresar" render={() => (
+								<Login action={this.UserLogged}/>)}/>
 							<Route path="/" exact component={Portada}/>
 							<Route component={PageNotFound}/>
-							
 						</Switch>
 					):(
 						<Switch>
@@ -105,6 +125,7 @@ class Layout extends Component {
 							<Route path="/" exact component={Portada}/>
 							<Route component={PageNotFound}/>
 							
+
 						</Switch>
 					)}                
 				</main>

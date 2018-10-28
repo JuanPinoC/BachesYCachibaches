@@ -18,7 +18,8 @@ import Spinner from '../Spinner/Spinner';
 export default class anuncioDetalle extends Component{
 
 	state = {
-		anuncioId: this.props.match.params.id
+		anuncioId: this.props.match.params.id,
+		usuarioByToken: ""
 	}
 
 	componentWillMount = () => {
@@ -26,7 +27,7 @@ export default class anuncioDetalle extends Component{
   			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
   		.then((response) => {
   			const data = response.data.anuncio;
-  			console.log(data);
+  			console.log("AnuncioUsuario",data.usuario._id);
   			this.setState({
   				_id: data._id,
 				id_cat: data.categoria._id,
@@ -46,6 +47,15 @@ export default class anuncioDetalle extends Component{
   		.catch((response) => {
   			console.log(response);
   		});
+
+  		axios.get('usuarios/menu',
+  			{headers: { "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
+  		.then(doc=>{
+  			console.log("Usuario",doc.data.usuario._id)
+  			this.setState({
+  				usuarioByToken:doc.data.usuario._id 
+  			})
+  		})
 	}
 
 	render(){
@@ -83,11 +93,13 @@ export default class anuncioDetalle extends Component{
 								<Valoracion val={3}/>
 							</div>
 							<br/>
-							<center><h3>Opciones</h3></center>
 							<NavLink to={"/perfil/"+this.state.usuario} exact >
-								<button className={Classes.Opcion}><h3>Contactar</h3></button>
+								<button className={Classes.Opcion}><h2>Contactar</h2></button>
 							</NavLink>
-							<button className={Classes.Opcion}><h3>Reportar</h3></button>
+							{(this.state.usuarioByToken !== this.state.usuario)?
+							null:(<NavLink to={"/Vendido/"+this.state._id}>
+								<button className={Classes.Opcion}><h2>Vender</h2></button>
+							</NavLink>)}
 						</center>
 					</div>
 				</div>

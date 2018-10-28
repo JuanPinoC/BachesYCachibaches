@@ -3,13 +3,12 @@ import classes from './Compra.css';
 
 const compra = (props) => {
 	const data = props.data;
-	console.log(data);
 	return(
 		<div className={classes.Compra}>
-			<h2>Anuncio: {data.anuncio.titulo}</h2>
-			<h3>Precio:  S/. {data.anuncio.precio}</h3>
-			<h4>Comprado a: {data.usuario.nombres}</h4>
-			<h4>Correo del vendedor: {data.usuario.email}</h4>
+			<h2>Anuncio: {data.titulo}</h2>
+			<h3>Precio:  S/. {data.precio}</h3>
+			<h4>Comprado a: {data.vendedor}</h4>
+			<h4>Correo del vendedor: {data.email}</h4>
 		</div>
 	)		
 };

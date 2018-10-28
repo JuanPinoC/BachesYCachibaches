@@ -1,5 +1,76 @@
 .Anuncio{
+	width: 100%;
 	border-radius: 10px;
+	display: flex;
+	min-width: 520px;
+	padding:20px; 
+	border: 1px solid #f2f2f2;
+	background: #f2f2f2;
+	margin: 10px;
+	transition-duration: 0.4s;
+}
+.Anuncio:hover{
+	background-color: #FFBF00;
+	color: white;
+}
+
+.Foto{
+	width:40%;
+}
+.Foto img{
+	height: auto; 
+    width: auto; 
+    max-width: 200px; 
+    max-height: 300px;
+}
+
+.Datos{
+	padding:20px; 
+	width: 60%;
+	height: auto;
+	display: flex;
+}
+.Primera{
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	min-width: 190px;
+}
+.Segunda{
+	width:80%;
+	display: inline-block;
+	text-align: center;
+}
+
+.Segunda img{
+	width: 35px;
+    height: auto;
+}
+
+@media only screen and (max-width: 750px) {
+    .Anuncio{
+    	margin-left: 0px; 
+    	padding-left: 0px; 
+    	display: inline-block;
+    	min-width: 300px;
+    }
+    .Foto img{
+    	display: block;
+	    margin-left: auto;
+	    margin-right: auto;
+	    width: 100%;
+	    height: auto;
+    }
+    .Primera{
+    	margin-left: 0px; 
+    	padding-left: 0px;
+    	min-width: 80px;
+    	margin-right: 20px;
+    }
+    .Segunda{
+    	margin-left: 20px;
+    	padding-left: 20px;
+    }
 }
 
 .Publicacion{

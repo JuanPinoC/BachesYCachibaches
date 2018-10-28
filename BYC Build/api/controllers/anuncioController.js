@@ -2,10 +2,24 @@ const mongoose = require('mongoose');
 const Anuncio = require('../models/anuncio');
 const Comentario = require('../models/comentario');
 const fs = require('fs');
+let cron = require('node-cron');
+
+function addDays(startDate,numberOfDays)
+	{
+		var returnDate = new Date(
+								startDate.getFullYear(),
+								startDate.getMonth(),
+								startDate.getDate()+numberOfDays,
+								startDate.getHours(),
+								startDate.getMinutes(),
+								startDate.getSeconds());
+		return returnDate;
+	}
 
 module.exports = {
 	show: (req,res,next)=>{
 		Anuncio.find()
+			.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
@@ -22,6 +36,7 @@ module.exports = {
 							categoria: doc.categoria,
 							subcategoria: doc.subcategoria,
 							precio: doc.precio,
+							destacado: doc.destacado,
 							imagen: doc.imagen
 						}
 					})
@@ -199,15 +214,20 @@ module.exports = {
 	highlight: (req,res,next)=>{
 		Anuncio.update({_id: req.body.anuncioId},{$set:{
 			destacado:{
-				plan:req.body.plan,
+				plan:req.body.plan._id,
 				fecha:req.body.fecha
 			}
 		}})
 		.exec()
 		.then(result => {
 			res.status(200).json({
-				message: 'Ad updated'
+				message: 'Ad updated',
+				result: result
 			});
+			req.anuncioId = req.body.anuncioId;
+			req.fecha_inicio = req.body.fecha;
+			req.dias = req.body.plan.tiempo;
+			next();
 		})
 		.catch(err =>{
 			console.log(err);
@@ -215,6 +235,28 @@ module.exports = {
 				error: err
 			});
 		});
+	},
+	cronTask:(req,res,next)=>{
+		let task = cron.schedule('0 0 * * *',()=>{
+			const anuncioId = req.anuncioId;
+			const fecha_actual = new Date();
+			const fecha_final = addDays(req.fecha_inicio,req.dias);
+			if (fecha_actual.getDate() === fecha_final.getDate()) {
+				Anuncio.update({_id: req.body.anuncioId},{$set:{
+					destacado:{
+						plan:null,
+						fecha:null}
+				}})
+				.exec()
+				.then(doc=>{
+					console.log("Highlight was expired",doc);
+					task.destroy();	
+				})
+				.catch(err=>{
+					console.log("Error in cronTask",err);
+				})
+			}
+		})
 	},
 	edit:(req,res,next)=>{
 		Anuncio.findById(req.body.anuncioId)
@@ -237,6 +279,7 @@ module.exports = {
 	},
 	listByCategory:(req,res,next)=>{
 		Anuncio.find({categoria:req.query.categoriaId})
+			.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
@@ -253,6 +296,7 @@ module.exports = {
 							categoria: doc.categoria,
 							subcategoria: doc.subcategoria,
 							precio: doc.precio,
+							destacado: doc.destacado,
 							imagen: doc.imagen
 						}
 					})
@@ -267,6 +311,7 @@ module.exports = {
 	},
 	listBySubCategory:(req,res,next)=>{
 		Anuncio.find({subcategoria: req.query.subcategoria})
+			.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
@@ -283,6 +328,7 @@ module.exports = {
 							categoria: doc.categoria,
 							subcategoria: doc.subcategoria,
 							precio: doc.precio,
+							destacado: doc.destacado,
 							imagen: doc.imagen
 						}
 					})
@@ -297,6 +343,7 @@ module.exports = {
 	},
 	listByTokken:(req,res,next)=>{
 		Anuncio.find({usuario: req.userData.userId})
+			.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.populate('usuario','nombres')
 			.populate('categoria','nombre')
@@ -329,18 +376,13 @@ module.exports = {
 	listById:(req,res,next)=>{
 		const id = req.query.userId;
 		Anuncio.find({usuario: id})
+			.sort({destacado:-1,fecha:-1})
 			.select('_id titulo descripcion categoria subcategoria precio imagen activo destacado')
 			.exec()
-			.then(doc=>{
-				if (doc.length < 1) {
-					res.status(401).json({
-						message: 'Ad does not exist'
-					});
-				}else{
-					res.status(200).json({
-						result:doc
-					});	
-				}
+			.then(doc => {
+				res.status(200).json({
+					result:doc
+				})
 			})
 			.catch(err => {
 				console.log(err);
@@ -350,7 +392,7 @@ module.exports = {
 	search:(req,res,next) => {
 		const string = req.body.string;
 		Anuncio.find({titulo: { $regex: string , $options:'i'}})
-		.sort({destacado:-1})
+		.sort({destacado:-1,fecha:-1})
 			.select('_id usuario titulo fec_pub categoria subcategoria precio imagen destacado')
 			.exec()
 			.then(docs => {

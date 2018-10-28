@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
@@ -11,20 +11,32 @@ import Atributo from './Atributo/Atributo';
 import img from '../Perfil/Usuario/user.png';
 
 import Classes from './Formulario.css';
+import Modal from '../Modal/Modal';
+import EliminarCuenta from '../EliminarCuenta/EliminarCuenta';
 
 class formularioUsuario extends Component {
-
 	constructor(props) {
 		super(props);
 		this.state = 
 			(typeof props.tipo != 'undefined')?
 				{
-					tipo: 'Editar'
+					tipo: 'Editar',
+					eliminando: false,
+					validated: true,
+					validations: {	nombres:true, apellidos: true, email: true,
+									direccion: true, celular: true, telefono: true
+								}
 				}:{
-					tipo: 'Crear'
+					tipo: 'Crear',
+					validated: false,
+					validations: {
+									nombres: false, apellidos: false, email:false, 
+									contrasenia:false, direccion:false, celular:false, telefono:false
+								}
 				};
 
 		this.AtributoHandler = this.AtributoHandler.bind(this);
+		this.validatedFormHandler = this.validatedFormHandler.bind(this);
 	}
 
 	componentWillMount = () => {
@@ -85,7 +97,26 @@ class formularioUsuario extends Component {
     	this.setState({ [campo]: valor });
   	}
 
+  	validatedFormHandler = (campo, validado) => {
+  		let validations = this.state.validations;
+
+  		validations = {...validations, [campo]: validado};
+
+  		this.setState({ validations: validations });
+  		this.setState({ validated: this.validateAllFields(validations) });
+  	}
+
+  	validateAllFields = (validations) => {
+  		for (const i in validations){
+  			if(validations[i] != true){
+  				return false;
+  			}
+  		}
+  		return true;
+  	}
+
   	SubmitHandler = (e) => {
+  		if(this.state.validated == false) return;
 
   		const data = this.state;
   		const file = data.foto;
@@ -138,37 +169,55 @@ class formularioUsuario extends Component {
   		});
   	}
 
+  	eliminarHandler = () =>{
+		this.setState({eliminando: true})
+	}
+	modalHandler = () => {
+		this.setState({eliminando: false})
+	}
+
   	render(){
   		return (!this.state.load)?
   			(<Spinner/>
   			):(
 			<div className={Classes.Formulario}>
 			{this.state.redirect}
+			<Modal show={this.state.eliminando} modalClosed={this.modalHandler}>
+			<EliminarCuenta closed={this.modalHandler}/>
+  			</Modal>
+  			<hr/>
 			<center><h1>{this.state.tipo} Usuario</h1></center>
 			<hr/>
 			<div className={Classes.Form}>
 				<div className={Classes.Parte}>
 					<Atributo titulo={"Nombres"} nombre={"nombres"}
-						tipo={"text"} contenido={this.state.nombres} action={this.AtributoHandler} />
+						tipo={"text"} contenido={this.state.nombres} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. Juan Juancito" />
 					<Atributo titulo={"Apellidos"} nombre={"apellidos"}
-						tipo={"text"} contenido={this.state.apellidos} action={this.AtributoHandler}/>
+						tipo={"text"} contenido={this.state.apellidos} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. Perez Perez" />
 					<Atributo titulo={"E-mail"} nombre={"email"}
-						tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
+						tipo={"email"} contenido={this.state.email} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ejemplo@ejemplo.com" />
 					{(this.state.tipo == "Editar")?
 						(<div></div>):
 						(
 						<Atributo titulo={"Contraseña"} nombre={"contrasenia"}
-							tipo={"password"} contenido={this.state.contrasenia} action={this.AtributoHandler}/>
+							tipo={"password"} contenido={this.state.contrasenia} 
+							action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="Mayúsculas, Minúsculas, números, signo, min.10 caracteres" />
 						)
 					}
 				</div>
         		<div className={Classes.Parte}>
         			<Atributo titulo={"Dirección"} nombre={"direccion"}
-        				tipo={"text"} contenido={this.state.direccion} action={this.AtributoHandler}/>
+        				tipo={"text"} contenido={this.state.direccion} 
+        				action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. Av. Ejemplo-111" />
 					<Atributo titulo={"Celular"} nombre={"celular"}
-						tipo={"number"} contenido={this.state.celular} action={this.AtributoHandler}/>
+						tipo={"number"} contenido={this.state.celular} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. 111999111"/>
 					<Atributo titulo={"Teléfono"} nombre={"telefono"}
-						tipo={"number"} contenido={this.state.telefono} action={this.AtributoHandler}/>
+						tipo={"number"} contenido={this.state.telefono} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} mensaje="ej. 123456 "/>
 				</div>
 				<br/>
 				<br/>
@@ -194,12 +243,20 @@ class formularioUsuario extends Component {
 				}
 
 				<div className={Classes.Botones}>
-					<button onClick={this.SubmitHandler} className={Classes.BtnCrear}>
+					<button onClick={this.SubmitHandler} 
+							className={(this.state.validated == true)?Classes.BtnCrear:Classes.BtnUnvalidated}>
 						<h2>{(this.state.tipo == "Editar")?"Guardar":this.state.tipo}</h2>
 					</button>
+					<Link to ="/">
 					<button className={Classes.BtnCancelar}>
 						<h2>Cancelar</h2>
 					</button>
+					</Link>
+					{(this.state.tipo == "Editar")?
+					<button className={Classes.BtnEliminar} onClick={this.eliminarHandler}>
+						<h2>Eliminar Cuenta</h2>
+					</button>
+					:null}
 				</div>
 			</div>
 			</div>

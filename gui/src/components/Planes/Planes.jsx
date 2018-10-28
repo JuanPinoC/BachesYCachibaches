@@ -14,6 +14,7 @@ export default class planes extends Component{
 		this.state ={
 			anuncioId: this.props.match.params.id,
 			plan: null,
+			precio: 0,
 			fecha: Date()
 		}
 
@@ -21,11 +22,28 @@ export default class planes extends Component{
 	}
 
 	componentWillMount = () => {
-		this.getPlanes();
+		this.getAnuncio(this.getPlanes);
+		console.log("Fecha",this.state.fecha);
 	}
 
 	AtributoHandler = (value) => {
     	this.setState({ plan: value });
+	}
+
+	getAnuncio = (cb) =>{
+		axios.get('anuncios/find/?anuncioId=' + this.props.match.params.id,
+			{headers: 
+  				{ "Authorization": 'Bearer ' + sessionStorage.getItem('jwtToken') }})
+		.then(doc=>{
+			if (doc.data.anuncio.precio !== null) {
+				this.setState({precio: doc.data.anuncio.precio})
+				console.log("Precio",doc.data.anuncio.precio)
+				return cb();
+			}
+		})
+		.catch(err=>{
+			console.log("Error getAnuncio",err);
+		})
 	}
 
 	getPlanes = () => {
@@ -40,7 +58,7 @@ export default class planes extends Component{
   			const data = response.data.plan;
   			
   			for(let i = 0, l = data.length; i < l; i++){
-  				planes.push(<Plan data={data[i]} key={i} id={i} action={this.AtributoHandler}/>);
+  				planes.push(<Plan data={data[i]} key={i} id={i} action={this.AtributoHandler} precio={this.state.precio}/>);
   				if((i+1)%3 == 0){planes.push(<br/>)}
   			}
 
@@ -94,24 +112,27 @@ export default class planes extends Component{
 					{this.state.planes}
 				</div>
 				<div className={Classes.Formulario}>
+					<center><h1>Precio Actual del Anuncio <br/>$./ {this.state.precio}</h1></center>
+					<hr/>
 					<div>{(this.state.plan != null)?
 						(
 							<div>
 								<center>
-									<h1>{(parseFloat(this.state.plan.porcentaje)*100).toFixed(0)}%</h1>
-									<h2>Durante {this.state.plan.tiempo} días</h2>	
-								</center>
-								<button onClick={this.submitHandler}><h3>Aceptar</h3></button>	
+									<h1>Destaque {(parseFloat(this.state.plan.porcentaje)*100).toFixed(0)}%</h1>
+									<h2>Durante {this.state.plan.tiempo} días</h2>
+									<h2>Por solo $/.{(this.state.plan.precio*this.state.precio).toFixed(2)} </h2>	
+								<button onClick={this.submitHandler}><h3>Aceptar</h3></button>
+								</center>	
 							</div>
 										
 						):(
 							<div>
 								<center>
 								<h2>No has seleccionado un plan</h2>
-								</center>
 								<button 
 								className={Classes.Disabled}
 								onClick={this.submitHandler} disabled><h3>Aceptar</h3></button>
+								</center>
 							</div>
 						)}
 					</div>

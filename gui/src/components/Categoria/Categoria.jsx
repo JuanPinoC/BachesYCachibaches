@@ -175,9 +175,11 @@ export default class categoria extends Component{
 						action={this.subcatSelected}
 						/>
 					<hr/>
+					<center>
 					<div className={Classes.Publicaciones}>
 						{this.state.vistas}
 					</div>
+					</center>
 					{
 						(this.state.vistas.length != this.state.data.length)?
 						(
@@ -192,10 +194,10 @@ export default class categoria extends Component{
 		}
 		return(
 			<div className={Classes.Horizontal}>
-				<div>
+				<div className={Classes.BarraCategorias}>
 					<BarraCategorias className={Classes.Categorias} action={this.catSelected}/>
 				</div>
-				<div>
+				<div className={Classes.Content}> 
 					{content}
 				</div>
 			</div>

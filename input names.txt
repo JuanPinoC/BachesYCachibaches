@@ -1,0 +1,25 @@
+nombres text
+nombre text
+
+apellidos text
+apellido text
+
+email email
+
+contrasenia password
+newpass password
+
+direccion text
+
+celular number
+telefono number
+
+userId 
+
+titulo text
+
+descripcion text
+
+precio number
+
+categoria combobox

@@ -19,23 +19,19 @@
     background-color: transparent;
     color: white;
     border:1%;
+    border-color: #FFBF00;
     border-style:none none solid none;
     transition-duration: 0.4s;
-    border-color: #FFBF00;
 }
 
-.NavigationItems li:hover{
+.NavigationItems li:hover,
+.NavigationItems li:active,
+.NavigationItems li.active {
     background-color: #FFBF00;
+    border-bottom:4px solid #FFBF00;
     color: white;
-    border-color: #FFBF00;
 }
 
-.NavigationItems li:active{
-    background-color: #ffffff;
-    color: white;
-    border-color: transparent;
-}
-
-.NavigationItems a{
-    text-decoration: none;
+.BarSuperiorBtn {
+    border-bottom:4px solid #FFBF00
 }

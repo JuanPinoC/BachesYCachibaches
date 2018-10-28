@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 
 import Classes from './Login.css';
 
@@ -12,6 +13,26 @@ import Atributo from '../Formularios/Atributo/Atributo';
 import axios from '../../AxiosFiles/axios.js';
 
 class login extends Component {
+
+  state = {
+    isLoggedIn: false,
+    userID: '',
+    name: '',
+    email: '',
+    picture: ''
+  };
+  responseFacebook = response => {
+    console.log(response);
+    this.setState({
+      isLoggedIn: true,
+      userID: response.userID,
+      name: response.name,
+      email: response.email,
+      picture: response.picture.data.url
+    })
+  };
+
+  componentClick = () => console.log("clicked");
 
   constructor(props) {
     super(props);
@@ -59,7 +80,7 @@ class login extends Component {
         this.props.action();
       }else{
         this.changeForm();
-        alert("Contraseña cambiada con exito.");
+        alert("Contraseña cambiada con exito, email enviado al correo con la nueva contraseña.");
       }
 
       //console.log(response);
@@ -77,23 +98,53 @@ class login extends Component {
   }
 
   render() {
+    let fbContent;
     let redirect = (sessionStorage.getItem('jwtToken')!="null")?<Redirect to="/" />:null;
+
+    if(this.state.isLoggedIn){
+      fbContent = (
+          <div style={{
+            with: '400px',
+            margin: 'auto',
+            background: '#f4f4f4',
+            padding: '20px'
+          }}>
+            <img src={this.state.picture} alt={this.state.name} />
+            <h2>Holi {this.state.name}</h2>
+            Email: {this.state.email}
+          </div>
+        )
+    }else{
+      fbContent = (
+        <FacebookLogin
+        appId="451339475272860"
+        autoLoad={true}
+        fields="name,email,picture"
+        onClick={this.componentClicked}
+        callback={this.responseFacebook} />);
+      /*goContent = (
+        <GoogleLogin
+        clientId="606790169121-g9m43sk15b7rdp0eumkaigvr9lc8bqqm.apps.googleusercontent.com"
+        buttonText="Google"
+        onSuccess={this.responseGoogle}
+        onFailure={this.responseGoogle}
+        />);*/
+  
+    }
+
     return (
       <div className={Classes.Login}>
         {redirect}
         <div className={Classes.Form}>
-          <h1>Ingresar</h1>
+        {(this.state.newPassForm)?<h1>Cambiar Contraseña</h1>:<h1>Ingresar</h1>}
           <div className={Classes.Parte}>
           <Atributo titulo={"E-mail"} nombre={"email"}
             tipo={"email"} contenido={this.state.email} action={this.AtributoHandler}/>
-          {
-            (this.state.newPassForm)?(
-            <Atributo titulo={"Nueva Contraseña"} nombre={"contrasenia"}
-              tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
-            ):(
+          {(this.state.newPassForm)?
+            <h3>Un correo con la nueva contraseña será enviado.</h3>
+            :
             <Atributo titulo={"Contraseña"} nombre={"contrasenia"}
               tipo={"password"} contenido={this.state.password} action={this.AtributoHandler}/>
-            )
           }
           </div>
           {
@@ -115,9 +166,14 @@ class login extends Component {
                   Olvide mi contraseña :c
                 </button>
               </div>
+              
             )
           }
+          <div className={Classes.Botones}>
+            {fbContent}
+          </div>
         </div>
+
         <div className={Classes.Info}>
           <div className={Classes.Texto}>
             <h2>Tal vez te interese...</h2>

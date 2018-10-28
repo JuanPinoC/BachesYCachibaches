@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
 import axios from '../../AxiosFiles/axios';
@@ -18,12 +18,17 @@ class formularioAnuncio extends Component {
 		super(props);
 		this.state = (typeof props.match.params.id != 'undefined')?
 						{
-							tipo:'Editar'
+							tipo:'Editar',
+							validated: true,
+							validations: {titulo:true,descripcion:true,precio:true}
 						}:{
-							tipo: 'Crear'
+							tipo: 'Crear',
+							validated: false,
+							validations: {titulo:false,descripcion:true,precio:false}
 						};
 
 		this.AtributoHandler = this.AtributoHandler.bind(this);
+		this.validatedFormHandler = this.validatedFormHandler.bind(this);
 	}
 
 	componentWillMount = () => {
@@ -65,7 +70,7 @@ class formularioAnuncio extends Component {
   			});
   		})
   		.catch((response) => {
-  			console.log(response);
+  			console.log("Error");
   		});		
 	}
 
@@ -91,7 +96,31 @@ class formularioAnuncio extends Component {
     		this.setState({ [campo]: valor});
   	}
 
+  	validatedFormHandler = (campo, validado) => {
+  		let validations = this.state.validations;
+
+  		//validations.campo = validado;
+
+  		validations = {...validations, [campo]: validado};
+
+  		this.setState({ validations: validations });
+  		this.setState({ validated: this.validateAllFields(validations) });
+
+  		//console.log(this.state.validated);
+  	}
+
+  	validateAllFields = (validations) => {
+  		//console.log(validations);
+  		for (const i in validations){
+  			if(validations[i] != true){
+  				return false;
+  			}
+  		}
+  		return true;
+  	}
+
   	SubmitHandler = (e) => {
+  		if(this.state.validated == false) return;
 
   		let imgs = [];
   		const data = this.state;
@@ -138,7 +167,7 @@ class formularioAnuncio extends Component {
   		})
   		.catch((response) => {
   			//handle error
-  			console.log(response);
+  			console.log("Error");
   		});
   	}
 
@@ -159,18 +188,23 @@ class formularioAnuncio extends Component {
 				<div className={Classes.Parte}>
 					<Atributo 
 						titulo={"Título"} nombre={"titulo"} 
-						tipo={"text"} contenido={this.state.titulo} action={this.AtributoHandler} />
+						tipo={"text"} contenido={this.state.titulo} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 					<Atributo titulo={"Descripción"} nombre={"descripcion"}
-						tipo={"textarea"} contenido={this.state.descripcion} action={this.AtributoHandler} />
+
+						tipo={"textarea"} contenido={this.state.descripcion} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
+						
 					<Atributo titulo={"Precio"} nombre={"precio"}
-						tipo={"number"} contenido={this.state.precio} action={this.AtributoHandler}/>
+						tipo={"number"} contenido={this.state.precio} 
+						action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 				</div>
         		<div className={Classes.Parte}>
         			<Atributo titulo={"Categoría"} nombre={"categoria"}
         				tipo={"select"} 
         				categoria={this.state.id_cat}
         				subcategoria={this.state.sub_cat} 
-        				action={this.AtributoHandler}/>
+        				action={this.AtributoHandler} validatedAction={this.validatedFormHandler} />
 				</div>
 				<br/>
 				<br/>
@@ -197,12 +231,16 @@ class formularioAnuncio extends Component {
 					</div>)
 				}
 				<div className={Classes.Botones}>
-					<button type='submit' className={Classes.BtnCrear} onClick={this.SubmitHandler}>
+					<button type='submit' 
+						className={(this.state.validated == true)?Classes.BtnCrear:Classes.BtnUnvalidated} 
+						onClick={this.SubmitHandler}>
 						<h2>{this.state.tipo}</h2>
 					</button>
+					<Link to="/misAnuncios">
 					<button className={Classes.BtnCancelar}>
 						<h2>Cancelar</h2>
 					</button>
+					</Link>
 				</div>
 			</div>
 			</div>

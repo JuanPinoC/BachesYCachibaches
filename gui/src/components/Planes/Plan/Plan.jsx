@@ -17,9 +17,9 @@ const plan = (props) => {
 	return(
 		<div className={estilo} onClick={() =>{ props.action(data)}}>
 			
-			<h2>{parseFloat(data.porcentaje)*100}%</h2>
-			<p>Tiempo:{data.tiempo}</p>
-			<p>Precio:{(parseFloat(data.precio)*100).toFixed(0)}% </p>
+			<h2>Destaque {parseFloat(data.porcentaje)*100}%</h2>
+			<p>Tiempo:{data.tiempo} días</p>
+			<p>Precio: $/. {(parseFloat(data.precio)*props.precio).toFixed(2)}</p>
 		</div>			
 		);	
 }

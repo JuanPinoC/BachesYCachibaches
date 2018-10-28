@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
 import Compra from './Compra/Compra';
 import axios from '../../AxiosFiles/axios';
+import Spinner from '../Spinner/Spinner';
 
 import Classes from './Compras.css';
 
@@ -9,7 +9,8 @@ export default class compras extends Component {
 
 	state = {
 		inputText: "",
-		compras: []
+		compras: [],
+		validado: null
 	}
 
 	componentWillMount = () => {
@@ -21,17 +22,50 @@ export default class compras extends Component {
         		'Authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
         	}
 		};
-		let compras = [];
+		
 		axios(params)
 		.then(docs => {
-			let data = docs.data.compra;
-			for(let i=0,l=data.length;i < l; i++){
-				compras.push(
-					<Compra data={data[i]} />
-					)
+			let compras = [];
+			if (docs.data.count < 1) {
+				this.setState({validado: false});
+			}else {
+				let data=[];
+				for(let i in docs.data.compra){
+					let item = docs.data.compra[i];
+					if (item.anuncio === null && item.vendedor === null) {
+						data.push({
+								'titulo':'Este anuncio ha sido eliminado',
+								'precio':0,
+								'vendedor':'Este usuario ha borrado su cuenta',
+								'email':'Este usuario ha borrado su cuenta'
+								});
+					}else if(item.anuncio === null){
+						data.push({
+								'titulo':'Este anuncio ha sido eliminado',
+								'precio':0,
+								'vendedor':item.vendedor.nombres,
+								'email':item.vendedor.email
+								});
+					}else if(item.usuario === null){
+						data.push({
+								'titulo':item.anuncio.titulo,
+								'precio':item.anuncio.precio,
+								'vendedor':'Este usuario ha borrado su cuenta',
+								'email':'Este usuario ha borrado su cuenta'
+								});
+					}else{
+						data.push({
+								'titulo':item.anuncio.titulo,
+								'precio':item.anuncio.precio,
+								'vendedor':item.vendedor.nombres,
+								'email':item.vendedor.email
+							});
+					}
+					compras.push(<Compra data={data[i]} />)
+				}
+				this.setState({compras: compras,
+								validado: true});
 			}
-
-			this.setState({compras: compras});
 		})
 		.catch(err => {
 			console.log(err);
@@ -40,12 +74,19 @@ export default class compras extends Component {
 	}
 
   	render(){
+  		let componente = <Spinner/>;
+  		if (this.state.validado === false) {
+			componente = <h2>Usted aún no ha comprado nada.</h2>
+  		}
+  		if (this.state.validado) {
+  			componente = this.state.compras;
+  		}
   		return (
 			<div className={Classes.Compras}>
 				<center><h1> Compras Realizadas </h1></center>
 				<hr/>
-				<div className={Classes.ListaCompras}>
-					{this.state.compras}
+				<div>
+					<center>{componente}</center>
 				</div>
 			</div>
 		);
