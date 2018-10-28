@@ -142,6 +142,10 @@ class formularioAnuncio extends Component {
   		});
   	}
 
+	textareaHandler = (e) => {
+		this.setState({descripcion:e.target.value});
+	}
+
   	render(){
   		return (!this.state.load)?(
   			<Spinner />
@@ -157,7 +161,7 @@ class formularioAnuncio extends Component {
 						titulo={"Título"} nombre={"titulo"} 
 						tipo={"text"} contenido={this.state.titulo} action={this.AtributoHandler} />
 					<Atributo titulo={"Descripción"} nombre={"descripcion"}
-						tipo={"text"} contenido={this.state.descripcion} action={this.AtributoHandler} />
+						tipo={"textarea"} contenido={this.state.descripcion} action={this.AtributoHandler} />
 					<Atributo titulo={"Precio"} nombre={"precio"}
 						tipo={"number"} contenido={this.state.precio} action={this.AtributoHandler}/>
 				</div>

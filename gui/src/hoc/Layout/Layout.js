@@ -29,6 +29,7 @@ import FormularioUsuario from '../../components/Formularios/FormularioUsuario';
 import FormularioCategoria from '../../components/Formularios/FormularioCategoria';
 import FormularioPlan from '../../components/Formularios/FormularioPlan';
 import FormularioComentario from '../../components/Formularios/FormularioComentario';
+import PageNotFound from '../../components/PageNotFound/PageNotFound';
 
 class Layout extends Component {
 	
@@ -70,6 +71,7 @@ class Layout extends Component {
 				<main className={classes.Content}>
 					{(this.state.token != "null")?(
 						<Switch>
+
 							<Route path="/perfil/:id" component={Perfil}/>
 							<Route path="/perfil" component={Perfil}/>
 							<Route path="/misAnuncios" component={MisAnuncios}/>
@@ -90,7 +92,9 @@ class Layout extends Component {
 							<Route path="/nosotros" component={Portada}/>
 							<Route path="/misCompras" component={MisCompras}/>
 							<Route path="/info" component={Usuario}/>
-							<Route path="/" component={Portada}/>
+							<Route path="/" exact component={Portada}/>
+							<Route component={PageNotFound}/>
+							
 						</Switch>
 					):(
 						<Switch>
@@ -98,7 +102,9 @@ class Layout extends Component {
 								<Login action={this.UserLogged}/>)}/>
 							<Route path="/registrarse" component={FormularioUsuario}/>
 							<Route path="/info" component={Informacion}/>
-							<Route path="/" component={Portada}/>
+							<Route path="/" exact component={Portada}/>
+							<Route component={PageNotFound}/>
+							
 						</Switch>
 					)}                
 				</main>
